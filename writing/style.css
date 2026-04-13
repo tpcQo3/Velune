@@ -48,6 +48,15 @@ h1 {
   outline: none;
 }
 
+.meta-line {
+  margin: 2px 0;
+  line-height: 1.4;
+}
+
+.divider {
+  height: 10px; /* giảm khoảng cách thay vì <br> */
+}
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;

@@ -46,11 +46,15 @@ function updatePreview() {
   const content = parseMarkdown(editor.innerText);
 
   preview.innerHTML = `
-    <div><b>Từ:</b> ${from.value || "..."}</div>
-    <div><b>Đến:</b> ${to.value || "..."}</div>
-    <br/>
-    <div class="letter-content">${content}</div>
-  `;
+  <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
+  <div class="meta-line"><b>Đến:</b> ${to.value || "..."}</div>
+
+  <div class="divider"></div>
+
+  <div class="letter-content">
+    ${parseMarkdown(editor.innerText)}
+  </div>
+`;
 }
 
 // ======================
