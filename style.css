@@ -1,37 +1,76 @@
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
-  background: linear-gradient(135deg, #0f1020, #1b1c3a, #2a2d5a);
-  color: #e8e8f0;
+
+  background: linear-gradient(
+    135deg,
+    #0f1025,
+    #1e1f4b,
+    #2a1f4f,
+    #3a2b6f
+  );
+
+  color: #f2f2ff;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(180,150,255,0.25), transparent 70%);
+  top: -100px;
+  left: -100px;
+  filter: blur(80px);
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,180,220,0.2), transparent 70%);
+  bottom: -100px;
+  right: -100px;
+  filter: blur(80px);
 }
 
 .container {
-  max-width: 680px;
-  padding: 40px;
-  text-align: center;
+  position: relative;
+  max-width: 700px;
+  padding: 45px;
 
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
 
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.4);
+  border-radius: 24px;
+
+  box-shadow:
+    0 0 60px rgba(140, 120, 255, 0.2),
+    0 0 120px rgba(200, 150, 255, 0.1);
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 46px;
+  font-size: 48px;
   margin-bottom: 5px;
-  letter-spacing: 1px;
+
+  /* 🌟 chữ có glow */
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(200,180,255,0.6);
 }
 
 .subtitle {
   font-size: 14px;
   opacity: 0.6;
   margin-bottom: 30px;
+  letter-spacing: 1px;
 }
 
 .message {
@@ -46,12 +85,14 @@ h1 {
 }
 
 .contact a {
-  color: #b8c0ff;
+  color: #c7bfff;
   text-decoration: none;
+  transition: 0.3s;
 }
 
 .contact a:hover {
-  text-decoration: underline;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(200,180,255,0.8);
 }
 
 .ending {
@@ -63,32 +104,42 @@ h1 {
 .btn {
   display: inline-block;
   margin-top: 30px;
-  padding: 12px 28px;
+  padding: 12px 30px;
 
   border-radius: 999px;
-  background: rgba(200, 210, 255, 0.15);
-  color: #eaeaff;
 
+  background: linear-gradient(
+    135deg,
+    rgba(180,150,255,0.3),
+    rgba(255,180,220,0.25)
+  );
+
+  color: #fff;
   text-decoration: none;
   font-size: 14px;
   letter-spacing: 1px;
+
+  backdrop-filter: blur(10px);
 
   transition: all 0.3s ease;
 }
 
 .btn:hover {
-  background: rgba(200, 210, 255, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.03);
+
+  box-shadow:
+    0 0 20px rgba(200,150,255,0.6),
+    0 0 40px rgba(255,180,220,0.4);
 }
 
 .fade-in {
-  animation: fade 1.8s ease;
+  animation: fade 2s ease;
 }
 
 @keyframes fade {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(25px);
   }
   to {
     opacity: 1;
