@@ -3,21 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viết thư - Veluneink</title>
+  <title>Veluneink - Writing</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container fade-in">
 
-  <h1>Write</h1>
-  <p class="subtitle">write something you’ll never send...</p>
+  <h1>Viết thư</h1>
+  <p class="subtitle">write your feelings into words</p>
 
-  <textarea id="letter" placeholder="Viết điều bạn chưa từng nói..."></textarea>
+  <!-- FORM -->
+  <div class="form">
 
-  <button onclick="send()" class="btn">Gửi thư</button>
+    <input id="from" type="text" placeholder="Người gửi">
+
+    <input id="to" type="text" placeholder="Người nhận">
+
+    <textarea id="content" placeholder="Nội dung thư..."></textarea>
+
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview">
+    <h3>Preview</h3>
+    <p><b>Từ:</b> <span id="p-from">...</span></p>
+    <p><b>Gửi đến:</b> <span id="p-to">...</span></p>
+    <p id="p-content" class="preview-content">Nội dung sẽ hiển thị ở đây...</p>
+  </div>
+
+  <!-- BUTTON -->
+  <button class="btn" onclick="createLetter()">Tạo thư</button>
 
   <p id="status"></p>
 
@@ -26,28 +45,54 @@
 <script type="module">
   import { saveLetter } from "../firebase.js";
 
-  window.send = async function () {
-    const text = document.getElementById("letter").value;
-    const status = document.getElementById("status");
+  const from = document.getElementById("from");
+  const to = document.getElementById("to");
+  const content = document.getElementById("content");
 
-    if (!text.trim()) {
-      status.innerText = "Hãy viết gì đó trước...";
+  const pFrom = document.getElementById("p-from");
+  const pTo = document.getElementById("p-to");
+  const pContent = document.getElementById("p-content");
+
+  const status = document.getElementById("status");
+
+  // ✨ LIVE PREVIEW
+  from.addEventListener("input", () => {
+    pFrom.textContent = from.value || "...";
+  });
+
+  to.addEventListener("input", () => {
+    pTo.textContent = to.value || "...";
+  });
+
+  content.addEventListener("input", () => {
+    pContent.textContent = content.value || "Nội dung sẽ hiển thị ở đây...";
+  });
+
+  // 💌 CREATE LETTER
+  window.createLetter = async function () {
+
+    if (!content.value.trim()) {
+      status.innerText = "Hãy viết nội dung thư...";
       return;
     }
 
-    status.innerText = "Đang gửi...";
+    status.innerText = "Đang tạo thư...";
 
     try {
-      const id = await saveLetter(text);
+      const id = await saveLetter({
+        from: from.value || "Ẩn danh",
+        to: to.value || "Không rõ",
+        text: content.value
+      });
 
-      status.innerText = "Đã gửi 💌";
+      status.innerText = "Đã tạo thư ✨";
 
       setTimeout(() => {
         window.location.href = "../reading/reading.html?id=" + id;
-      }, 1000);
+      }, 800);
 
     } catch (e) {
-      status.innerText = "Lỗi khi gửi 😢";
+      status.innerText = "Lỗi: " + e.message;
       console.error(e);
     }
   };
