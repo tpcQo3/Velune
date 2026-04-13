@@ -48,17 +48,6 @@ h1 {
   outline: none;
 }
 
-.meta-line {
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.divider {
-  height: 1px;
-  background: rgba(0,0,0,0.1);
-  margin: 10px 0;
-}
-
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -106,7 +95,6 @@ h1 {
 }
 
 .letter-content {
-  margin-top: 8px;
   line-height: 1.8;
   white-space: pre-wrap;
 }
