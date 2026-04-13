@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veluneink - Write</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&family=Playfair+Display&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,61 +14,48 @@
 
 <div class="container fade-in">
 
-  <h1>Write a letter</h1>
-  <p class="subtitle">everything starts from a feeling</p>
+  <h1>Write a Letter</h1>
+  <p class="subtitle">express what you can’t say</p>
 
-  <!-- FORM -->
-  <div class="form">
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <select id="font">
+      <option value="Quicksand">Default</option>
+      <option value="serif">Serif</option>
+      <option value="monospace">Mono</option>
+      <option value="cursive">Cursive</option>
+    </select>
 
-    <input id="from" type="text" placeholder="Người gửi">
+    <select id="size">
+      <option value="14px">Small</option>
+      <option value="16px" selected>Normal</option>
+      <option value="20px">Large</option>
+      <option value="26px">Huge</option>
+    </select>
 
-    <input id="to" type="text" placeholder="Người nhận">
+    <input type="color" id="color">
 
-    <textarea id="content" placeholder="Nội dung thư..."></textarea>
-
+    <button onclick="cmd('bold')"><b>B</b></button>
+    <button onclick="cmd('italic')"><i>I</i></button>
+    <button onclick="cmd('underline')"><u>U</u></button>
   </div>
 
-  <!-- PREVIEW (render giống final output) -->
+  <!-- EDITOR -->
+  <div id="editor" class="editor" contenteditable="true"></div>
+
+  <!-- PREVIEW -->
   <div class="preview">
-
     <h3>Preview</h3>
-
-    <p><b>Từ:</b> <span id="p-from">...</span></p>
-    <p><b>Gửi đến:</b> <span id="p-to">...</span></p>
-
-    <div id="p-content" class="letter-content">
-      Nội dung sẽ hiển thị ở đây...
-    </div>
-
+    <div id="preview" class="letter-content"></div>
   </div>
 
-  <!-- BUTTON -->
   <button class="btn" onclick="createLetter()">Tạo thư</button>
 
   <p id="status"></p>
 
 </div>
 
-<!-- POPUP -->
-<div id="popup" class="popup hidden">
-  <div class="popup-box">
-
-    <h2>🎉 Chúc mừng bạn đã viết một lá thư!</h2>
-
-    <p>Bấm vào link bên dưới để mở thư của bạn:</p>
-
-    <a id="openLink" href="#" target="_blank">Mở thư</a>
-
-    <input id="linkBox" readonly>
-
-    <button onclick="copyLink()" class="btn-small">Copy link</button>
-    <button onclick="closePopup()" class="btn-small secondary">Đóng</button>
-
-  </div>
-</div>
-
-<script type="module" src="script.js">
-</script>
+<script type="module" src="script.js"></script>
 
 </body>
 </html>

@@ -1,44 +1,54 @@
 import { saveLetter } from "../firebase.js";
 
-// INPUT
-const from = document.getElementById("from");
-const to = document.getElementById("to");
-const content = document.getElementById("content");
-
-// PREVIEW
-const pFrom = document.getElementById("p-from");
-const pTo = document.getElementById("p-to");
-const pContent = document.getElementById("p-content");
-
-// STATUS
+// ======================
+// ELEMENTS
+// ======================
+const editor = document.getElementById("editor");
+const preview = document.getElementById("preview");
 const status = document.getElementById("status");
 
-// POPUP
-const popup = document.getElementById("popup");
-const openLink = document.getElementById("openLink");
-const linkBox = document.getElementById("linkBox");
+// ======================
+// TOOLBAR COMMANDS
+// ======================
+window.cmd = function (command) {
+  document.execCommand(command, false, null);
+};
 
-// =======================
+// font
+document.getElementById("font").addEventListener("change", (e) => {
+  document.execCommand("fontName", false, e.target.value);
+});
+
+// size (simple apply)
+document.getElementById("size").addEventListener("change", (e) => {
+  editor.style.fontSize = e.target.value;
+});
+
+// color
+document.getElementById("color").addEventListener("input", (e) => {
+  document.execCommand("foreColor", false, e.target.value);
+});
+
+// ======================
 // LIVE PREVIEW
-// =======================
-from.addEventListener("input", () => {
-  pFrom.textContent = from.value || "...";
+// ======================
+editor.addEventListener("input", () => {
+  let html = editor.innerHTML;
+
+  // markdown support
+  html = html.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+  html = html.replace(/\*(.*?)\*/g, "<i>$1</i>");
+  html = html.replace(/__(.*?)__/g, "<u>$1</u>");
+
+  preview.innerHTML = html;
 });
 
-to.addEventListener("input", () => {
-  pTo.textContent = to.value || "...";
-});
-
-content.addEventListener("input", () => {
-  pContent.textContent = content.value || "Nội dung sẽ hiển thị ở đây...";
-});
-
-// =======================
+// ======================
 // CREATE LETTER
-// =======================
+// ======================
 window.createLetter = async function () {
 
-  if (!content.value.trim()) {
+  if (!editor.innerHTML.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
     return;
   }
@@ -47,39 +57,16 @@ window.createLetter = async function () {
 
   try {
     const id = await saveLetter({
-      from: from.value || "Ẩn danh",
-      to: to.value || "Không rõ",
-      text: content.value
+      text: editor.innerHTML
     });
-
-    const link = window.location.origin + "/reading/reading.html?id=" + id;
-
-    // update popup
-    openLink.href = link;
-    openLink.innerText = link;
-
-    linkBox.value = link;
-
-    // show popup
-    popup.classList.remove("hidden");
 
     status.innerText = "Đã tạo thư ✨";
 
+    const link = window.location.origin + "/reading/reading.html?id=" + id;
+
+    alert("Link thư của bạn:\n" + link);
+
   } catch (e) {
     status.innerText = "Lỗi: " + e.message;
-    console.error(e);
   }
-};
-
-// =======================
-// POPUP ACTIONS
-// =======================
-window.closePopup = function () {
-  popup.classList.add("hidden");
-};
-
-window.copyLink = function () {
-  linkBox.select();
-  document.execCommand("copy");
-  alert("Đã copy link 💌");
 };

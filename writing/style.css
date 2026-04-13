@@ -28,7 +28,7 @@ body {
 h1 {
   font-family: 'Playfair Display', serif;
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 .subtitle {
@@ -37,27 +37,40 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* form */
-.form input,
-.form textarea {
-  width: 100%;
+/* TOOLBAR */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
   margin-bottom: 10px;
+}
+
+.toolbar button,
+.toolbar select,
+.toolbar input {
+  padding: 6px;
+  border-radius: 8px;
+
+  border: 1px solid #ddd;
+  background: white;
+
+  font-size: 14px;
+}
+
+/* EDITOR */
+.editor {
+  min-height: 150px;
 
   padding: 12px;
   border-radius: 12px;
 
-  border: none;
+  background: rgba(255,255,255,0.8);
+
   outline: none;
 
-  font-family: 'Quicksand', sans-serif;
-  font-size: 14px;
-
-  background: rgba(255,255,255,0.8);
-}
-
-textarea {
-  height: 120px;
-  resize: none;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* PREVIEW */
@@ -69,23 +82,15 @@ textarea {
   border-radius: 12px;
 }
 
-.preview h3 {
-  margin: 0 0 8px 0;
-}
-
-/* ⭐ CORE: unified render system */
 .letter-content {
-  font-family: 'Quicksand', sans-serif;
   font-size: 15px;
   line-height: 1.8;
 
-  white-space: pre-wrap; /* giữ xuống dòng */
-
+  white-space: pre-wrap;
   color: #333;
-  margin-top: 8px;
 }
 
-/* button */
+/* BUTTON */
 .btn {
   width: 100%;
   margin-top: 15px;
@@ -111,86 +116,16 @@ textarea {
 #status {
   text-align: center;
   font-size: 13px;
-  margin-top: 8px;
   opacity: 0.7;
+  margin-top: 8px;
 }
 
 /* animation */
 .fade-in {
-  animation: fade 1.5s ease;
+  animation: fade 1.2s ease;
 }
 
 @keyframes fade {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* 🌫 nền mờ */
-.popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 999;
-}
-
-/* ẩn popup */
-.hidden {
-  display: none;
-}
-
-/* box */
-.popup-box {
-  width: 90%;
-  max-width: 400px;
-
-  background: white;
-  padding: 20px;
-
-  border-radius: 16px;
-
-  text-align: center;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-/* link */
-.popup-box a {
-  display: block;
-  margin: 10px 0;
-  color: #6a8cff;
-  word-break: break-all;
-}
-
-/* input link */
-.popup-box input {
-  width: 100%;
-  padding: 10px;
-
-  margin-top: 10px;
-
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-
-/* small buttons */
-.btn-small {
-  margin-top: 10px;
-  padding: 10px;
-  width: 100%;
-
-  border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #ffd6ec, #cceeff);
-
-  cursor: pointer;
-}
-
-.btn-small.secondary {
-  background: #eee;
 }
