@@ -1,14 +1,11 @@
 import { saveLetter } from "../firebase.js";
 
-// ======================
-// ELEMENTS
-// ======================
 const editor = document.getElementById("editor");
 const preview = document.getElementById("preview");
 const status = document.getElementById("status");
 
 // ======================
-// TOOLBAR COMMANDS
+// TOOL COMMAND (fix)
 // ======================
 window.cmd = function (command) {
   document.execCommand(command, false, null);
@@ -19,9 +16,14 @@ document.getElementById("font").addEventListener("change", (e) => {
   document.execCommand("fontName", false, e.target.value);
 });
 
-// size (simple apply)
+// size (fix đúng cách)
 document.getElementById("size").addEventListener("change", (e) => {
-  editor.style.fontSize = e.target.value;
+  document.execCommand("fontSize", false, "7");
+
+  const spans = editor.getElementsByTagName("font");
+  for (let i = 0; i < spans.length; i++) {
+    spans[i].style.fontSize = e.target.value;
+  }
 });
 
 // color
@@ -30,15 +32,23 @@ document.getElementById("color").addEventListener("input", (e) => {
 });
 
 // ======================
-// LIVE PREVIEW
+// FIXED MARKDOWN ENGINE
+// ======================
+function parseMarkdown(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+    .replace(/\*(.*?)\*/g, "<i>$1</i>")
+    .replace(/__(.*?)__/g, "<u>$1</u>");
+}
+
+// ======================
+// LIVE PREVIEW (FIXED)
 // ======================
 editor.addEventListener("input", () => {
-  let html = editor.innerHTML;
 
-  // markdown support
-  html = html.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
-  html = html.replace(/\*(.*?)\*/g, "<i>$1</i>");
-  html = html.replace(/__(.*?)__/g, "<u>$1</u>");
+  const raw = editor.innerText; // ⚠️ QUAN TRỌNG
+
+  const html = parseMarkdown(raw);
 
   preview.innerHTML = html;
 });
@@ -48,7 +58,9 @@ editor.addEventListener("input", () => {
 // ======================
 window.createLetter = async function () {
 
-  if (!editor.innerHTML.trim()) {
+  const raw = editor.innerText;
+
+  if (!raw.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
     return;
   }
@@ -57,14 +69,14 @@ window.createLetter = async function () {
 
   try {
     const id = await saveLetter({
-      text: editor.innerHTML
+      text: parseMarkdown(raw)
     });
 
     status.innerText = "Đã tạo thư ✨";
 
     const link = window.location.origin + "/reading/reading.html?id=" + id;
 
-    alert("Link thư của bạn:\n" + link);
+    alert("Link thư:\n" + link);
 
   } catch (e) {
     status.innerText = "Lỗi: " + e.message;
