@@ -2,7 +2,10 @@
 
 const starsContainer = document.querySelector(".stars");
 
-for (let i = 0; i < 50; i++) {
+const isMobile = window.innerWidth < 768;
+const starCount = isMobile ? 25 : 60;
+
+for (let i = 0; i < starCount; i++) {
   const star = document.createElement("div");
   star.classList.add("star");
 
