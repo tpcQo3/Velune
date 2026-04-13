@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veluneink - Writing</title>
+  <title>Veluneink - Write</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,8 +14,8 @@
 
 <div class="container fade-in">
 
-  <h1>Viết thư</h1>
-  <p class="subtitle">write your feelings into words</p>
+  <h1>Write a letter</h1>
+  <p class="subtitle">everything starts from a feeling</p>
 
   <!-- FORM -->
   <div class="form">
@@ -27,12 +28,18 @@
 
   </div>
 
-  <!-- PREVIEW -->
+  <!-- PREVIEW (render giống final output) -->
   <div class="preview">
+
     <h3>Preview</h3>
+
     <p><b>Từ:</b> <span id="p-from">...</span></p>
     <p><b>Gửi đến:</b> <span id="p-to">...</span></p>
-    <p id="p-content" class="preview-content">Nội dung sẽ hiển thị ở đây...</p>
+
+    <div id="p-content" class="letter-content">
+      Nội dung sẽ hiển thị ở đây...
+    </div>
+
   </div>
 
   <!-- BUTTON -->
@@ -55,7 +62,7 @@
 
   const status = document.getElementById("status");
 
-  // ✨ LIVE PREVIEW
+  // ✨ LIVE PREVIEW (data → render)
   from.addEventListener("input", () => {
     pFrom.textContent = from.value || "...";
   });
@@ -72,7 +79,7 @@
   window.createLetter = async function () {
 
     if (!content.value.trim()) {
-      status.innerText = "Hãy viết nội dung thư...";
+      status.innerText = "Bạn chưa viết nội dung...";
       return;
     }
 

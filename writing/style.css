@@ -4,11 +4,10 @@ body {
 
   background: linear-gradient(135deg, #fbe4ff, #e0f7ff, #fff0f5);
 
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  min-height: 100vh;
 }
 
 /* container */
@@ -61,7 +60,7 @@ textarea {
   resize: none;
 }
 
-/* preview */
+/* PREVIEW */
 .preview {
   margin-top: 10px;
   padding: 12px;
@@ -74,10 +73,16 @@ textarea {
   margin: 0 0 8px 0;
 }
 
-.preview-content {
+/* ⭐ CORE: unified render system */
+.letter-content {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+
+  white-space: pre-wrap; /* giữ xuống dòng */
+
+  color: #333;
   margin-top: 8px;
-  font-style: italic;
-  opacity: 0.8;
 }
 
 /* button */
