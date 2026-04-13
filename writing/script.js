@@ -34,19 +34,23 @@ from.addEventListener("input", updatePreview);
 to.addEventListener("input", updatePreview);
 
 function updatePreview() {
-  const content = parseMarkdown(editor.innerText);
-
   preview.innerHTML = `
-  <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
-  <div class="meta-line"><b>Đến:</b> ${to.value || "..."}</div>
+    <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
+    <div class="meta-line"><b>Đến:</b> ${to.value || "..."}</div>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <div class="letter-content">
-    ${parseMarkdown(editor.innerText)}
-  </div>
-`;
+    <div class="letter-content">
+      ${editor.innerHTML}
+    </div>
+  `;
 }
+
+editor.addEventListener("input", updatePreview);
+from.addEventListener("input", updatePreview);
+to.addEventListener("input", updatePreview);
+
+updatePreview();
 
 function getExpiryDate(days) {
   if (!days || days === "0") return null;
