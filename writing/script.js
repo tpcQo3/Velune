@@ -7,9 +7,6 @@ const status = document.getElementById("status");
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 
-// ======================
-// TOOLBAR
-// ======================
 window.cmd = function (cmd) {
   document.execCommand(cmd);
 };
@@ -26,9 +23,6 @@ document.getElementById("color").oninput = (e) => {
   document.execCommand("foreColor", false, e.target.value);
 };
 
-// ======================
-// MARKDOWN ENGINE (basic)
-// ======================
 function parseMarkdown(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
@@ -36,9 +30,6 @@ function parseMarkdown(text) {
     .replace(/__(.*?)__/g, "<u>$1</u>");
 }
 
-// ======================
-// LIVE PREVIEW
-// ======================
 from.addEventListener("input", updatePreview);
 to.addEventListener("input", updatePreview);
 
@@ -57,9 +48,6 @@ function updatePreview() {
 `;
 }
 
-// ======================
-// EXPIRY LOGIC (CÁCH A)
-// ======================
 function getExpiryDate(days) {
   if (!days || days === "0") return null;
 
@@ -69,9 +57,6 @@ function getExpiryDate(days) {
   return d;
 }
 
-// ======================
-// CREATE LETTER
-// ======================
 window.createLetter = async function () {
 
   const raw = editor.innerText;

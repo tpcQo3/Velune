@@ -1,6 +1,4 @@
-// firebase.js
 
-// Import từ CDN (dùng được trên web thường)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getFirestore,
@@ -10,7 +8,6 @@ import {
   doc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Config của bạn (OK rồi, giữ nguyên)
 const firebaseConfig = {
   apiKey: "AIzaSyDNkFretT8Y6dHzNsfsA_O3eQuaBugXQPU",
   authDomain: "veluneink-be596.firebaseapp.com",
@@ -21,11 +18,9 @@ const firebaseConfig = {
   measurementId: "G-6341F3F17T"
 };
 
-// Init Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ✍️ Lưu thư
 export async function saveLetter(content) {
   const docRef = await addDoc(collection(db, "letters"), {
     text: content,
@@ -35,7 +30,6 @@ export async function saveLetter(content) {
   return docRef.id;
 }
 
-// 📖 Lấy thư
 export async function getLetter(id) {
   const docSnap = await getDoc(doc(db, "letters", id));
 
