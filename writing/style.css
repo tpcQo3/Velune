@@ -124,3 +124,73 @@ textarea {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* 🌫 nền mờ */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+/* ẩn popup */
+.hidden {
+  display: none;
+}
+
+/* box */
+.popup-box {
+  width: 90%;
+  max-width: 400px;
+
+  background: white;
+  padding: 20px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* link */
+.popup-box a {
+  display: block;
+  margin: 10px 0;
+  color: #6a8cff;
+  word-break: break-all;
+}
+
+/* input link */
+.popup-box input {
+  width: 100%;
+  padding: 10px;
+
+  margin-top: 10px;
+
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* small buttons */
+.btn-small {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #ffd6ec, #cceeff);
+
+  cursor: pointer;
+}
+
+.btn-small.secondary {
+  background: #eee;
+}
