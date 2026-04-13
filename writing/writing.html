@@ -15,7 +15,13 @@
 <div class="container fade-in">
 
   <h1>Write a Letter</h1>
-  <p class="subtitle">express what you can’t say</p>
+  <p class="subtitle">express your feelings</p>
+
+  <!-- META -->
+  <div class="meta">
+    <input id="from" type="text" placeholder="Người gửi">
+    <input id="to" type="text" placeholder="Người nhận">
+  </div>
 
   <!-- TOOLBAR -->
   <div class="toolbar">
@@ -30,7 +36,6 @@
       <option value="14px">Small</option>
       <option value="16px" selected>Normal</option>
       <option value="20px">Large</option>
-      <option value="26px">Huge</option>
     </select>
 
     <input type="color" id="color">
@@ -42,6 +47,30 @@
 
   <!-- EDITOR -->
   <div id="editor" class="editor" contenteditable="true"></div>
+
+  <!-- SETTINGS -->
+  <div class="settings">
+
+    <select id="expiry">
+      <option value="0">Không giới hạn</option>
+      <option value="1">1 ngày</option>
+      <option value="3">3 ngày</option>
+      <option value="7">7 ngày</option>
+      <option value="30">30 ngày</option>
+    </select>
+
+    <input id="password" type="password" placeholder="Password (optional)">
+
+    <select id="theme">
+      <option value="romantic">Romantic</option>
+      <option value="dark">Dark</option>
+      <option value="sky">Sky</option>
+    </select>
+
+    <input id="youtube" type="text" placeholder="YouTube URL">
+    <input id="ytStart" type="number" placeholder="Start (sec)">
+    <input id="ytEnd" type="number" placeholder="End (sec)">
+  </div>
 
   <!-- PREVIEW -->
   <div class="preview">

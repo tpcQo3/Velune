@@ -4,35 +4,30 @@ const editor = document.getElementById("editor");
 const preview = document.getElementById("preview");
 const status = document.getElementById("status");
 
+const from = document.getElementById("from");
+const to = document.getElementById("to");
+
 // ======================
-// TOOL COMMAND (fix)
+// TOOLBAR
 // ======================
-window.cmd = function (command) {
-  document.execCommand(command, false, null);
+window.cmd = function (cmd) {
+  document.execCommand(cmd);
 };
 
-// font
-document.getElementById("font").addEventListener("change", (e) => {
+document.getElementById("font").onchange = (e) => {
   document.execCommand("fontName", false, e.target.value);
-});
+};
 
-// size (fix đúng cách)
-document.getElementById("size").addEventListener("change", (e) => {
-  document.execCommand("fontSize", false, "7");
+document.getElementById("size").onchange = (e) => {
+  editor.style.fontSize = e.target.value;
+};
 
-  const spans = editor.getElementsByTagName("font");
-  for (let i = 0; i < spans.length; i++) {
-    spans[i].style.fontSize = e.target.value;
-  }
-});
-
-// color
-document.getElementById("color").addEventListener("input", (e) => {
+document.getElementById("color").oninput = (e) => {
   document.execCommand("foreColor", false, e.target.value);
-});
+};
 
 // ======================
-// FIXED MARKDOWN ENGINE
+// MARKDOWN ENGINE (basic)
 // ======================
 function parseMarkdown(text) {
   return text
@@ -42,16 +37,23 @@ function parseMarkdown(text) {
 }
 
 // ======================
-// LIVE PREVIEW (FIXED)
+// LIVE PREVIEW
 // ======================
 editor.addEventListener("input", () => {
-
-  const raw = editor.innerText; // ⚠️ QUAN TRỌNG
-
-  const html = parseMarkdown(raw);
-
-  preview.innerHTML = html;
+  preview.innerHTML = parseMarkdown(editor.innerText);
 });
+
+// ======================
+// EXPIRY LOGIC (CÁCH A)
+// ======================
+function getExpiryDate(days) {
+  if (!days || days === "0") return null;
+
+  const d = new Date();
+  d.setDate(d.getDate() + parseInt(days));
+
+  return d;
+}
 
 // ======================
 // CREATE LETTER
@@ -68,17 +70,34 @@ window.createLetter = async function () {
   status.innerText = "Đang tạo thư...";
 
   try {
-    const id = await saveLetter({
-      text: parseMarkdown(raw)
-    });
 
-    status.innerText = "Đã tạo thư ✨";
+    const id = await saveLetter({
+      from: from.value || "Ẩn danh",
+      to: to.value || "Không rõ",
+
+      content: parseMarkdown(raw),
+
+      createdAt: new Date(),
+      expiryAt: getExpiryDate(document.getElementById("expiry").value),
+
+      password: document.getElementById("password").value || null,
+
+      theme: document.getElementById("theme").value,
+
+      urlYoutube: document.getElementById("youtube").value || null,
+
+      youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
+      youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
+    });
 
     const link = window.location.origin + "/reading/reading.html?id=" + id;
 
-    alert("Link thư:\n" + link);
+    alert("🎉 Thư đã tạo!\n\n" + link);
+
+    status.innerText = "Đã tạo thư ✨";
 
   } catch (e) {
     status.innerText = "Lỗi: " + e.message;
+    console.error(e);
   }
 };
