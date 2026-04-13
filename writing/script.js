@@ -39,9 +39,19 @@ function parseMarkdown(text) {
 // ======================
 // LIVE PREVIEW
 // ======================
-editor.addEventListener("input", () => {
-  preview.innerHTML = parseMarkdown(editor.innerText);
-});
+from.addEventListener("input", updatePreview);
+to.addEventListener("input", updatePreview);
+
+function updatePreview() {
+  const content = parseMarkdown(editor.innerText);
+
+  preview.innerHTML = `
+    <div><b>Từ:</b> ${from.value || "..."}</div>
+    <div><b>Đến:</b> ${to.value || "..."}</div>
+    <br/>
+    <div class="letter-content">${content}</div>
+  `;
+}
 
 // ======================
 // EXPIRY LOGIC (CÁCH A)
