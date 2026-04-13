@@ -2,103 +2,109 @@ body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
 
+  /* 🌸 màu mới */
   background: linear-gradient(
     135deg,
-    #0f1025,
-    #1e1f4b,
-    #2a1f4f,
-    #3a2b6f
+    #fbe4ff,
+    #e0f7ff,
+    #fff0f5
   );
 
-  color: #f2f2ff;
+  color: #333;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
   overflow: hidden;
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(180,150,255,0.25), transparent 70%);
-  top: -100px;
-  left: -100px;
-  filter: blur(80px);
+/* 🌠 SAO BAY */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-body::after {
-  content: "";
+.star {
   position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,180,220,0.2), transparent 70%);
-  bottom: -100px;
-  right: -100px;
-  filter: blur(80px);
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: 0.8;
+  animation: moveStar linear infinite;
 }
 
+@keyframes moveStar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* 🌫 container */
 .container {
   position: relative;
   max-width: 700px;
-  padding: 45px;
+  padding: 40px;
 
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(20px);
 
-  border-radius: 24px;
+  border-radius: 25px;
 
-  box-shadow:
-    0 0 60px rgba(140, 120, 255, 0.2),
-    0 0 120px rgba(200, 150, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 48px;
   margin-bottom: 5px;
-
-  /* 🌟 chữ có glow */
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(200,180,255,0.6);
+  color: #444;
 }
 
 .subtitle {
   font-size: 14px;
   opacity: 0.6;
-  margin-bottom: 30px;
-  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+/* ✍️ chữ chạy */
+.typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #aaa;
+  width: 0;
+  animation: typing 3s steps(30, end) forwards, blink 1s infinite;
+}
+
+@keyframes typing {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 
 .message {
   text-align: left;
   line-height: 1.8;
   font-size: 15px;
-  opacity: 0.9;
-}
-
-.message p {
-  margin-bottom: 15px;
 }
 
 .contact a {
-  color: #c7bfff;
+  color: #6a8cff;
   text-decoration: none;
-  transition: 0.3s;
 }
 
 .contact a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(200,180,255,0.8);
-}
-
-.ending {
-  margin-top: 20px;
-  font-style: italic;
-  opacity: 0.8;
+  text-decoration: underline;
 }
 
 .btn {
@@ -108,38 +114,29 @@ h1 {
 
   border-radius: 999px;
 
-  background: linear-gradient(
-    135deg,
-    rgba(180,150,255,0.3),
-    rgba(255,180,220,0.25)
-  );
+  background: linear-gradient(135deg, #ffd6ec, #cceeff);
+  color: #333;
 
-  color: #fff;
   text-decoration: none;
   font-size: 14px;
-  letter-spacing: 1px;
-
-  backdrop-filter: blur(10px);
 
   transition: all 0.3s ease;
 }
 
 .btn:hover {
-  transform: translateY(-3px) scale(1.03);
-
-  box-shadow:
-    0 0 20px rgba(200,150,255,0.6),
-    0 0 40px rgba(255,180,220,0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
+/* fade */
 .fade-in {
-  animation: fade 2s ease;
+  animation: fade 1.5s ease;
 }
 
 @keyframes fade {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
