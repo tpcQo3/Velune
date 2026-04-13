@@ -1,0 +1,47 @@
+// firebase.js
+
+// Import từ CDN (dùng được trên web thường)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// Config của bạn (OK rồi, giữ nguyên)
+const firebaseConfig = {
+  apiKey: "AIzaSyDNkFretT8Y6dHzNsfsA_O3eQuaBugXQPU",
+  authDomain: "veluneink-be596.firebaseapp.com",
+  projectId: "veluneink-be596",
+  storageBucket: "veluneink-be596.firebasestorage.app",
+  messagingSenderId: "940814623866",
+  appId: "1:940814623866:web:77109c8cacbb4c10e807c3",
+  measurementId: "G-6341F3F17T"
+};
+
+// Init Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ✍️ Lưu thư
+export async function saveLetter(content) {
+  const docRef = await addDoc(collection(db, "letters"), {
+    text: content,
+    createdAt: new Date()
+  });
+
+  return docRef.id;
+}
+
+// 📖 Lấy thư
+export async function getLetter(id) {
+  const docSnap = await getDoc(doc(db, "letters", id));
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return null;
+  }
+}

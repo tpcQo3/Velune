@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viết thư - Veluneink</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container fade-in">
+
+  <h1>Write</h1>
+  <p class="subtitle">write something you’ll never send...</p>
+
+  <textarea id="letter" placeholder="Viết điều bạn chưa từng nói..."></textarea>
+
+  <button onclick="send()" class="btn">Gửi thư</button>
+
+  <p id="status"></p>
+
+</div>
+
+<script type="module">
+  import { saveLetter } from "../firebase.js";
+
+  window.send = async function () {
+    const text = document.getElementById("letter").value;
+    const status = document.getElementById("status");
+
+    if (!text.trim()) {
+      status.innerText = "Hãy viết gì đó trước...";
+      return;
+    }
+
+    status.innerText = "Đang gửi...";
+
+    try {
+      const id = await saveLetter(text);
+
+      status.innerText = "Đã gửi 💌";
+
+      setTimeout(() => {
+        window.location.href = "../reading/reading.html?id=" + id;
+      }, 1000);
+
+    } catch (e) {
+      status.innerText = "Lỗi khi gửi 😢";
+      console.error(e);
+    }
+  };
+</script>
+
+</body>
+</html>
