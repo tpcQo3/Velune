@@ -1,8 +1,8 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f0f1a, #1a1a2e, #16213e);
-  color: #eaeaf0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #0f1020, #1b1c3a, #2a2d5a);
+  color: #e8e8f0;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -10,34 +10,43 @@ body {
 }
 
 .container {
-  max-width: 700px;
+  max-width: 680px;
+  padding: 40px;
   text-align: center;
-  padding: 30px;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.05);
+
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.4);
 }
 
 h1 {
-  font-size: 48px;
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
   margin-bottom: 5px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .subtitle {
+  font-size: 14px;
   opacity: 0.6;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .message {
   text-align: left;
-  line-height: 1.6;
+  line-height: 1.8;
   font-size: 15px;
+  opacity: 0.9;
+}
+
+.message p {
+  margin-bottom: 15px;
 }
 
 .contact a {
-  color: #8ab4ff;
+  color: #b8c0ff;
   text-decoration: none;
 }
 
@@ -45,31 +54,41 @@ h1 {
   text-decoration: underline;
 }
 
+.ending {
+  margin-top: 20px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .btn {
   display: inline-block;
-  margin-top: 25px;
-  padding: 12px 30px;
-  border-radius: 30px;
-  background: #8ab4ff;
-  color: black;
+  margin-top: 30px;
+  padding: 12px 28px;
+
+  border-radius: 999px;
+  background: rgba(200, 210, 255, 0.15);
+  color: #eaeaff;
+
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
+  font-size: 14px;
+  letter-spacing: 1px;
+
+  transition: all 0.3s ease;
 }
 
 .btn:hover {
-  transform: scale(1.05);
-  background: #a5c4ff;
+  background: rgba(200, 210, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .fade-in {
-  animation: fade 1.5s ease;
+  animation: fade 1.8s ease;
 }
 
 @keyframes fade {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
