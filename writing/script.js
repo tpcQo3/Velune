@@ -10,6 +10,9 @@ const status = document.getElementById("status");
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 
+const sizeInput = document.getElementById("size");
+const sizeValue = document.getElementById("sizeValue");
+
 // ======================
 // RANGE CORE
 // ======================
@@ -20,23 +23,47 @@ function getSelectionRange() {
 }
 
 // ======================
-// APPLY STYLE (NO execCommand)
+// APPLY STYLE (UNIFY)
 // ======================
 function applyStyle(styleObj) {
-  const range = getSelectionRange();
-  if (!range || range.collapsed) return;
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return;
 
+  const range = sel.getRangeAt(0);
+
+  // ❌ nếu không bôi đen → không làm gì
+  if (range.collapsed) return;
+
+  // lấy nội dung được chọn
+  const fragment = range.extractContents();
+
+  // 🔥 XÓA style cũ bên trong
+  const walker = document.createTreeWalker(
+    fragment,
+    NodeFilter.SHOW_ELEMENT,
+    null,
+    false
+  );
+
+  while (walker.nextNode()) {
+    const el = walker.currentNode;
+
+    for (let key in styleObj) {
+      el.style[key] = ""; // remove style cũ
+    }
+  }
+
+  // tạo span mới
   const span = document.createElement("span");
   Object.assign(span.style, styleObj);
 
-  span.appendChild(range.extractContents());
+  span.appendChild(fragment);
   range.insertNode(span);
 
   // giữ selection
   const newRange = document.createRange();
   newRange.selectNodeContents(span);
 
-  const sel = window.getSelection();
   sel.removeAllRanges();
   sel.addRange(newRange);
 
@@ -55,9 +82,13 @@ document.getElementById("font").onchange = (e) => {
 };
 
 // SIZE (1 → 50 px)
-document.getElementById("size").oninput = (e) => {
+sizeInput.oninput = (e) => {
+  const value = e.target.value;
+
+  sizeValue.innerText = value + "px";
+
   applyStyle({
-    fontSize: e.target.value + "px"
+    fontSize: value + "px"
   });
 };
 
@@ -87,20 +118,14 @@ function updatePreview() {
 // ======================
 // EVENTS
 // ======================
-
-// 🔥 KHÔNG dùng markdown realtime nữa
-editor.addEventListener("input", () => {
-  updatePreview();
-});
-
+editor.addEventListener("input", updatePreview);
 from.addEventListener("input", updatePreview);
 to.addEventListener("input", updatePreview);
 
-// init
 updatePreview();
 
 // ======================
-// MARKDOWN (chỉ dùng khi lưu)
+// MARKDOWN (SAVE ONLY)
 // ======================
 function parseMarkdown(html) {
   return html
@@ -139,14 +164,11 @@ window.createLetter = async function () {
 
   try {
 
-    const contentHTML = editor.innerHTML;
-
     const id = await saveLetter({
       from: from.value || "Ẩn danh",
       to: to.value || "Không rõ",
 
-      // 🔥 xử lý markdown tại đây (không realtime)
-      content: parseMarkdown(contentHTML),
+      content: parseMarkdown(editor.innerHTML),
 
       createdAt: new Date(),
       expiryAt: getExpiryDate(document.getElementById("expiry").value),
@@ -197,7 +219,6 @@ window.copyLink = function () {
   alert("Đã copy link!");
 };
 
-// click ra ngoài để đóng
 document.getElementById("popup").addEventListener("click", (e) => {
   if (e.target.id === "popup") {
     closePopup();
