@@ -65,6 +65,7 @@ h1 {
 }
 
 .editor {
+  font-size: 18px;
   min-height: 150px;
   padding: 12px;
   border-radius: 12px;
