@@ -15,14 +15,17 @@ const to = document.getElementById("to");
 // ======================
 document.getElementById("font").onchange = (e) => {
   document.execCommand("fontName", false, e.target.value);
+  updatePreview();
 };
 
 document.getElementById("size").onchange = (e) => {
   editor.style.fontSize = e.target.value;
+  updatePreview();
 };
 
 document.getElementById("color").oninput = (e) => {
   document.execCommand("foreColor", false, e.target.value);
+  updatePreview();
 };
 
 // ======================
@@ -52,17 +55,17 @@ function parseMarkdown(text) {
 // ======================
 // PREVIEW UPDATE
 // ======================
-function updatePreview() {
-  preview.innerHTML = `
-    <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
-    <div class="meta-line"><b>Đến:</b> ${to.value || "..."}</div>
+function parseMarkdown(html) {
 
-    <div class="divider"></div>
-
-    <div class="letter-content">
-      ${parseMarkdown(editor.innerText)}
-    </div>
-  `;
+  // chỉ xử lý text, tránh phá tag HTML
+  return html
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+    .replace(/\*(.*?)\*/g, "<i>$1</i>")
+    .replace(/__(.*?)__/g, "<u>$1</u>")
+    .replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
+      if (!u.startsWith("http")) u = "https://" + u;
+      return `<a href="${u}" target="_blank">${t}</a>`;
+    });
 }
 
 // realtime update
