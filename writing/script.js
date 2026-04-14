@@ -29,33 +29,32 @@ function applyStyle(styleObj) {
   const range = sel.getRangeAt(0);
   if (range.collapsed) return;
 
-  try {
-    let wrapper;
+  const selectedText = sel.toString();
+  if (!selectedText) return;
 
-    // 🎯 highlight
-    if (styleObj.backgroundColor) {
-      wrapper = document.createElement("mark");
-      wrapper.style.backgroundColor = styleObj.backgroundColor;
-      wrapper.style.padding = "0 2px";
-      wrapper.style.borderRadius = "2px";
-    } else {
-      wrapper = document.createElement("span");
-      Object.assign(wrapper.style, styleObj);
-    }
+  // 🔥 tạo wrapper
+  let wrapperStart = "";
+  let wrapperEnd = "";
 
-    // 🔥 API CHUẨN
-    range.surroundContents(wrapper);
+  if (styleObj.backgroundColor) {
+    wrapperStart = `<mark style="background:${styleObj.backgroundColor};padding:0 2px;border-radius:2px;">`;
+    wrapperEnd = `</mark>`;
+  } else {
+    const styleStr = Object.entries(styleObj)
+      .map(([k, v]) => `${k}:${v}`)
+      .join(";");
 
-    // giữ selection
-    const newRange = document.createRange();
-    newRange.selectNodeContents(wrapper);
-
-    sel.removeAllRanges();
-    sel.addRange(newRange);
-
-  } catch (e) {
-    console.warn("Không thể apply style vào vùng phức tạp");
+    wrapperStart = `<span style="${styleStr}">`;
+    wrapperEnd = `</span>`;
   }
+
+  // 🔥 replace text trong editor
+  const html = editor.innerHTML;
+
+  // ⚠️ chỉ replace lần đầu (tránh replace nhầm nhiều chỗ)
+  const newHTML = html.replace(selectedText, wrapperStart + selectedText + wrapperEnd);
+
+  editor.innerHTML = newHTML;
 
   updatePreview();
 }
