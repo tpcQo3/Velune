@@ -99,6 +99,12 @@ h1 {
   white-space: pre-wrap;
 }
 
+.letter-content a {
+  color: #6a8cff;
+  border-bottom: 1px dashed #6a8cff;
+  text-decoration: none;
+}
+
 .btn {
   width: 100%;
   margin-top: 15px;

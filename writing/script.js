@@ -1,5 +1,8 @@
 import { saveLetter } from "../firebase.js";
 
+// ======================
+// ELEMENTS
+// ======================
 const editor = document.getElementById("editor");
 const preview = document.getElementById("preview");
 const status = document.getElementById("status");
@@ -7,10 +10,9 @@ const status = document.getElementById("status");
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 
-window.cmd = function (cmd) {
-  document.execCommand(cmd);
-};
-
+// ======================
+// TOOLBAR (simple)
+// ======================
 document.getElementById("font").onchange = (e) => {
   document.execCommand("fontName", false, e.target.value);
 };
@@ -23,16 +25,33 @@ document.getElementById("color").oninput = (e) => {
   document.execCommand("foreColor", false, e.target.value);
 };
 
+// ======================
+// MARKDOWN ENGINE
+// ======================
 function parseMarkdown(text) {
   return text
+
+    // bold
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+
+    // italic
     .replace(/\*(.*?)\*/g, "<i>$1</i>")
-    .replace(/__(.*?)__/g, "<u>$1</u>");
+
+    // underline
+    .replace(/__(.*?)__/g, "<u>$1</u>")
+
+    // link (auto thêm https nếu thiếu)
+    .replace(/\[(.*?)\]\((.*?)\)/g, (match, label, url) => {
+      if (!url.startsWith("http")) {
+        url = "https://" + url;
+      }
+      return `<a href="${url}" target="_blank">${label}</a>`;
+    });
 }
 
-from.addEventListener("input", updatePreview);
-to.addEventListener("input", updatePreview);
-
+// ======================
+// PREVIEW UPDATE
+// ======================
 function updatePreview() {
   preview.innerHTML = `
     <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
@@ -41,17 +60,22 @@ function updatePreview() {
     <div class="divider"></div>
 
     <div class="letter-content">
-      ${editor.innerHTML}
+      ${parseMarkdown(editor.innerText)}
     </div>
   `;
 }
 
+// realtime update
 editor.addEventListener("input", updatePreview);
 from.addEventListener("input", updatePreview);
 to.addEventListener("input", updatePreview);
 
+// gọi lần đầu
 updatePreview();
 
+// ======================
+// EXPIRY
+// ======================
 function getExpiryDate(days) {
   if (!days || days === "0") return null;
 
@@ -61,6 +85,9 @@ function getExpiryDate(days) {
   return d;
 }
 
+// ======================
+// CREATE LETTER
+// ======================
 window.createLetter = async function () {
 
   const raw = editor.innerText;
