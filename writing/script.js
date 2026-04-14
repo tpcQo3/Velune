@@ -241,6 +241,8 @@ window.setColor = function (color) {
   updatePreview();
 };
 
+// theme
+
 const themeSelect = document.getElementById("theme");
 
 themeSelect.addEventListener("change", () => {
@@ -248,13 +250,8 @@ themeSelect.addEventListener("change", () => {
 });
 
 function applyTheme(theme) {
-  const previewBox = document.querySelector(".preview");
-
-  // reset class cũ
-  previewBox.className = "preview";
-
-  // add theme mới
-  previewBox.classList.add("theme-" + theme);
+  document.body.className = "theme-" + theme;
 }
 
+// load lần đầu
 applyTheme(themeSelect.value);
