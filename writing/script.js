@@ -19,7 +19,16 @@ document.getElementById("font").onchange = (e) => {
 };
 
 document.getElementById("size").onchange = (e) => {
-  editor.style.fontSize = e.target.value;
+  document.execCommand("fontSize", false, "7"); // fake size
+  const fonts = editor.getElementsByTagName("font");
+
+  for (let i = 0; i < fonts.length; i++) {
+    if (fonts[i].size === "7") {
+      fonts[i].removeAttribute("size");
+      fonts[i].style.fontSize = e.target.value;
+    }
+  }
+
   updatePreview();
 };
 
@@ -126,4 +135,25 @@ window.createLetter = async function () {
 
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
+};
+
+const sizeInput = document.getElementById("size");
+const sizeValue = document.getElementById("sizeValue");
+
+sizeInput.oninput = (e) => {
+  const value = e.target.value;
+  sizeValue.innerText = value + "px";
+
+  document.execCommand("fontSize", false, "7");
+
+  const fonts = editor.getElementsByTagName("font");
+
+  for (let i = 0; i < fonts.length; i++) {
+    if (fonts[i].size === "7") {
+      fonts[i].removeAttribute("size");
+      fonts[i].style.fontSize = value + "px";
+    }
+  }
+
+  updatePreview();
 };
