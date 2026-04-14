@@ -71,6 +71,21 @@
 
   <p id="status"></p>
 
+  <div id="popup" class="popup hidden">
+  <div class="popup-box">
+    <h3>🎉 Thành công!</h3>
+
+    <p>Bạn đã tạo một lá thư ✨</p>
+
+    <input id="popupLink" readonly>
+
+    <div class="popup-actions">
+      <button onclick="copyLink()">Copy link</button>
+      <button onclick="closePopup()">Đóng</button>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <script type="module" src="script.js"></script>

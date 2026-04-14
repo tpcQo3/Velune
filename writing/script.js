@@ -20,7 +20,7 @@ function getSelectionRange() {
 }
 
 // ======================
-// APPLY STYLE (CORE)
+// APPLY STYLE (NO execCommand)
 // ======================
 function applyStyle(styleObj) {
   const range = getSelectionRange();
@@ -44,7 +44,7 @@ function applyStyle(styleObj) {
 }
 
 // ======================
-// TOOLBAR (NO execCommand)
+// TOOLBAR
 // ======================
 
 // FONT
@@ -69,20 +69,6 @@ document.getElementById("color").oninput = (e) => {
 };
 
 // ======================
-// MARKDOWN (SAFE)
-// ======================
-function applyMarkdown() {
-  editor.innerHTML = editor.innerHTML
-    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
-    .replace(/\*(.*?)\*/g, "<i>$1</i>")
-    .replace(/__(.*?)__/g, "<u>$1</u>")
-    .replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
-      if (!u.startsWith("http")) u = "https://" + u;
-      return `<a href="${u}" target="_blank">${t}</a>`;
-    });
-}
-
-// ======================
 // PREVIEW
 // ======================
 function updatePreview() {
@@ -101,8 +87,9 @@ function updatePreview() {
 // ======================
 // EVENTS
 // ======================
+
+// 🔥 KHÔNG dùng markdown realtime nữa
 editor.addEventListener("input", () => {
-  applyMarkdown();   // optional
   updatePreview();
 });
 
@@ -111,6 +98,20 @@ to.addEventListener("input", updatePreview);
 
 // init
 updatePreview();
+
+// ======================
+// MARKDOWN (chỉ dùng khi lưu)
+// ======================
+function parseMarkdown(html) {
+  return html
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+    .replace(/\*(.*?)\*/g, "<i>$1</i>")
+    .replace(/__(.*?)__/g, "<u>$1</u>")
+    .replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
+      if (!u.startsWith("http")) u = "https://" + u;
+      return `<a href="${u}" target="_blank">${t}</a>`;
+    });
+}
 
 // ======================
 // EXPIRY
@@ -138,11 +139,14 @@ window.createLetter = async function () {
 
   try {
 
+    const contentHTML = editor.innerHTML;
+
     const id = await saveLetter({
       from: from.value || "Ẩn danh",
       to: to.value || "Không rõ",
 
-      content: editor.innerHTML, // 🔥 giữ full style
+      // 🔥 xử lý markdown tại đây (không realtime)
+      content: parseMarkdown(contentHTML),
 
       createdAt: new Date(),
       expiryAt: getExpiryDate(document.getElementById("expiry").value),
@@ -159,7 +163,7 @@ window.createLetter = async function () {
 
     const link = window.location.origin + "/reading/reading.html?id=" + id;
 
-    alert("🎉 Thư đã tạo!\n\n" + link);
+    openPopup(link);
 
     status.innerText = "Đã tạo thư ✨";
 
@@ -168,6 +172,37 @@ window.createLetter = async function () {
     console.error(e);
   }
 };
+
+// ======================
+// POPUP
+// ======================
+function openPopup(link) {
+  const popup = document.getElementById("popup");
+  const input = document.getElementById("popupLink");
+
+  input.value = link;
+  popup.classList.remove("hidden");
+}
+
+window.closePopup = function () {
+  document.getElementById("popup").classList.add("hidden");
+};
+
+window.copyLink = function () {
+  const input = document.getElementById("popupLink");
+
+  input.select();
+  document.execCommand("copy");
+
+  alert("Đã copy link!");
+};
+
+// click ra ngoài để đóng
+document.getElementById("popup").addEventListener("click", (e) => {
+  if (e.target.id === "popup") {
+    closePopup();
+  }
+});
 
 // ======================
 // HELP NAV
