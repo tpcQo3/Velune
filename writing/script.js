@@ -240,3 +240,21 @@ window.setColor = function (color) {
 
   updatePreview();
 };
+
+const themeSelect = document.getElementById("theme");
+
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
+});
+
+function applyTheme(theme) {
+  const previewBox = document.querySelector(".preview");
+
+  // reset class cũ
+  previewBox.className = "preview";
+
+  // add theme mới
+  previewBox.classList.add("theme-" + theme);
+}
+
+applyTheme(themeSelect.value);
