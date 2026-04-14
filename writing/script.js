@@ -30,13 +30,16 @@ function applyStyle(styleObj) {
   if (!sel.rangeCount) return;
 
   const range = sel.getRangeAt(0);
-
-  // ❌ không bôi đen → bỏ qua
   if (range.collapsed) return;
 
+  // ======================
+  // 1. clone nội dung
+  // ======================
   const fragment = range.extractContents();
 
-  // 🔥 XÓA style cũ bên trong
+  // ======================
+  // 2. GỠ highlight cũ
+  // ======================
   const walker = document.createTreeWalker(
     fragment,
     NodeFilter.SHOW_ELEMENT,
@@ -44,29 +47,54 @@ function applyStyle(styleObj) {
     false
   );
 
+  const nodesToRemove = [];
+
   while (walker.nextNode()) {
     const el = walker.currentNode;
 
+    // remove highlight cũ
+    if (el.tagName === "MARK") {
+      nodesToRemove.push(el);
+    }
+
+    // remove style trùng
     for (let key in styleObj) {
-      el.style[key] = ""; // remove style cũ
+      el.style[key] = "";
     }
   }
 
-  const span = document.createElement("span");
-  Object.assign(span.style, styleObj);
+  // unwrap mark
+  nodesToRemove.forEach((mark) => {
+    const parent = mark.parentNode;
+    while (mark.firstChild) {
+      parent.insertBefore(mark.firstChild, mark);
+    }
+    parent.removeChild(mark);
+  });
 
-  // ✨ hiệu ứng dạ quang
+  // ======================
+  // 3. tạo highlight mới
+  // ======================
+  let wrapper;
+
   if (styleObj.backgroundColor) {
-    span.style.padding = "2px 4px";
-    span.style.borderRadius = "4px";
+    wrapper = document.createElement("mark");
+    wrapper.style.backgroundColor = styleObj.backgroundColor;
+    wrapper.style.padding = "0 2px";
+    wrapper.style.borderRadius = "2px";
+  } else {
+    wrapper = document.createElement("span");
+    Object.assign(wrapper.style, styleObj);
   }
 
-  span.appendChild(fragment);
-  range.insertNode(span);
+  wrapper.appendChild(fragment);
+  range.insertNode(wrapper);
 
-  // giữ selection
+  // ======================
+  // 4. giữ selection
+  // ======================
   const newRange = document.createRange();
-  newRange.selectNodeContents(span);
+  newRange.selectNodeContents(wrapper);
 
   sel.removeAllRanges();
   sel.addRange(newRange);
