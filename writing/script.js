@@ -31,10 +31,9 @@ function applyStyle(styleObj) {
 
   const range = sel.getRangeAt(0);
 
-  // ❌ nếu không bôi đen → không làm gì
+  // ❌ không bôi đen → bỏ qua
   if (range.collapsed) return;
 
-  // lấy nội dung được chọn
   const fragment = range.extractContents();
 
   // 🔥 XÓA style cũ bên trong
@@ -53,9 +52,14 @@ function applyStyle(styleObj) {
     }
   }
 
-  // tạo span mới
   const span = document.createElement("span");
   Object.assign(span.style, styleObj);
+
+  // ✨ hiệu ứng dạ quang
+  if (styleObj.backgroundColor) {
+    span.style.padding = "2px 4px";
+    span.style.borderRadius = "4px";
+  }
 
   span.appendChild(fragment);
   range.insertNode(span);
@@ -92,10 +96,17 @@ sizeInput.oninput = (e) => {
   });
 };
 
-// COLOR
+// 🎨 MÀU CHỮ
 document.getElementById("color").oninput = (e) => {
   applyStyle({
     color: e.target.value
+  });
+};
+
+// ✨ DẠ QUANG (HIGHLIGHT)
+document.getElementById("bgcolor").oninput = (e) => {
+  applyStyle({
+    backgroundColor: e.target.value
   });
 };
 
@@ -219,6 +230,7 @@ window.copyLink = function () {
   alert("Đã copy link!");
 };
 
+// click ngoài để đóng
 document.getElementById("popup").addEventListener("click", (e) => {
   if (e.target.id === "popup") {
     closePopup();
