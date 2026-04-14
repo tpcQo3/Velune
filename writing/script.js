@@ -83,18 +83,15 @@ sizeInput.oninput = (e) => {
   });
 };
 
-// ======================
-// PREVIEW
-// ======================
+// preview
+
 function updatePreview() {
   preview.innerHTML = `
-    <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
-    <div class="meta-line"><b>Đến:</b> ${to.value || "..."}</div>
-
-    <div class="divider"></div>
-
+    <div><b>Từ:</b> ${from.value || "..."}</div>
+    <div><b>Đến:</b> ${to.value || "..."}</div>
+    <hr>
     <div class="letter-content">
-      ${editor.innerHTML}
+      ${parseMarkdown(editor.innerHTML)}
     </div>
   `;
 }

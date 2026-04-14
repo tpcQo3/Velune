@@ -64,13 +64,24 @@ h1 {
   border: none;
 }
 
-/* EDITOR */
 .editor {
   font-size: 18px;
   min-height: 150px;
   padding: 12px;
   border-radius: 12px;
+
+  background: rgba(255,255,255,0.85);
+
+  /* 🔥 thêm cái này */
+  border: 1.5px solid rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
   outline: none;
+}
+
+.editor:focus {
+  border: 1.5px solid #a6c1ee;
+  box-shadow: 0 0 0 3px rgba(166,193,238,0.2);
 }
 
 /* SETTINGS */
