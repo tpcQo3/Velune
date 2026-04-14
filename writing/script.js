@@ -29,30 +29,6 @@ document.getElementById("color").oninput = (e) => {
 };
 
 // ======================
-// MARKDOWN ENGINE
-// ======================
-function parseMarkdown(text) {
-  return text
-
-    // bold
-    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
-
-    // italic
-    .replace(/\*(.*?)\*/g, "<i>$1</i>")
-
-    // underline
-    .replace(/__(.*?)__/g, "<u>$1</u>")
-
-    // link (auto thêm https nếu thiếu)
-    .replace(/\[(.*?)\]\((.*?)\)/g, (match, label, url) => {
-      if (!url.startsWith("http")) {
-        url = "https://" + url;
-      }
-      return `<a href="${url}" target="_blank">${label}</a>`;
-    });
-}
-
-// ======================
 // PREVIEW UPDATE
 // ======================
 function parseMarkdown(html) {
@@ -75,6 +51,19 @@ to.addEventListener("input", updatePreview);
 
 // gọi lần đầu
 updatePreview();
+
+function updatePreview() {
+  preview.innerHTML = `
+    <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
+    <div class="meta-line"><b>Đến:</b> ${to.value || "..."}</div>
+
+    <div class="divider"></div>
+
+    <div class="letter-content">
+      ${editor.innerHTML}
+    </div>
+  `;
+}
 
 // ======================
 // EXPIRY
