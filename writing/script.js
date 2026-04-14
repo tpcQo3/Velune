@@ -29,32 +29,34 @@ function applyStyle(styleObj) {
   const range = sel.getRangeAt(0);
   if (range.collapsed) return;
 
-  const selectedText = sel.toString();
-  if (!selectedText) return;
+  const fragment = range.extractContents();
 
-  // 🔥 tạo wrapper
-  let wrapperStart = "";
-  let wrapperEnd = "";
+  const walker = document.createTreeWalker(
+    fragment,
+    NodeFilter.SHOW_ELEMENT,
+    null,
+    false
+  );
 
-  if (styleObj.backgroundColor) {
-    wrapperStart = `<mark style="background:${styleObj.backgroundColor};padding:0 2px;border-radius:2px;">`;
-    wrapperEnd = `</mark>`;
-  } else {
-    const styleStr = Object.entries(styleObj)
-      .map(([k, v]) => `${k}:${v}`)
-      .join(";");
+  while (walker.nextNode()) {
+    const el = walker.currentNode;
 
-    wrapperStart = `<span style="${styleStr}">`;
-    wrapperEnd = `</span>`;
+    for (let key in styleObj) {
+      el.style[key] = "";
+    }
   }
 
-  // 🔥 replace text trong editor
-  const html = editor.innerHTML;
+  const span = document.createElement("span");
+  Object.assign(span.style, styleObj);
 
-  // ⚠️ chỉ replace lần đầu (tránh replace nhầm nhiều chỗ)
-  const newHTML = html.replace(selectedText, wrapperStart + selectedText + wrapperEnd);
+  span.appendChild(fragment);
+  range.insertNode(span);
 
-  editor.innerHTML = newHTML;
+  const newRange = document.createRange();
+  newRange.selectNodeContents(span);
+
+  sel.removeAllRanges();
+  sel.addRange(newRange);
 
   updatePreview();
 }
@@ -85,13 +87,6 @@ sizeInput.oninput = (e) => {
 document.getElementById("color").oninput = (e) => {
   applyStyle({
     color: e.target.value
-  });
-};
-
-// ✨ DẠ QUANG (HIGHLIGHT)
-document.getElementById("bgcolor").oninput = (e) => {
-  applyStyle({
-    backgroundColor: e.target.value
   });
 };
 
