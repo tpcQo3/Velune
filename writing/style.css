@@ -122,3 +122,26 @@ h1 {
   font-size: 13px;
   opacity: 0.7;
 }
+
+.help-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+
+  font-size: 13px;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.help-btn:hover {
+  transform: scale(1.05);
+}

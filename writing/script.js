@@ -131,3 +131,7 @@ window.createLetter = async function () {
     console.error(e);
   }
 };
+
+window.goHelp = function () {
+  window.location.href = "../helping/helping.html";
+};
