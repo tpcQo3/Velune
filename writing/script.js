@@ -22,9 +22,6 @@ function getSelectionRange() {
   return sel.getRangeAt(0);
 }
 
-// ======================
-// APPLY STYLE (UNIFY)
-// ======================
 function applyStyle(styleObj) {
   const sel = window.getSelection();
   if (!sel.rangeCount) return;
@@ -32,72 +29,33 @@ function applyStyle(styleObj) {
   const range = sel.getRangeAt(0);
   if (range.collapsed) return;
 
-  // ======================
-  // 1. clone nội dung
-  // ======================
-  const fragment = range.extractContents();
+  try {
+    let wrapper;
 
-  // ======================
-  // 2. GỠ highlight cũ
-  // ======================
-  const walker = document.createTreeWalker(
-    fragment,
-    NodeFilter.SHOW_ELEMENT,
-    null,
-    false
-  );
-
-  const nodesToRemove = [];
-
-  while (walker.nextNode()) {
-    const el = walker.currentNode;
-
-    // remove highlight cũ
-    if (el.tagName === "MARK") {
-      nodesToRemove.push(el);
+    // 🎯 highlight
+    if (styleObj.backgroundColor) {
+      wrapper = document.createElement("mark");
+      wrapper.style.backgroundColor = styleObj.backgroundColor;
+      wrapper.style.padding = "0 2px";
+      wrapper.style.borderRadius = "2px";
+    } else {
+      wrapper = document.createElement("span");
+      Object.assign(wrapper.style, styleObj);
     }
 
-    // remove style trùng
-    for (let key in styleObj) {
-      el.style[key] = "";
-    }
+    // 🔥 API CHUẨN
+    range.surroundContents(wrapper);
+
+    // giữ selection
+    const newRange = document.createRange();
+    newRange.selectNodeContents(wrapper);
+
+    sel.removeAllRanges();
+    sel.addRange(newRange);
+
+  } catch (e) {
+    console.warn("Không thể apply style vào vùng phức tạp");
   }
-
-  // unwrap mark
-  nodesToRemove.forEach((mark) => {
-    const parent = mark.parentNode;
-    while (mark.firstChild) {
-      parent.insertBefore(mark.firstChild, mark);
-    }
-    parent.removeChild(mark);
-  });
-
-  // ======================
-  // 3. tạo highlight mới
-  // ======================
-  let wrapper;
-
-  if (styleObj.backgroundColor) {
-    wrapper = document.createElement("mark");
-    wrapper.style.backgroundColor = styleObj.backgroundColor;
-    wrapper.style.padding = "0 2px";
-    wrapper.style.borderRadius = "2px";
-  } else {
-    wrapper = document.createElement("span");
-    Object.assign(wrapper.style, styleObj);
-  }
-
-  wrapper.appendChild(fragment);
-  range.insertNode(wrapper);
-
-  // ======================
-  // 4. giữ selection
-  // ======================
-  const newRange = document.createRange();
-  newRange.selectNodeContents(wrapper);
-
-  sel.removeAllRanges();
-  sel.addRange(newRange);
 
   updatePreview();
 }
