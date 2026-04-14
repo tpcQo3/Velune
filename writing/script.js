@@ -247,7 +247,18 @@ themeSelect.addEventListener("change", () => {
 });
 
 function applyTheme(theme) {
-  document.body.className = "theme-" + theme;
+  const body = document.body;
+
+  // thêm animation trước
+  body.classList.add("theme-transition");
+
+  // đổi theme
+  body.className = "theme-" + theme + " theme-transition";
+
+  // xóa animation sau khi chạy xong
+  setTimeout(() => {
+    body.classList.remove("theme-transition");
+  }, 400);
 }
 
 // load lần đầu
