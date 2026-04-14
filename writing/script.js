@@ -11,39 +11,68 @@ const from = document.getElementById("from");
 const to = document.getElementById("to");
 
 // ======================
-// TOOLBAR (simple)
+// RANGE CORE
 // ======================
+function getSelectionRange() {
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return null;
+  return sel.getRangeAt(0);
+}
+
+// ======================
+// APPLY STYLE (CORE)
+// ======================
+function applyStyle(styleObj) {
+  const range = getSelectionRange();
+  if (!range || range.collapsed) return;
+
+  const span = document.createElement("span");
+  Object.assign(span.style, styleObj);
+
+  span.appendChild(range.extractContents());
+  range.insertNode(span);
+
+  // giữ selection
+  const newRange = document.createRange();
+  newRange.selectNodeContents(span);
+
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(newRange);
+
+  updatePreview();
+}
+
+// ======================
+// TOOLBAR (NO execCommand)
+// ======================
+
+// FONT
 document.getElementById("font").onchange = (e) => {
-  document.execCommand("fontName", false, e.target.value);
-  updatePreview();
+  applyStyle({
+    fontFamily: e.target.value
+  });
 };
 
-document.getElementById("size").onchange = (e) => {
-  document.execCommand("fontSize", false, "7"); // fake size
-  const fonts = editor.getElementsByTagName("font");
-
-  for (let i = 0; i < fonts.length; i++) {
-    if (fonts[i].size === "7") {
-      fonts[i].removeAttribute("size");
-      fonts[i].style.fontSize = e.target.value;
-    }
-  }
-
-  updatePreview();
+// SIZE (1 → 50 px)
+document.getElementById("size").oninput = (e) => {
+  applyStyle({
+    fontSize: e.target.value + "px"
+  });
 };
 
+// COLOR
 document.getElementById("color").oninput = (e) => {
-  document.execCommand("foreColor", false, e.target.value);
-  updatePreview();
+  applyStyle({
+    color: e.target.value
+  });
 };
 
 // ======================
-// PREVIEW UPDATE
+// MARKDOWN (SAFE)
 // ======================
-function parseMarkdown(html) {
-
-  // chỉ xử lý text, tránh phá tag HTML
-  return html
+function applyMarkdown() {
+  editor.innerHTML = editor.innerHTML
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
     .replace(/\*(.*?)\*/g, "<i>$1</i>")
     .replace(/__(.*?)__/g, "<u>$1</u>")
@@ -53,14 +82,9 @@ function parseMarkdown(html) {
     });
 }
 
-// realtime update
-editor.addEventListener("input", updatePreview);
-from.addEventListener("input", updatePreview);
-to.addEventListener("input", updatePreview);
-
-// gọi lần đầu
-updatePreview();
-
+// ======================
+// PREVIEW
+// ======================
 function updatePreview() {
   preview.innerHTML = `
     <div class="meta-line"><b>Từ:</b> ${from.value || "..."}</div>
@@ -73,6 +97,20 @@ function updatePreview() {
     </div>
   `;
 }
+
+// ======================
+// EVENTS
+// ======================
+editor.addEventListener("input", () => {
+  applyMarkdown();   // optional
+  updatePreview();
+});
+
+from.addEventListener("input", updatePreview);
+to.addEventListener("input", updatePreview);
+
+// init
+updatePreview();
 
 // ======================
 // EXPIRY
@@ -91,9 +129,7 @@ function getExpiryDate(days) {
 // ======================
 window.createLetter = async function () {
 
-  const raw = editor.innerText;
-
-  if (!raw.trim()) {
+  if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
     return;
   }
@@ -106,7 +142,7 @@ window.createLetter = async function () {
       from: from.value || "Ẩn danh",
       to: to.value || "Không rõ",
 
-      content: parseMarkdown(raw),
+      content: editor.innerHTML, // 🔥 giữ full style
 
       createdAt: new Date(),
       expiryAt: getExpiryDate(document.getElementById("expiry").value),
@@ -133,27 +169,9 @@ window.createLetter = async function () {
   }
 };
 
+// ======================
+// HELP NAV
+// ======================
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
-};
-
-const sizeInput = document.getElementById("size");
-const sizeValue = document.getElementById("sizeValue");
-
-sizeInput.oninput = (e) => {
-  const value = e.target.value;
-  sizeValue.innerText = value + "px";
-
-  document.execCommand("fontSize", false, "7");
-
-  const fonts = editor.getElementsByTagName("font");
-
-  for (let i = 0; i < fonts.length; i++) {
-    if (fonts[i].size === "7") {
-      fonts[i].removeAttribute("size");
-      fonts[i].style.fontSize = value + "px";
-    }
-  }
-
-  updatePreview();
 };
