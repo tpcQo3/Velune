@@ -308,3 +308,107 @@ h1 {
 .theme-cat .btn {
   background: linear-gradient(135deg, #ffcc80, #ffab40);
 }
+
+/* ===== POPUP OVERLAY ===== */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+
+  animation: fadeOverlay 0.3s ease;
+}
+
+/* Ẩn */
+.hidden {
+  display: none;
+}
+
+/* ===== POPUP BOX ===== */
+.popup-box {
+  width: 90%;
+  max-width: 340px;
+
+  padding: 20px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+
+  text-align: center;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+
+  animation: popupIn 0.35s ease;
+}
+
+/* INPUT */
+.popup-box input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* BUTTON GROUP */
+.popup-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.popup-actions button {
+  flex: 1;
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #ffd6ec, #cceeff);
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.popup-actions button:hover {
+  transform: scale(1.05);
+}
+
+/* ===== ANIMATION ===== */
+
+/* overlay fade */
+@keyframes fadeOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* popup bay lên */
+@keyframes popupIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  60% {
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
