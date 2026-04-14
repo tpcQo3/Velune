@@ -35,9 +35,19 @@
       <span id="sizeValue">16px</span>
   </div>
 
-      <div class="toolbar-row">
-  <label>Màu chữ:</label>
-  <input type="color" id="color">
+    <div class="color-toolbar">
+  <span>Màu chữ:</span>
+
+  <div class="color-palette">
+    <button style="background:#000000" onclick="setColor('#000000')"></button>
+    <button style="background:#e53935" onclick="setColor('#e53935')"></button>
+    <button style="background:#8e24aa" onclick="setColor('#8e24aa')"></button>
+    <button style="background:#3949ab" onclick="setColor('#3949ab')"></button>
+    <button style="background:#00897b" onclick="setColor('#00897b')"></button>
+    <button style="background:#fdd835" onclick="setColor('#fdd835')"></button>
+    <button style="background:#fb8c00" onclick="setColor('#fb8c00')"></button>
+  </div>
+</div>
 </div>
 
   <div id="editor" class="editor" contenteditable="true"></div>

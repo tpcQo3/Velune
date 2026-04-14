@@ -223,3 +223,45 @@ document.getElementById("popup").addEventListener("click", (e) => {
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
 };
+
+window.setColor = function (color) {
+  const sel = window.getSelection();
+
+  if (!sel.rangeCount) return;
+
+  const range = sel.getRangeAt(0);
+
+  // ❌ không bôi đen → bỏ qua
+  if (range.collapsed) return;
+
+  const fragment = range.extractContents();
+
+  // 🔥 xóa màu cũ trong vùng chọn
+  const walker = document.createTreeWalker(
+    fragment,
+    NodeFilter.SHOW_ELEMENT,
+    null,
+    false
+  );
+
+  while (walker.nextNode()) {
+    const el = walker.currentNode;
+    el.style.color = "";
+  }
+
+  // apply màu mới
+  const span = document.createElement("span");
+  span.style.color = color;
+
+  span.appendChild(fragment);
+  range.insertNode(span);
+
+  // giữ selection
+  const newRange = document.createRange();
+  newRange.selectNodeContents(span);
+
+  sel.removeAllRanges();
+  sel.addRange(newRange);
+
+  updatePreview();
+};
