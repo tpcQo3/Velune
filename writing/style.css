@@ -517,56 +517,60 @@ h1 {
   to { transform: translateY(12px); }
 }
 
-/* ===== ROMANTIC – GOLDEN HOUR ===== */
+/* ===== ROMANTIC – ROSE INK ===== */
 .theme-romantic {
   position: relative;
   overflow-x: hidden;
 
+  /* 🎨 hồng trầm, không kẹo */
   background:
-    radial-gradient(circle at 30% 20%, #fff4e6, transparent 60%),
-    radial-gradient(circle at 80% 70%, #ffe3d6, transparent 60%),
-    linear-gradient(135deg, #fdf6f0, #f3e8e2);
+    linear-gradient(135deg, #f4ecef, #ead7de);
 
-  color: #3b2a25;
+  color: #3a2b30;
 }
 
-/* 🌅 ánh sáng chiều */
+/* 🌫 chiều sâu rất nhẹ (không animation) */
 .theme-romantic::before {
   content: "";
   position: fixed;
   inset: 0;
 
   background:
-    radial-gradient(circle at 40% 30%, rgba(255,200,150,0.25), transparent 60%);
+    radial-gradient(circle at 30% 30%, rgba(255,220,230,0.25), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(180,120,140,0.15), transparent 60%);
 
-  opacity: 0.7;
+  opacity: 0.5;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* 🧊 container */
+/* 🧊 container = hòa vào nền */
 .theme-romantic .container {
   position: relative;
   z-index: 1;
 
   background: rgba(255,255,255,0.85);
 
-  border-radius: 18px;
+  border-radius: 16px;
 
-  /* ❗ shadow rất nhẹ thôi */
-  box-shadow: 0 10px 30px rgba(120,90,70,0.15);
+  /* ❗ shadow cực nhẹ thôi */
+  box-shadow: 0 8px 20px rgba(120,80,90,0.12);
 }
 
-/* ✍️ editor */
+/* ✍️ editor = giấy viết thư */
 .theme-romantic .editor {
-  background: #fffaf6;
+  background: #fffafb;
 
-  border: 1px solid #e6d6cc;
+  border: 1px solid #e4d3d9;
 
   border-radius: 10px;
 
   font-family: "Playfair Display", serif;
+
+  font-size: 18px;
+
+  line-height: 1.9;
 
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
 }
@@ -575,7 +579,7 @@ h1 {
 .theme-romantic .preview {
   background: rgba(255,255,255,0.7);
 
-  border: 1px solid #e6d6cc;
+  border: 1px solid #e4d3d9;
 
   border-radius: 10px;
 }
@@ -585,13 +589,13 @@ h1 {
   line-height: 1.9;
 }
 
-/* 💗 button */
+/* 💗 button – hồng trầm (IMPORTANT) */
 .theme-romantic .btn {
-  background: linear-gradient(135deg, #d8a47f, #c08457);
+  background: linear-gradient(135deg, #b07a8b, #c593a4);
 
   color: white;
 
-  box-shadow: 0 6px 18px rgba(120,80,50,0.2);
+  box-shadow: 0 6px 18px rgba(120,80,90,0.2);
 }
 
 .theme-romantic .btn:hover {
@@ -602,7 +606,7 @@ h1 {
 .theme-romantic input,
 .theme-romantic select {
   background: rgba(255,255,255,0.9);
-  border: 1px solid #e6d6cc;
+  border: 1px solid #e4d3d9;
 }
 
 /* HELLO KITTY */
