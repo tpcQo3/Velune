@@ -65,11 +65,9 @@ function applyStyle(styleObj) {
 // TOOLBAR
 // ======================
 
-// FONT
 document.getElementById("font").onchange = (e) => {
-  applyStyle({
-    fontFamily: e.target.value
-  });
+  applyStyleToSelection("fontFamily", e.target.value);
+  updatePreview();
 };
 
 // SIZE (1 → 50 px)
