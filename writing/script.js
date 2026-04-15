@@ -227,3 +227,8 @@ applyTheme(themeSelect.value);
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
 };
+
+setInterval(() => {
+  const star = document.querySelector(".shooting-star");
+  star.style.top = Math.random() * 50 + "%";
+}, 10000);
