@@ -1,8 +1,8 @@
 import { saveLetter } from "../firebase.js";
 
-// ======================
-// ELEMENTS
-// ======================
+/* ======================
+   ELEMENTS
+====================== */
 const editor = document.getElementById("editor");
 const preview = document.getElementById("preview");
 const status = document.getElementById("status");
@@ -13,9 +13,9 @@ const to = document.getElementById("to");
 const sizeInput = document.getElementById("size");
 const sizeValue = document.getElementById("sizeValue");
 
-// ======================
-// MARKDOWN
-// ======================
+/* ======================
+   MARKDOWN
+====================== */
 function parseMarkdown(html) {
   return html
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
@@ -27,46 +27,82 @@ function parseMarkdown(html) {
     });
 }
 
-// ======================
-// APPLY STYLE (CORE FIX)
-// ======================
-function applyStyleToSelection(style, value) {
-  const selection = window.getSelection();
-  if (!selection.rangeCount) return;
+/* ======================
+   CORE STYLE ENGINE (FIX REAL)
+====================== */
+function applyStyle(style, value) {
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return;
 
-  const range = selection.getRangeAt(0);
+  const range = sel.getRangeAt(0);
   if (range.collapsed) return;
 
-  const span = document.createElement("span");
-  span.style[style] = value;
+  const walker = document.createTreeWalker(
+    range.commonAncestorContainer,
+    NodeFilter.SHOW_TEXT
+  );
 
-  const fragment = range.extractContents();
-  span.appendChild(fragment);
-  range.insertNode(span);
+  let nodes = [];
+  let node;
 
-  // reset selection
-  selection.removeAllRanges();
-  const newRange = document.createRange();
-  newRange.selectNodeContents(span);
-  selection.addRange(newRange);
+  while ((node = walker.nextNode())) {
+    if (!range.intersectsNode(node)) continue;
+    if (!node.nodeValue.trim()) continue;
+    nodes.push(node);
+  }
+
+  nodes.forEach(textNode => {
+    const parent = textNode.parentNode;
+
+    // nếu đã có span → update
+    if (parent.nodeName === "SPAN") {
+      parent.style[style] = value;
+      return;
+    }
+
+    // split text node nếu cần (QUAN TRỌNG)
+    const text = textNode.nodeValue;
+    const start = range.startOffset;
+    const end = range.endOffset;
+
+    if (textNode === range.startContainer && textNode === range.endContainer) {
+      const before = text.slice(0, start);
+      const middle = text.slice(start, end);
+      const after = text.slice(end);
+
+      const span = document.createElement("span");
+      span.style[style] = value;
+      span.textContent = middle;
+
+      const parent = textNode.parentNode;
+
+      if (before) parent.insertBefore(document.createTextNode(before), textNode);
+      parent.insertBefore(span, textNode);
+      if (after) parent.insertBefore(document.createTextNode(after), textNode);
+
+      textNode.remove();
+    } else {
+      // node bình thường
+      const span = document.createElement("span");
+      span.style[style] = value;
+
+      parent.replaceChild(span, textNode);
+      span.appendChild(textNode);
+    }
+  });
+
+  cleanDOM(editor);
+  updatePreview();
 }
 
-function setFontSize(size) {
-  applyStyle("fontSize", size + "px");
-}
-
-/* ===== FONT ===== */
-function setFontFamily(font) {
-  applyStyle("fontFamily", font);
-}
-
-/* ===== CLEAN DOM (QUAN TRỌNG NHẤT) ===== */
+/* ======================
+   CLEAN DOM (NOTION STYLE)
+====================== */
 function cleanDOM(root) {
   mergeSpans(root);
   removeEmptySpans(root);
 }
 
-/* ===== MERGE SPANS ===== */
 function mergeSpans(root) {
   const spans = root.querySelectorAll("span");
 
@@ -85,44 +121,31 @@ function mergeSpans(root) {
   });
 }
 
-/* ===== REMOVE EMPTY ===== */
 function removeEmptySpans(root) {
-  const spans = root.querySelectorAll("span");
-
-  spans.forEach(span => {
-    if (!span.textContent.trim()) {
-      span.remove();
-    }
+  root.querySelectorAll("span").forEach(span => {
+    if (!span.textContent.trim()) span.remove();
   });
 }
 
-document.getElementById("size").addEventListener("input", e => {
-  document.getElementById("sizeValue").innerText =
-    e.target.value + "px";
-
-  setFontSize(e.target.value);
+/* ======================
+   TOOLBAR
+====================== */
+sizeInput.addEventListener("input", () => {
+  sizeValue.innerText = sizeInput.value + "px";
+  applyStyle("fontSize", sizeInput.value + "px");
 });
 
 document.getElementById("font").addEventListener("change", e => {
-  setFontFamily(e.target.value);
+  applyStyle("fontFamily", e.target.value);
 });
 
-editor.addEventListener("input", () => {
-  cleanDOM(editor);
-  updatePreview();
-});
-
-// ======================
-// COLOR (palette)
-// ======================
-/* ===== COLOR ===== */
 window.setColor = function (color) {
   applyStyle("color", color);
 };
 
-// ======================
-// PREVIEW
-// ======================
+/* ======================
+   PREVIEW
+====================== */
 function updatePreview() {
   preview.innerHTML = `
     <div><b>Từ:</b> ${from.value || "..."}</div>
@@ -134,84 +157,29 @@ function updatePreview() {
   `;
 }
 
-// realtime
-editor.addEventListener("input", updatePreview);
+editor.addEventListener("input", () => {
+  cleanDOM(editor);
+  updatePreview();
+});
+
 from.addEventListener("input", updatePreview);
 to.addEventListener("input", updatePreview);
 
-// init
 updatePreview();
 
-// ======================
-// EXPIRY
-// ======================
+/* ======================
+   EXPIRY
+====================== */
 function getExpiryDate(days) {
   if (!days || days === "0") return null;
-
   const d = new Date();
   d.setDate(d.getDate() + parseInt(days));
   return d;
 }
 
-// ======================
-// POPUP
-// ======================
-
-function downloadQR() {
-  const canvas = document.getElementById("qrcode");
-  const link = document.createElement("a");
-
-  link.download = "velune-qr.png";
-  link.href = canvas.toDataURL();
-
-  link.click();
-}
-
-/* ===== FONT SIZE LOGIC (FIXED) ===== */
-/* ===== APPLY STYLE (GENERIC) ===== */
-function applyStyle(styleKey, value) {
-  const sel = window.getSelection();
-  if (!sel.rangeCount) return;
-
-  const range = sel.getRangeAt(0);
-  if (range.collapsed) return;
-
-  const walker = document.createTreeWalker(
-    range.commonAncestorContainer,
-    NodeFilter.SHOW_TEXT,
-    null
-  );
-
-  let nodes = [];
-  let node;
-
-  while ((node = walker.nextNode())) {
-    if (!range.intersectsNode(node)) continue;
-    if (!node.nodeValue.trim()) continue;
-    nodes.push(node);
-  }
-
-  nodes.forEach(textNode => {
-    let parent = textNode.parentNode;
-
-    // nếu đã có span → reuse
-    if (parent.nodeName === "SPAN") {
-      parent.style[styleKey] = value;
-      return;
-    }
-
-    // nếu chưa có → wrap
-    const span = document.createElement("span");
-    span.style[styleKey] = value;
-
-    parent.replaceChild(span, textNode);
-    span.appendChild(textNode);
-  });
-
-  cleanDOM(editor);
-  updatePreview();
-}
-
+/* ======================
+   POPUP + QR
+====================== */
 function showPopup(link) {
   const popup = document.getElementById("popup");
   const input = document.getElementById("popupLink");
@@ -219,17 +187,13 @@ function showPopup(link) {
 
   input.value = link;
 
-  // tạo QR
   QRCode.toCanvas(canvas, link, {
-  width: 200,
-  color: {
-    dark: "#333",
-    light: "#ffffff"
-  }
-});
+    width: 200,
+    color: { dark: "#333", light: "#fff" }
+  });
 
   popup.classList.remove("hidden");
-  document.body.style.overflow = "auto";
+  document.body.style.overflow = "hidden";
 }
 
 window.closePopup = function () {
@@ -243,9 +207,9 @@ window.copyLink = function () {
   document.execCommand("copy");
 };
 
-// ======================
-// CREATE LETTER
-// ======================
+/* ======================
+   CREATE LETTER
+====================== */
 window.createLetter = async function () {
   if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
@@ -258,19 +222,13 @@ window.createLetter = async function () {
     const id = await saveLetter({
       from: from.value || "Ẩn danh",
       to: to.value || "Không rõ",
-
       content: editor.innerHTML,
-
       expiryAt: getExpiryDate(document.getElementById("expiry").value),
-
       password: document.getElementById("password").value || null,
       theme: document.getElementById("theme").value,
-
       urlYoutube: document.getElementById("youtube").value || null,
-      youtubeStart:
-        parseInt(document.getElementById("ytStart").value) || 0,
-      youtubeEnd:
-        parseInt(document.getElementById("ytEnd").value) || null
+      youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
+      youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
     });
 
     const link =
@@ -281,40 +239,23 @@ window.createLetter = async function () {
     status.innerText = "Đã tạo thư ✨";
   } catch (e) {
     status.innerText = "Lỗi: " + e.message;
-    console.error(e);
   }
 };
 
-// ======================
-// THEME
-// ======================
+/* ======================
+   THEME
+====================== */
 const themeSelect = document.getElementById("theme");
 
 themeSelect.addEventListener("change", () => {
-  applyTheme(themeSelect.value);
+  document.body.className = "theme-" + themeSelect.value;
 });
 
-function applyTheme(theme) {
-  const body = document.body;
+document.body.className = "theme-" + themeSelect.value;
 
-  body.className = "theme-" + theme + " theme-transition";
-
-  setTimeout(() => {
-    body.classList.remove("theme-transition");
-  }, 400);
-}
-
-// load theme
-applyTheme(themeSelect.value);
-
-// ======================
-// NAV
-// ======================
+/* ======================
+   NAV
+====================== */
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
 };
-
-setInterval(() => {
-  const star = document.querySelector(".shooting-star");
-  star.style.top = Math.random() * 50 + "%";
-}, 10000);
