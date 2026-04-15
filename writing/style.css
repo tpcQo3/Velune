@@ -517,17 +517,138 @@ h1 {
   to { transform: translateY(12px); }
 }
 
-/* LOVING */
+/* ===== LOVING CINEMATIC (MINIMAL) ===== */
 .theme-loving {
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  position: relative;
+  overflow-x: hidden;
+
+  background: linear-gradient(135deg, #fff1f5, #ffe4ec, #ffd6e8);
+  color: #5a2a3a;
 }
 
+/* 💡 LIGHT SOFT GLOW */
+.theme-loving::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255,200,220,0.25), transparent 60%);
+
+  opacity: 0.6;
+
+  animation: lovingGlow 8s ease-in-out infinite alternate;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 💗 FLOATING HEART (ÍT + NHẸ) */
+.theme-loving .heart-soft {
+  position: fixed;
+  bottom: -20px;
+
+  width: 10px;
+  height: 10px;
+
+  background: #ff8fab;
+
+  transform: rotate(45deg);
+
+  opacity: 0.5;
+
+  animation: floatSoft 12s linear infinite;
+
+  z-index: 0;
+}
+
+.theme-loving .heart-soft::before,
+.theme-loving .heart-soft::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff8fab;
+  border-radius: 50%;
+}
+
+.theme-loving .heart-soft::before {
+  top: -5px;
+}
+
+.theme-loving .heart-soft::after {
+  left: -5px;
+}
+
+/* 🧊 CONTAINER */
 .theme-loving .container {
-  background: rgba(255,255,255,0.6);
+  position: relative;
+  z-index: 1;
+
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(255,150,180,0.15),
+    0 0 20px rgba(255,200,220,0.15);
 }
 
+/* ✍️ EDITOR */
+.theme-loving .editor {
+  background: linear-gradient(to bottom, #ffffff, #fff5f8);
+
+  border: 1px solid rgba(255,180,200,0.4);
+}
+
+/* 📄 PREVIEW */
+.theme-loving .preview {
+  background: rgba(255,255,255,0.6);
+
+  border: 1px solid rgba(255,180,200,0.3);
+}
+
+/* 💗 BUTTON */
 .theme-loving .btn {
-  background: linear-gradient(135deg, #ff6a88, #ff99ac);
+  background: linear-gradient(135deg, #ff8fab, #ffc2d1);
+
+  box-shadow: 0 4px 15px rgba(255,150,180,0.25);
+}
+
+.theme-loving .btn:hover {
+  transform: scale(1.04);
+}
+
+/* INPUT */
+.theme-loving input,
+.theme-loving select {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,180,200,0.4);
+}
+
+/* ✨ TEXT */
+.theme-loving .letter-content {
+  text-shadow: 0 0 2px rgba(255,150,180,0.15);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes lovingGlow {
+  from { opacity: 0.4; }
+  to { opacity: 0.7; }
+}
+
+@keyframes floatSoft {
+  from {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.5; }
+  to {
+    transform: translateY(-120vh) rotate(45deg);
+    opacity: 0;
+  }
 }
 
 /* ===== ROMANTIC CINEMATIC ===== */
