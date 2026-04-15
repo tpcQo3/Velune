@@ -878,3 +878,8 @@ h1 {
     transform: translateY(0) scale(1);
   }
 }
+
+.editor span {
+  line-height: inherit;
+  white-space: pre-wrap;
+}

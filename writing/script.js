@@ -51,28 +51,73 @@ function applyStyleToSelection(style, value) {
   selection.addRange(newRange);
 }
 
-// ======================
-// FONT
-// ======================
-document.getElementById("font").onchange = (e) => {
-  applyStyleToSelection("fontFamily", e.target.value);
-  updatePreview();
-};
+function setFontSize(size) {
+  applyStyle("fontSize", size + "px");
+}
 
-// ======================
-// SIZE (UNIFY SELECTION)
-// ======================
-sizeInput.addEventListener("input", () => {
-  sizeValue.innerText = sizeInput.value + "px";
-  applyFontSize(sizeInput.value);
+/* ===== FONT ===== */
+function setFontFamily(font) {
+  applyStyle("fontFamily", font);
+}
+
+/* ===== CLEAN DOM (QUAN TRỌNG NHẤT) ===== */
+function cleanDOM(root) {
+  mergeSpans(root);
+  removeEmptySpans(root);
+}
+
+/* ===== MERGE SPANS ===== */
+function mergeSpans(root) {
+  const spans = root.querySelectorAll("span");
+
+  spans.forEach(span => {
+    let next = span.nextSibling;
+
+    if (
+      next &&
+      next.nodeType === 1 &&
+      next.nodeName === "SPAN" &&
+      span.style.cssText === next.style.cssText
+    ) {
+      span.innerHTML += next.innerHTML;
+      next.remove();
+    }
+  });
+}
+
+/* ===== REMOVE EMPTY ===== */
+function removeEmptySpans(root) {
+  const spans = root.querySelectorAll("span");
+
+  spans.forEach(span => {
+    if (!span.textContent.trim()) {
+      span.remove();
+    }
+  });
+}
+
+document.getElementById("size").addEventListener("input", e => {
+  document.getElementById("sizeValue").innerText =
+    e.target.value + "px";
+
+  setFontSize(e.target.value);
+});
+
+document.getElementById("font").addEventListener("change", e => {
+  setFontFamily(e.target.value);
+});
+
+editor.addEventListener("input", () => {
+  cleanDOM(editor);
+  updatePreview();
 });
 
 // ======================
 // COLOR (palette)
 // ======================
+/* ===== COLOR ===== */
 window.setColor = function (color) {
-  applyStyleToSelection("color", color);
-  updatePreview();
+  applyStyle("color", color);
 };
 
 // ======================
@@ -123,47 +168,47 @@ function downloadQR() {
 }
 
 /* ===== FONT SIZE LOGIC (FIXED) ===== */
-function applyFontSize(size) {
+/* ===== APPLY STYLE (GENERIC) ===== */
+function applyStyle(styleKey, value) {
   const sel = window.getSelection();
   if (!sel.rangeCount) return;
 
   const range = sel.getRangeAt(0);
-
   if (range.collapsed) return;
 
   const walker = document.createTreeWalker(
     range.commonAncestorContainer,
     NodeFilter.SHOW_TEXT,
-    {
-      acceptNode(node) {
-        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-
-        const nodeRange = document.createRange();
-        nodeRange.selectNodeContents(node);
-
-        return range.intersectsNode(node)
-          ? NodeFilter.FILTER_ACCEPT
-          : NodeFilter.FILTER_REJECT;
-      }
-    }
+    null
   );
 
   let nodes = [];
-  let current;
+  let node;
 
-  while ((current = walker.nextNode())) {
-    nodes.push(current);
+  while ((node = walker.nextNode())) {
+    if (!range.intersectsNode(node)) continue;
+    if (!node.nodeValue.trim()) continue;
+    nodes.push(node);
   }
 
   nodes.forEach(textNode => {
-    const span = document.createElement("span");
-    span.style.fontSize = size + "px";
+    let parent = textNode.parentNode;
 
-    const parent = textNode.parentNode;
+    // nếu đã có span → reuse
+    if (parent.nodeName === "SPAN") {
+      parent.style[styleKey] = value;
+      return;
+    }
+
+    // nếu chưa có → wrap
+    const span = document.createElement("span");
+    span.style[styleKey] = value;
+
     parent.replaceChild(span, textNode);
     span.appendChild(textNode);
   });
 
+  cleanDOM(editor);
   updatePreview();
 }
 
