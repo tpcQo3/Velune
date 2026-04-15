@@ -129,48 +129,40 @@ function applyFontSize(size) {
 
   const range = sel.getRangeAt(0);
 
-  if (!range.collapsed) {
-    // 👉 có bôi đen → wrap
+  if (range.collapsed) return;
+
+  const walker = document.createTreeWalker(
+    range.commonAncestorContainer,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+
+        const nodeRange = document.createRange();
+        nodeRange.selectNodeContents(node);
+
+        return range.intersectsNode(node)
+          ? NodeFilter.FILTER_ACCEPT
+          : NodeFilter.FILTER_REJECT;
+      }
+    }
+  );
+
+  let nodes = [];
+  let current;
+
+  while ((current = walker.nextNode())) {
+    nodes.push(current);
+  }
+
+  nodes.forEach(textNode => {
     const span = document.createElement("span");
     span.style.fontSize = size + "px";
 
-    span.appendChild(range.extractContents());
-    range.insertNode(span);
-
-    // giữ selection
-    sel.removeAllRanges();
-    const newRange = document.createRange();
-    newRange.selectNodeContents(span);
-    sel.addRange(newRange);
-  } else {
-    // 👉 chỉ đặt con trỏ → set style cho dòng hiện tại
-
-    let node = sel.anchorNode;
-
-    // tìm parent element gần nhất
-    while (node && node !== editor) {
-      if (node.nodeType === 1) break;
-      node = node.parentNode;
-    }
-
-    if (node && node !== editor) {
-      node.style.fontSize = size + "px";
-    } else {
-      // fallback: tạo span nhưng KHÔNG thêm ký tự ẩn
-      const span = document.createElement("span");
-      span.style.fontSize = size + "px";
-
-      range.insertNode(span);
-
-      // đặt cursor vào span
-      const newRange = document.createRange();
-      newRange.setStart(span, 0);
-      newRange.collapse(true);
-
-      sel.removeAllRanges();
-      sel.addRange(newRange);
-    }
-  }
+    const parent = textNode.parentNode;
+    parent.replaceChild(span, textNode);
+    span.appendChild(textNode);
+  });
 
   updatePreview();
 }
