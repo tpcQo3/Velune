@@ -135,15 +135,20 @@ display=swap" rel="stylesheet">
 
     <input id="popupLink" readonly>
 
+    <!-- QR -->
+    <canvas id="qrcode"></canvas>
+
     <div class="popup-actions">
       <button onclick="copyLink()">Copy link</button>
       <button onclick="closePopup()">Đóng</button>
     </div>
   </div>
 </div>
+</div>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script type="module" src="script.js"></script>
 
 </body>

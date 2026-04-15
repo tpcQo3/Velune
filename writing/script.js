@@ -115,13 +115,34 @@ function getExpiryDate(days) {
 // ======================
 // POPUP
 // ======================
+
+function downloadQR() {
+  const canvas = document.getElementById("qrcode");
+  const link = document.createElement("a");
+
+  link.download = "velune-qr.png";
+  link.href = canvas.toDataURL();
+
+  link.click();
+}
+
 function showPopup(link) {
   const popup = document.getElementById("popup");
   const input = document.getElementById("popupLink");
+  const canvas = document.getElementById("qrcode");
 
   input.value = link;
-  popup.classList.remove("hidden");
 
+  // tạo QR
+  QRCode.toCanvas(canvas, link, {
+  width: 200,
+  color: {
+    dark: "#333",
+    light: "#ffffff"
+  }
+});
+
+  popup.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 }
 
