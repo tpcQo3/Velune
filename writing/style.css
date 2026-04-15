@@ -246,7 +246,7 @@ h1 {
   pointer-events: none;
   z-index: 0;
 
-  animation: skyMove 60s linear infinite;
+  animation: skyMove 90s linear infinite alternate;
 }
 
 /* 🌤 ánh sáng nhẹ */
