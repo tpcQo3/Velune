@@ -16,16 +16,15 @@ const sizeValue = document.getElementById("sizeValue");
 // ======================
 // MARKDOWN
 // ======================
-function parseMarkdown(text) {
-  return text
+function parseMarkdown(html) {
+  return html
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
     .replace(/\*(.*?)\*/g, "<i>$1</i>")
     .replace(/__(.*?)__/g, "<u>$1</u>")
     .replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
       if (!u.startsWith("http")) u = "https://" + u;
       return `<a href="${u}" target="_blank">${t}</a>`;
-    })
-    .replace(/\n/g, "<br>");
+    });
 }
 
 // ======================
@@ -89,7 +88,7 @@ function updatePreview() {
     <div><b>Đến:</b> ${to.value || "..."}</div>
     <hr>
     <div class="letter-content">
-      ${parseMarkdown(editor.innerText)}
+      ${parseMarkdown(editor.innerHTML)}
     </div>
   `;
 }
