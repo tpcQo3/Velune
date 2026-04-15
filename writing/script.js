@@ -232,3 +232,29 @@ setInterval(() => {
   const star = document.querySelector(".shooting-star");
   star.style.top = Math.random() * 50 + "%";
 }, 10000);
+
+function spawnPetal() {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+
+  // vị trí random ngang
+  petal.style.left = Math.random() * 100 + "vw";
+
+  // tốc độ khác nhau
+  const duration = 8 + Math.random() * 6;
+  petal.style.animationDuration = duration + "s";
+
+  // độ to nhỏ khác nhau
+  const scale = 0.6 + Math.random() * 0.8;
+  petal.style.transform = `scale(${scale})`;
+
+  document.body.appendChild(petal);
+
+  // tự xóa để không lag
+  setTimeout(() => {
+    petal.remove();
+  }, duration * 1000);
+}
+
+// spawn liên tục (nhưng ít thôi)
+setInterval(spawnPetal, 1200);

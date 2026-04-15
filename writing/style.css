@@ -656,6 +656,49 @@ h1 {
   }
 }
 
+/* 🌸 PETAL */
+.theme-romantic .petal {
+  position: fixed;
+  top: -50px;
+
+  width: 12px;
+  height: 18px;
+
+  background: radial-gradient(circle at 30% 30%, #ffb6c1, #ff6f91);
+
+  border-radius: 60% 40% 60% 40%;
+
+  opacity: 0.7;
+
+  pointer-events: none;
+  z-index: 0;
+
+  animation: fallPetal linear infinite;
+}
+
+/* 🌸 chuyển động KHÔNG THẲNG */
+@keyframes fallPetal {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(25vh) translateX(10px) rotate(60deg);
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(-15px) rotate(120deg);
+  }
+
+  75% {
+    transform: translateY(75vh) translateX(10px) rotate(200deg);
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(-5px) rotate(260deg);
+  }
+}
+
 /* HELLO KITTY */
 .theme-hellokitty {
   background: linear-gradient(135deg, #fff0f5, #ffd6ec);
