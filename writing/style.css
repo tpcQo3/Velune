@@ -330,6 +330,24 @@ h1 {
   color: #e6edf5;
 }
 
+.theme-moon .stars-2 {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(1px 1px at 15% 25%, white, transparent),
+    radial-gradient(1px 1px at 60% 10%, white, transparent),
+    radial-gradient(1px 1px at 75% 65%, white, transparent),
+    radial-gradient(1px 1px at 35% 85%, white, transparent);
+
+  opacity: 0.4;
+
+  animation: twinkleSlow 6s infinite alternate;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* ===== STAR FIELD (layer 1) ===== */
 .theme-moon::before {
   content: "";
@@ -337,17 +355,21 @@ h1 {
   inset: 0;
 
   background:
-    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
-    radial-gradient(1px 1px at 30% 40%, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 80% 10%, #fff, transparent),
-    radial-gradient(2px 2px at 60% 90%, #fff, transparent),
-    radial-gradient(1px 1px at 90% 60%, #fff, transparent);
+    radial-gradient(1.5px 1.5px at 10% 20%, white, transparent),
+    radial-gradient(1px 1px at 25% 60%, white, transparent),
+    radial-gradient(2px 2px at 70% 15%, white, transparent),
+    radial-gradient(1px 1px at 80% 40%, white, transparent),
+    radial-gradient(1.5px 1.5px at 60% 80%, white, transparent),
+    radial-gradient(2px 2px at 30% 30%, white, transparent),
+    radial-gradient(1px 1px at 90% 70%, white, transparent),
+    radial-gradient(1.5px 1.5px at 50% 50%, white, transparent);
 
-  opacity: 0.6;
   animation: twinkle 3s infinite alternate;
 
-  pointer-events: none;
+  opacity: 0.7;
+
   z-index: 0;
+  pointer-events: none;
 }
 
 /* ===== MOON (layer 2) ===== */
@@ -357,57 +379,54 @@ h1 {
   top: 60px;
   right: 80px;
 
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
 
-  /* 🌙 base + texture */
   background:
-    radial-gradient(circle at 30% 30%, #ffffff, #e5e5e5 40%, #cfcfcf 65%, #aaa 85%, transparent 100%),
+    /* base */
+    radial-gradient(circle at 30% 30%, #fff, #eaeaea 35%, #d6d6d6 55%, #bfbfbf 75%, transparent 100%),
 
-    /* 🌑 craters */
-    radial-gradient(circle at 60% 40%, rgba(0,0,0,0.15) 8px, transparent 10px),
-    radial-gradient(circle at 40% 60%, rgba(0,0,0,0.12) 10px, transparent 12px),
-    radial-gradient(circle at 70% 70%, rgba(0,0,0,0.1) 6px, transparent 8px),
-    radial-gradient(circle at 50% 20%, rgba(0,0,0,0.1) 7px, transparent 9px);
+    /* craters (nhiều hơn, tự nhiên hơn) */
+    radial-gradient(circle at 65% 40%, rgba(0,0,0,0.18) 10px, transparent 12px),
+    radial-gradient(circle at 40% 65%, rgba(0,0,0,0.15) 12px, transparent 14px),
+    radial-gradient(circle at 75% 75%, rgba(0,0,0,0.12) 8px, transparent 10px),
+    radial-gradient(circle at 55% 20%, rgba(0,0,0,0.14) 9px, transparent 11px),
+    radial-gradient(circle at 30% 50%, rgba(0,0,0,0.1) 7px, transparent 9px);
 
-  /* 🌗 shadow tạo phase */
   box-shadow:
-    inset -20px -20px 40px rgba(0,0,0,0.4),
-    inset 10px 10px 20px rgba(255,255,255,0.2),
-    0 0 40px rgba(255,255,255,0.25),
-    0 0 120px rgba(200,220,255,0.12);
+    /* phase shadow */
+    inset -30px -30px 60px rgba(0,0,0,0.5),
+    inset 15px 15px 25px rgba(255,255,255,0.25),
 
-  filter: blur(0.3px);
+    /* glow */
+    0 0 60px rgba(255,255,255,0.25),
+    0 0 160px rgba(180,200,255,0.15);
 
-  opacity: 0.95;
+  filter: blur(0.2px);
 
-  pointer-events: none;
+  animation: moonFloat 8s ease-in-out infinite alternate;
+
   z-index: 0;
-  animation: moonFloat 6s ease-in-out infinite alternate;
-}
-
-@keyframes moonFloat {
-  from { transform: translateY(0px); }
-  to { transform: translateY(10px); }
+  pointer-events: none;
 }
 
 /* ===== SHOOTING STAR ===== */
 .theme-moon .shooting-star {
   position: fixed;
   top: 20%;
-  left: -100px;
+  left: -150px;
 
-  width: 120px;
+  width: 150px;
   height: 2px;
 
   background: linear-gradient(90deg, white, transparent);
 
   opacity: 0;
 
-  transform: rotate(20deg);
+  transform: rotate(25deg);
 
-  animation: shooting 8s infinite;
+  animation: shooting 10s infinite;
 }
 
 /* ===== CONTAINER ===== */
@@ -470,27 +489,32 @@ h1 {
   color: #e6edf5;
 }
 
-/* ===== ANIMATIONS ===== */
 @keyframes twinkle {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.8; }
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.9; transform: scale(1.2); }
+}
+
+@keyframes twinkleSlow {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.5; }
 }
 
 @keyframes shooting {
   0% {
-    transform: translateX(0) translateY(0) rotate(20deg);
+    transform: translateX(0) translateY(0) rotate(25deg);
     opacity: 0;
   }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(120vw) translateY(60vh) rotate(20deg);
+  10% { opacity: 1; }
+  40% {
+    transform: translateX(120vw) translateY(60vh) rotate(25deg);
     opacity: 0;
   }
-  100% {
-    opacity: 0;
-  }
+  100% { opacity: 0; }
+}
+
+@keyframes moonFloat {
+  from { transform: translateY(0px); }
+  to { transform: translateY(12px); }
 }
 
 /* LOVING */
