@@ -517,138 +517,103 @@ h1 {
   to { transform: translateY(12px); }
 }
 
-/* ===== ROMANTIC CINEMATIC PRO ===== */
+/* ===== MIDNIGHT LETTER (ROMANTIC REAL) ===== */
 .theme-romantic {
   position: relative;
   overflow-x: hidden;
 
+  /* 🌙 nền đêm */
   background:
-    radial-gradient(circle at 20% 20%, #fff6f8, transparent 60%),
-    radial-gradient(circle at 80% 80%, #f0d6de, transparent 60%),
-    linear-gradient(135deg, #f5ecef, #e6d3da);
+    radial-gradient(circle at 30% 20%, #1e1b2e, transparent 60%),
+    radial-gradient(circle at 70% 80%, #14121f, transparent 60%),
+    linear-gradient(135deg, #0f0c1a, #1a1625);
 
-  color: #3b2a30;
+  color: #e8dfe5;
 }
 
-/* 🎬 LIGHTING (cinematic falloff) */
+/* 🌫 ánh sáng nhẹ như đèn bàn */
 .theme-romantic::before {
   content: "";
   position: fixed;
   inset: 0;
 
   background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), transparent 55%),
-    radial-gradient(circle at 70% 70%, rgba(120,80,90,0.25), transparent 65%);
+    radial-gradient(circle at 50% 40%, rgba(255,220,200,0.12), transparent 60%);
 
-  animation: lightDrift 20s ease-in-out infinite alternate;
+  opacity: 0.8;
 
-  opacity: 0.6;
   pointer-events: none;
   z-index: 0;
 }
 
-/* 🎞 FILM GRAIN */
-.theme-romantic::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      rgba(0,0,0,0.015) 0px,
-      rgba(0,0,0,0.015) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-
-  opacity: 0.25;
-  pointer-events: none;
-  z-index: 0;
-
-  animation: grainMove 1s steps(2) infinite;
-}
-
-/* 🧊 CONTAINER (main subject) */
+/* 🧊 container = vùng ánh sáng */
 .theme-romantic .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(255,255,255,0.85);
+  background: rgba(20,18,30,0.75);
 
-  border-radius: 22px;
+  border-radius: 16px;
 
-  box-shadow:
-    0 40px 100px rgba(60,30,40,0.35),
-    0 0 60px rgba(255,200,220,0.2);
+  backdrop-filter: blur(10px);
 
-  backdrop-filter: blur(14px);
+  /* ❗ shadow nhẹ thôi */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
 
-/* ✍️ EDITOR */
+/* ✍️ editor = giấy trong đêm */
 .theme-romantic .editor {
-  background: linear-gradient(to bottom, #ffffff, #fff5f7);
+  background: rgba(255,245,240,0.95);
 
-  border: 1px solid rgba(180,140,150,0.4);
+  color: #2a1e22;
+
+  border-radius: 10px;
+
+  padding: 16px;
+
+  font-family: "Playfair Display", serif;
 
   box-shadow:
-    inset 0 3px 12px rgba(0,0,0,0.06);
-
-  border-radius: 12px;
+    0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* 📄 PREVIEW */
+/* 📄 preview */
 .theme-romantic .preview {
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,245,240,0.9);
 
-  border: 1px solid rgba(180,140,150,0.35);
+  color: #2a1e22;
 
-  border-radius: 12px;
+  border-radius: 10px;
+
+  padding: 16px;
 }
 
-/* ✨ TEXT */
+/* 💌 text */
 .theme-romantic .letter-content {
   line-height: 1.9;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 
-/* 💗 BUTTON */
+/* 💗 button – ánh ấm */
 .theme-romantic .btn {
-  background: linear-gradient(135deg, #c49aa6, #e3b8c6);
+  background: linear-gradient(135deg, #c6a27a, #e6c7a1);
 
-  box-shadow: 0 10px 30px rgba(80,50,60,0.35);
+  color: #2a1e22;
 
-  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 .theme-romantic .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 40px rgba(80,50,60,0.4);
+  transform: translateY(-1px);
 }
 
-/* INPUT */
+/* input */
 .theme-romantic input,
 .theme-romantic select {
-  background: rgba(255,255,255,0.95);
-  border: 1px solid rgba(180,140,150,0.4);
-}
+  background: rgba(255,255,255,0.1);
+  color: #e8dfe5;
 
-/* ===== ANIMATION ===== */
-
-/* 🌫 ánh sáng trôi */
-@keyframes lightDrift {
-  0% {
-    transform: translateX(-3%) translateY(-2%);
-  }
-  100% {
-    transform: translateX(3%) translateY(2%);
-  }
-}
-
-/* 🎞 film grain di chuyển */
-@keyframes grainMove {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-2px,2px); }
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 /* HELLO KITTY */
