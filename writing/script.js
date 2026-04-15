@@ -232,31 +232,3 @@ setInterval(() => {
   const star = document.querySelector(".shooting-star");
   star.style.top = Math.random() * 50 + "%";
 }, 10000);
-
-function spawnPetal() {
-  const petal = document.createElement("div");
-  petal.className = "petal";
-
-  // random vị trí ngang
-  petal.style.left = Math.random() * 100 + "vw";
-
-  // random size (depth)
-  const scale = 0.6 + Math.random() * 0.7;
-  petal.style.transform = `scale(${scale})`;
-
-  // random opacity (xa gần)
-  petal.style.opacity = 0.5 + Math.random() * 0.4;
-
-  // random thời gian rơi
-  const duration = 8 + Math.random() * 6;
-  petal.style.animationDuration = duration + "s";
-
-  document.body.appendChild(petal);
-
-  setTimeout(() => {
-    petal.remove();
-  }, duration * 1000);
-}
-
-// spawn chậm lại để không bị spam
-setInterval(spawnPetal, 1500);
