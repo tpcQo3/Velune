@@ -517,138 +517,113 @@ h1 {
   to { transform: translateY(12px); }
 }
 
-/* ===== LOVING CINEMATIC (MINIMAL) ===== */
+/* ===== LOVING PREMIUM (SUBTLE) ===== */
 .theme-loving {
   position: relative;
   overflow-x: hidden;
 
-  background: linear-gradient(135deg, #fff1f5, #ffe4ec, #ffd6e8);
-  color: #5a2a3a;
+  background:
+    radial-gradient(circle at 20% 20%, #fff5f7, transparent 60%),
+    radial-gradient(circle at 80% 80%, #ffe9ef, transparent 60%),
+    linear-gradient(135deg, #fffafc, #fff1f5);
+
+  color: #4a2c3a;
+
+  transition: background 0.6s ease, color 0.6s ease;
 }
 
-/* 💡 LIGHT SOFT GLOW */
+/* 🌫 SOFT AMBIENT LIGHT */
 .theme-loving::before {
   content: "";
   position: fixed;
   inset: 0;
 
   background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 60%),
-    radial-gradient(circle at 70% 70%, rgba(255,200,220,0.25), transparent 60%);
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.5), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(255,220,230,0.25), transparent 60%);
 
-  opacity: 0.6;
-
-  animation: lovingGlow 8s ease-in-out infinite alternate;
+  opacity: 0.5;
 
   z-index: 0;
   pointer-events: none;
 }
 
-/* 💗 FLOATING HEART (ÍT + NHẸ) */
-.theme-loving .heart-soft {
-  position: fixed;
-  bottom: -20px;
-
-  width: 10px;
-  height: 10px;
-
-  background: #ff8fab;
-
-  transform: rotate(45deg);
-
-  opacity: 0.5;
-
-  animation: floatSoft 12s linear infinite;
-
-  z-index: 0;
-}
-
-.theme-loving .heart-soft::before,
-.theme-loving .heart-soft::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #ff8fab;
-  border-radius: 50%;
-}
-
-.theme-loving .heart-soft::before {
-  top: -5px;
-}
-
-.theme-loving .heart-soft::after {
-  left: -5px;
-}
-
-/* 🧊 CONTAINER */
+/* 🧊 CONTAINER (GLASS + DEPTH) */
 .theme-loving .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(18px);
 
-  border-radius: 20px;
+  border-radius: 22px;
 
   box-shadow:
-    0 10px 30px rgba(255,150,180,0.15),
-    0 0 20px rgba(255,200,220,0.15);
+    0 20px 50px rgba(200,120,150,0.15),
+    0 0 40px rgba(255,200,220,0.1);
 }
 
-/* ✍️ EDITOR */
+/* ✍️ EDITOR (PAPER FEEL) */
 .theme-loving .editor {
-  background: linear-gradient(to bottom, #ffffff, #fff5f8);
+  background:
+    linear-gradient(to bottom, #ffffff, #fff7fa);
 
-  border: 1px solid rgba(255,180,200,0.4);
+  border: 1px solid rgba(220,170,190,0.35);
+
+  box-shadow:
+    inset 0 0 12px rgba(255,200,220,0.15);
+
+  border-radius: 12px;
 }
 
 /* 📄 PREVIEW */
 .theme-loving .preview {
   background: rgba(255,255,255,0.6);
 
-  border: 1px solid rgba(255,180,200,0.3);
+  border: 1px solid rgba(220,170,190,0.3);
+
+  border-radius: 12px;
 }
 
-/* 💗 BUTTON */
-.theme-loving .btn {
-  background: linear-gradient(135deg, #ff8fab, #ffc2d1);
+/* ✨ TEXT (VERY SUBTLE GLOW) */
+.theme-loving .letter-content {
+  text-shadow: 0 0 1.5px rgba(255,150,180,0.1);
+}
 
-  box-shadow: 0 4px 15px rgba(255,150,180,0.25);
+/* 💗 BUTTON (ELEGANT, KHÔNG CHÓI) */
+.theme-loving .btn {
+  background: linear-gradient(135deg, #f8cdda, #fbc2eb);
+
+  box-shadow: 0 6px 18px rgba(200,120,150,0.2);
+
+  transition: all 0.25s ease;
 }
 
 .theme-loving .btn:hover {
-  transform: scale(1.04);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(200,120,150,0.25);
 }
 
 /* INPUT */
 .theme-loving input,
 .theme-loving select {
   background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(255,180,200,0.4);
+  border: 1px solid rgba(220,170,190,0.35);
 }
 
-/* ✨ TEXT */
-.theme-loving .letter-content {
-  text-shadow: 0 0 2px rgba(255,150,180,0.15);
+/* ✨ LINK (ROMANTIC TOUCH NHẸ) */
+.theme-loving .letter-content a {
+  color: #d46a92;
+  border-bottom: 1px dashed #e6a4bd;
 }
 
-/* ===== ANIMATION ===== */
-@keyframes lovingGlow {
-  from { opacity: 0.4; }
-  to { opacity: 0.7; }
-}
-
-@keyframes floatSoft {
-  from {
-    transform: translateY(0) rotate(45deg);
-    opacity: 0;
-  }
-  10% { opacity: 0.5; }
-  to {
-    transform: translateY(-120vh) rotate(45deg);
-    opacity: 0;
-  }
+/* 🌫 FADE TRANSITION (KHI ĐỔI THEME) */
+.theme-loving,
+.theme-loving .container,
+.theme-loving .editor,
+.theme-loving .preview,
+.theme-loving .btn {
+  transition: all 0.4s ease;
 }
 
 /* ===== ROMANTIC CINEMATIC ===== */
