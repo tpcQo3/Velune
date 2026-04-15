@@ -268,33 +268,103 @@ h1 {
   background: linear-gradient(135deg, #ff6a88, #ff99ac);
 }
 
+/* ===== ROMANTIC PRO ===== */
 .theme-romantic {
-  background: linear-gradient(135deg, #ffe3ec, #fff5f9);
+  background: radial-gradient(circle at top, #fff1f5, #ffe3ec, #ffd6e8);
+  color: #4a2c3a;
 }
 
+.theme-romantic::after {
+  content: "❤";
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+
+  opacity: 0.2;
+  font-size: 20px;
+}
+
+/* 🌫 overlay glow nhẹ */
+.theme-romantic::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: radial-gradient(circle at 20% 30%, rgba(255,182,193,0.25), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,105,180,0.2), transparent 40%);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* container nổi nhẹ */
 .theme-romantic .container {
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(255,182,193,0.4);
+  position: relative;
+  z-index: 1;
 
-  box-shadow: 0 15px 40px rgba(255,150,180,0.2);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(18px);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 30px rgba(255,150,180,0.2),
+    0 0 40px rgba(255,180,200,0.15);
 }
 
-/* texture giấy */
-.theme-romantic .editor,
-.theme-romantic .preview {
-  background: repeating-linear-gradient(
-    0deg,
-    #fff,
-    #fff 24px,
-    #ffeef3 25px
-  );
+/* ✍️ editor giống giấy cao cấp */
+.theme-romantic .editor {
+  background: linear-gradient(to bottom, #fff, #fffafc);
+
+  border: 1px solid rgba(255,182,193,0.3);
+
+  box-shadow: inset 0 0 10px rgba(255,200,220,0.2);
 
   font-family: 'Playfair Display', serif;
 }
 
-/* nút */
+/* preview giống thư thật */
+.theme-romantic .preview {
+  background: linear-gradient(to bottom, #fff, #fff5f8);
+
+  border: 1px solid rgba(255,182,193,0.25);
+
+  box-shadow: inset 0 0 8px rgba(255,200,220,0.15);
+}
+
+/* ✨ chữ mềm hơn */
+.theme-romantic .letter-content {
+  letter-spacing: 0.3px;
+}
+
+/* 💌 button */
 .theme-romantic .btn {
   background: linear-gradient(135deg, #ff9ebc, #ffc1d9);
+
+  box-shadow: 0 5px 15px rgba(255,120,160,0.3);
+}
+
+.theme-romantic .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255,120,160,0.4);
+}
+
+/* input */
+.theme-romantic input,
+.theme-romantic select {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,182,193,0.3);
+}
+
+/* 💡 subtle animation */
+@keyframes romanticFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+
+.theme-romantic .container {
+  animation: romanticFloat 6s ease-in-out infinite;
 }
 
 /* HELLO KITTY */
