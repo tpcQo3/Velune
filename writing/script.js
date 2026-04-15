@@ -143,12 +143,12 @@ function showPopup(link) {
 });
 
   popup.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = "auto";
 }
 
 window.closePopup = function () {
   document.getElementById("popup").classList.add("hidden");
-  document.body.style.overflow = "auto";
+  document.body.style.overflow = "";
 };
 
 window.copyLink = function () {
