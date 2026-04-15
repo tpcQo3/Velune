@@ -140,9 +140,7 @@ window.copyLink = function () {
 // CREATE LETTER
 // ======================
 window.createLetter = async function () {
-  const raw = editor.innerText;
-
-  if (!raw.trim()) {
+  if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
     return;
   }
@@ -154,17 +152,18 @@ window.createLetter = async function () {
       from: from.value || "Ẩn danh",
       to: to.value || "Không rõ",
 
-      content: parseMarkdown(raw),
+      content: editor.innerHTML,
 
-      createdAt: new Date(),
       expiryAt: getExpiryDate(document.getElementById("expiry").value),
 
       password: document.getElementById("password").value || null,
       theme: document.getElementById("theme").value,
 
       urlYoutube: document.getElementById("youtube").value || null,
-      youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
-      youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
+      youtubeStart:
+        parseInt(document.getElementById("ytStart").value) || 0,
+      youtubeEnd:
+        parseInt(document.getElementById("ytEnd").value) || null
     });
 
     const link =
