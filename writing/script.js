@@ -232,18 +232,3 @@ setInterval(() => {
   const star = document.querySelector(".shooting-star");
   star.style.top = Math.random() * 50 + "%";
 }, 10000);
-
-function spawnRomantic() {
-  const body = document.body;
-
-  for (let i = 0; i < 6; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "%";
-    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-
-    body.appendChild(heart);
-  }
-}
-
-spawnRomantic();
