@@ -129,8 +129,8 @@ function applyFontSize(size) {
 
   const range = sel.getRangeAt(0);
 
-  // 👉 nếu có selection
   if (!range.collapsed) {
+    // 👉 có bôi đen → wrap
     const span = document.createElement("span");
     span.style.fontSize = size + "px";
 
@@ -143,20 +143,33 @@ function applyFontSize(size) {
     newRange.selectNodeContents(span);
     sel.addRange(newRange);
   } else {
-    // 👉 nếu chỉ đặt con trỏ → tạo span rỗng để gõ tiếp
-    const span = document.createElement("span");
-    span.style.fontSize = size + "px";
-    span.appendChild(document.createTextNode("\u200B"));
+    // 👉 chỉ đặt con trỏ → set style cho dòng hiện tại
 
-    range.insertNode(span);
+    let node = sel.anchorNode;
 
-    // đặt lại cursor
-    const newRange = document.createRange();
-    newRange.setStart(span.firstChild, 1);
-    newRange.collapse(true);
+    // tìm parent element gần nhất
+    while (node && node !== editor) {
+      if (node.nodeType === 1) break;
+      node = node.parentNode;
+    }
 
-    sel.removeAllRanges();
-    sel.addRange(newRange);
+    if (node && node !== editor) {
+      node.style.fontSize = size + "px";
+    } else {
+      // fallback: tạo span nhưng KHÔNG thêm ký tự ẩn
+      const span = document.createElement("span");
+      span.style.fontSize = size + "px";
+
+      range.insertNode(span);
+
+      // đặt cursor vào span
+      const newRange = document.createRange();
+      newRange.setStart(span, 0);
+      newRange.collapse(true);
+
+      sel.removeAllRanges();
+      sel.addRange(newRange);
+    }
   }
 
   updatePreview();
