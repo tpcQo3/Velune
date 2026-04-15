@@ -237,24 +237,26 @@ function spawnPetal() {
   const petal = document.createElement("div");
   petal.className = "petal";
 
-  // vị trí random ngang
+  // random vị trí ngang
   petal.style.left = Math.random() * 100 + "vw";
 
-  // tốc độ khác nhau
+  // random size (depth)
+  const scale = 0.6 + Math.random() * 0.7;
+  petal.style.transform = `scale(${scale})`;
+
+  // random opacity (xa gần)
+  petal.style.opacity = 0.5 + Math.random() * 0.4;
+
+  // random thời gian rơi
   const duration = 8 + Math.random() * 6;
   petal.style.animationDuration = duration + "s";
 
-  // độ to nhỏ khác nhau
-  const scale = 0.6 + Math.random() * 0.8;
-  petal.style.transform = `scale(${scale})`;
-
   document.body.appendChild(petal);
 
-  // tự xóa để không lag
   setTimeout(() => {
     petal.remove();
   }, duration * 1000);
 }
 
-// spawn liên tục (nhưng ít thôi)
-setInterval(spawnPetal, 1200);
+// spawn chậm lại để không bị spam
+setInterval(spawnPetal, 1500);
