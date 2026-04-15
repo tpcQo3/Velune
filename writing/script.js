@@ -148,7 +148,7 @@ function showPopup(link) {
 
 window.closePopup = function () {
   document.getElementById("popup").classList.add("hidden");
-  document.body.style.overflow = "";
+  document.body.style.overflow = "auto";
 };
 
 window.copyLink = function () {
