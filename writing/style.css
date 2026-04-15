@@ -517,51 +517,53 @@ h1 {
   to { transform: translateY(12px); }
 }
 
-/* ===== ROMANTIC – CRIMSON LOVE ===== */
+/* ===== CRIMSON SIGNATURE – VELUNE ===== */
 .theme-romantic {
   position: relative;
   overflow-x: hidden;
 
-  /* 🔥 gradient đỏ thẫm + tím đen */
+  /* 🥀 nền signature */
   background:
-    radial-gradient(circle at 30% 20%, #3b0d1a, transparent 60%),
-    radial-gradient(circle at 70% 80%, #1a0b14, transparent 70%),
-    linear-gradient(135deg, #1a0a12, #2b0d18, #3a0f1c);
+    radial-gradient(circle at 20% 20%, #3a0f1c, transparent 60%),
+    radial-gradient(circle at 80% 80%, #1a0a12, transparent 70%),
+    linear-gradient(135deg, #12070c, #1a0a12, #2a0d18);
 
   color: #f5e6eb;
+
+  transition: all 0.5s ease;
 }
 
-/* 🌫 ánh sáng bí ẩn */
+/* 🌫 glow đỏ cực nhẹ (signature feel) */
 .theme-romantic::before {
   content: "";
   position: fixed;
   inset: 0;
 
   background:
-    radial-gradient(circle at 40% 30%, rgba(180,40,70,0.25), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(120,20,50,0.2), transparent 70%);
+    radial-gradient(circle at 40% 30%, rgba(200,40,70,0.15), transparent 60%),
+    radial-gradient(circle at 60% 70%, rgba(120,20,50,0.12), transparent 70%);
 
-  opacity: 0.7;
+  opacity: 0.6;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* 🧊 container */
+/* 🧊 container – không nổi quá */
 .theme-romantic .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(20,10,15,0.75);
+  background: rgba(18,8,12,0.65);
 
-  border-radius: 18px;
+  border-radius: 16px;
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
-/* ✍️ editor (giấy nổi bật trong nền tối) */
+/* ✍️ editor – trung tâm cảm xúc */
 .theme-romantic .editor {
   background: #fff8fa;
 
@@ -569,12 +571,23 @@ h1 {
 
   border-radius: 10px;
 
-  border: 1px solid rgba(200,100,130,0.3);
+  border: 1px solid rgba(200,100,130,0.25);
 
   font-family: "Playfair Display", serif;
 
   box-shadow:
-    0 6px 20px rgba(0,0,0,0.3);
+    0 4px 12px rgba(0,0,0,0.25);
+
+  transition: all 0.3s ease;
+}
+
+/* 🔥 focus = glow đỏ (KEY SIGNATURE) */
+.theme-romantic .editor:focus {
+  outline: none;
+
+  box-shadow:
+    0 0 0 1px rgba(200,50,80,0.4),
+    0 0 20px rgba(200,50,80,0.25);
 }
 
 /* 📄 preview */
@@ -585,38 +598,68 @@ h1 {
 
   border-radius: 10px;
 
-  border: 1px solid rgba(200,100,130,0.3);
+  border: 1px solid rgba(200,100,130,0.25);
 }
 
 /* 💌 text */
 .theme-romantic .letter-content {
   line-height: 1.9;
+  letter-spacing: 0.3px;
 }
 
-/* 🔥 button – đỏ rượu vang */
+/* 🔥 button – signature gradient */
 .theme-romantic .btn {
-  background: linear-gradient(135deg, #8a1c3a, #c72c54);
+  background: linear-gradient(135deg, #7a1a34, #c72c54);
 
   color: white;
 
-  box-shadow: 0 8px 25px rgba(120,20,50,0.4);
+  box-shadow: 0 6px 20px rgba(120,20,50,0.35);
 
   transition: all 0.25s ease;
 }
 
 .theme-romantic .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(150,30,70,0.5);
+
+  box-shadow:
+    0 10px 30px rgba(150,30,70,0.5);
+}
+
+/* 🩸 hover subtle glow */
+.theme-romantic .btn:active {
+  transform: scale(0.98);
 }
 
 /* input */
 .theme-romantic input,
 .theme-romantic select {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
 
   color: #f5e6eb;
 
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ✨ title */
+.theme-romantic h1 {
+  letter-spacing: 1px;
+}
+
+/* ===== SUBTLE CINEMATIC TOUCH ===== */
+
+/* 🌫 rất nhẹ – không lố */
+.theme-romantic {
+  background-size: 120% 120%;
+  animation: crimsonShift 25s ease infinite alternate;
+}
+
+@keyframes crimsonShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 /* HELLO KITTY */
