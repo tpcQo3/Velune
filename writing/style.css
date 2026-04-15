@@ -321,117 +321,158 @@ h1 {
   }
 }
 
-/* ===== MOON PRO ===== */
+/* ===== MOON CINEMATIC ===== */
 .theme-moon {
-  background: radial-gradient(circle at top, #1b2735, #090a0f 80%);
-  color: #e4ecf5;
+  position: relative;
   overflow-x: hidden;
+
+  background: radial-gradient(circle at top, #1a2330, #05070d 80%);
+  color: #e6edf5;
 }
 
-/* 🌌 stars layer */
+/* ===== STAR FIELD (layer 1) ===== */
 .theme-moon::before {
   content: "";
   position: fixed;
   inset: 0;
 
   background:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(1.5px 1.5px at 70% 20%, white, transparent),
-    radial-gradient(2px 2px at 40% 70%, white, transparent),
-    radial-gradient(1px 1px at 80% 60%, white, transparent),
-    radial-gradient(1.5px 1.5px at 60% 80%, white, transparent);
+    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 30% 40%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 80% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 60% 90%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 60%, #fff, transparent);
 
   opacity: 0.6;
+  animation: twinkle 3s infinite alternate;
+
   pointer-events: none;
   z-index: 0;
-
-  animation: twinkle 4s infinite alternate;
 }
 
-/* 🌙 moon glow */
+/* ===== MOON (layer 2) ===== */
 .theme-moon::after {
   content: "";
   position: fixed;
-  top: 50px;
-  right: 60px;
+  top: 60px;
+  right: 80px;
 
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
 
-  background: radial-gradient(circle, #fff, #ddd, transparent 70%);
-  box-shadow: 0 0 60px rgba(255,255,255,0.2);
+  background:
+    radial-gradient(circle at 30% 30%, #fff, #ddd 40%, #bbb 60%, transparent 70%);
 
-  opacity: 0.2;
+  box-shadow:
+    0 0 40px rgba(255,255,255,0.3),
+    0 0 120px rgba(200,220,255,0.15);
+
+  opacity: 0.9;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* container nổi nhẹ */
+/* ===== SHOOTING STAR ===== */
+.theme-moon .shooting-star {
+  position: fixed;
+  top: 20%;
+  left: -100px;
+
+  width: 120px;
+  height: 2px;
+
+  background: linear-gradient(90deg, white, transparent);
+
+  opacity: 0;
+
+  transform: rotate(20deg);
+
+  animation: shooting 8s infinite;
+}
+
+/* ===== CONTAINER ===== */
 .theme-moon .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(20,25,35,0.75);
-  backdrop-filter: blur(15px);
+  background: rgba(15,20,30,0.75);
+  backdrop-filter: blur(18px);
 
   border-radius: 20px;
 
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.6),
-    0 0 30px rgba(100,120,200,0.15);
+    0 10px 40px rgba(0,0,0,0.7),
+    0 0 40px rgba(120,150,255,0.1);
 }
 
-/* ✍️ editor */
+/* ===== EDITOR ===== */
 .theme-moon .editor {
-  background: linear-gradient(to bottom, #0f141c, #151b25);
+  background: linear-gradient(to bottom, #0b0f17, #111827);
 
-  border: 1px solid rgba(100,120,200,0.2);
+  border: 1px solid rgba(120,150,255,0.2);
 
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
 
-  color: #e4ecf5;
+  color: #e6edf5;
 }
 
-/* preview */
+/* ===== PREVIEW ===== */
 .theme-moon .preview {
-  background: rgba(15,20,30,0.7);
+  background: rgba(10,15,25,0.7);
 
-  border: 1px solid rgba(100,120,200,0.2);
+  border: 1px solid rgba(120,150,255,0.2);
 }
 
-/* ✨ text nhẹ glow */
+/* ===== TEXT GLOW ===== */
 .theme-moon .letter-content {
-  text-shadow: 0 0 3px rgba(200,220,255,0.2);
+  text-shadow: 0 0 4px rgba(200,220,255,0.25);
 }
 
-/* 🌙 button */
+/* ===== BUTTON ===== */
 .theme-moon .btn {
-  background: linear-gradient(135deg, #2c3e50, #4b79a1);
+  background: linear-gradient(135deg, #1f2a44, #3b5998);
 
-  color: #fff;
+  color: white;
 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
 }
 
 .theme-moon .btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(100,120,200,0.3);
+  box-shadow: 0 10px 30px rgba(100,120,255,0.3);
 }
 
-/* input */
+/* ===== INPUT ===== */
 .theme-moon input,
 .theme-moon select {
   background: rgba(20,25,35,0.9);
-  border: 1px solid rgba(100,120,200,0.2);
-  color: #e4ecf5;
+  border: 1px solid rgba(120,150,255,0.2);
+  color: #e6edf5;
 }
 
-/* 🌌 animation sao nhấp nháy */
+/* ===== ANIMATIONS ===== */
 @keyframes twinkle {
-  0% { opacity: 0.4; }
+  0% { opacity: 0.3; }
   100% { opacity: 0.8; }
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(0) translateY(0) rotate(20deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(120vw) translateY(60vh) rotate(20deg);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* LOVING */
