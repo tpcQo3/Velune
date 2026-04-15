@@ -517,22 +517,20 @@ h1 {
   to { transform: translateY(12px); }
 }
 
-/* ===== LOVING PREMIUM (SUBTLE) ===== */
+/* ===== LOVING CINEMATIC BALANCED ===== */
 .theme-loving {
   position: relative;
   overflow-x: hidden;
 
   background:
-    radial-gradient(circle at 20% 20%, #fff5f7, transparent 60%),
-    radial-gradient(circle at 80% 80%, #ffe9ef, transparent 60%),
-    linear-gradient(135deg, #fffafc, #fff1f5);
+    radial-gradient(circle at 20% 30%, #fff3f7, transparent 60%),
+    radial-gradient(circle at 80% 70%, #ffe3ec, transparent 60%),
+    linear-gradient(135deg, #fff8fb, #ffeef5);
 
   color: #4a2c3a;
-
-  transition: background 0.6s ease, color 0.6s ease;
 }
 
-/* 🌫 SOFT AMBIENT LIGHT */
+/* 🌫 LIGHT MOTION (KHÔNG LỘ) */
 .theme-loving::before {
   content: "";
   position: fixed;
@@ -540,68 +538,81 @@ h1 {
 
   background:
     radial-gradient(circle at 30% 40%, rgba(255,255,255,0.5), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(255,220,230,0.25), transparent 60%);
+    radial-gradient(circle at 70% 60%, rgba(255,200,220,0.3), transparent 60%);
 
-  opacity: 0.5;
+  animation: lovingFlow 12s ease-in-out infinite alternate;
+
+  opacity: 0.6;
 
   z-index: 0;
   pointer-events: none;
 }
 
-/* 🧊 CONTAINER (GLASS + DEPTH) */
+/* ✨ SOFT GLOW LAYER */
+.theme-loving::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,220,230,0.15), transparent 70%);
+
+  animation: lovingPulse 6s ease-in-out infinite;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 🧊 CONTAINER */
 .theme-loving .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(20px);
 
   border-radius: 22px;
 
   box-shadow:
-    0 20px 50px rgba(200,120,150,0.15),
-    0 0 40px rgba(255,200,220,0.1);
+    0 20px 50px rgba(200,120,150,0.18),
+    0 0 40px rgba(255,200,220,0.12);
 }
 
-/* ✍️ EDITOR (PAPER FEEL) */
+/* ✍️ EDITOR */
 .theme-loving .editor {
-  background:
-    linear-gradient(to bottom, #ffffff, #fff7fa);
+  background: linear-gradient(to bottom, #ffffff, #fff6fa);
 
   border: 1px solid rgba(220,170,190,0.35);
 
-  box-shadow:
-    inset 0 0 12px rgba(255,200,220,0.15);
+  box-shadow: inset 0 0 12px rgba(255,200,220,0.18);
 
   border-radius: 12px;
 }
 
 /* 📄 PREVIEW */
 .theme-loving .preview {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.65);
 
   border: 1px solid rgba(220,170,190,0.3);
-
-  border-radius: 12px;
 }
 
-/* ✨ TEXT (VERY SUBTLE GLOW) */
+/* ✨ TEXT */
 .theme-loving .letter-content {
-  text-shadow: 0 0 1.5px rgba(255,150,180,0.1);
+  text-shadow: 0 0 2px rgba(255,150,180,0.15);
 }
 
-/* 💗 BUTTON (ELEGANT, KHÔNG CHÓI) */
+/* 💗 BUTTON */
 .theme-loving .btn {
-  background: linear-gradient(135deg, #f8cdda, #fbc2eb);
+  background: linear-gradient(135deg, #f6c1d0, #fbc2eb);
 
-  box-shadow: 0 6px 18px rgba(200,120,150,0.2);
+  box-shadow: 0 6px 18px rgba(200,120,150,0.25);
 
   transition: all 0.25s ease;
 }
 
 .theme-loving .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(200,120,150,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(200,120,150,0.3);
 }
 
 /* INPUT */
@@ -611,19 +622,28 @@ h1 {
   border: 1px solid rgba(220,170,190,0.35);
 }
 
-/* ✨ LINK (ROMANTIC TOUCH NHẸ) */
-.theme-loving .letter-content a {
-  color: #d46a92;
-  border-bottom: 1px dashed #e6a4bd;
+/* ===== ANIMATION ===== */
+
+/* 🌫 ánh sáng di chuyển rất nhẹ */
+@keyframes lovingFlow {
+  0% {
+    transform: translateX(-2%) translateY(-2%);
+  }
+  100% {
+    transform: translateX(2%) translateY(2%);
+  }
 }
 
-/* 🌫 FADE TRANSITION (KHI ĐỔI THEME) */
-.theme-loving,
-.theme-loving .container,
-.theme-loving .editor,
-.theme-loving .preview,
-.theme-loving .btn {
-  transition: all 0.4s ease;
+/* 💗 nhịp “thở” */
+@keyframes lovingPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
 }
 
 /* ===== ROMANTIC CINEMATIC ===== */
