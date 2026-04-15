@@ -321,26 +321,117 @@ h1 {
   }
 }
 
-/* MOON */
+/* ===== MOON PRO ===== */
 .theme-moon {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #eee;
+  background: radial-gradient(circle at top, #1b2735, #090a0f 80%);
+  color: #e4ecf5;
+  overflow-x: hidden;
 }
 
+/* 🌌 stars layer */
+.theme-moon::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1.5px 1.5px at 70% 20%, white, transparent),
+    radial-gradient(2px 2px at 40% 70%, white, transparent),
+    radial-gradient(1px 1px at 80% 60%, white, transparent),
+    radial-gradient(1.5px 1.5px at 60% 80%, white, transparent);
+
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+
+  animation: twinkle 4s infinite alternate;
+}
+
+/* 🌙 moon glow */
+.theme-moon::after {
+  content: "";
+  position: fixed;
+  top: 50px;
+  right: 60px;
+
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+
+  background: radial-gradient(circle, #fff, #ddd, transparent 70%);
+  box-shadow: 0 0 60px rgba(255,255,255,0.2);
+
+  opacity: 0.2;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* container nổi nhẹ */
 .theme-moon .container {
-  background: rgba(20,20,30,0.7);
+  position: relative;
+  z-index: 1;
+
+  background: rgba(20,25,35,0.75);
+  backdrop-filter: blur(15px);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    0 0 30px rgba(100,120,200,0.15);
 }
 
-.theme-moon input,
-.theme-moon select,
+/* ✍️ editor */
 .theme-moon .editor {
-  background: rgba(255,255,255,0.1);
-  color: white;
+  background: linear-gradient(to bottom, #0f141c, #151b25);
+
+  border: 1px solid rgba(100,120,200,0.2);
+
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+
+  color: #e4ecf5;
 }
 
+/* preview */
+.theme-moon .preview {
+  background: rgba(15,20,30,0.7);
+
+  border: 1px solid rgba(100,120,200,0.2);
+}
+
+/* ✨ text nhẹ glow */
+.theme-moon .letter-content {
+  text-shadow: 0 0 3px rgba(200,220,255,0.2);
+}
+
+/* 🌙 button */
 .theme-moon .btn {
-  background: linear-gradient(135deg, #444, #222);
-  color: white;
+  background: linear-gradient(135deg, #2c3e50, #4b79a1);
+
+  color: #fff;
+
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.theme-moon .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(100,120,200,0.3);
+}
+
+/* input */
+.theme-moon input,
+.theme-moon select {
+  background: rgba(20,25,35,0.9);
+  border: 1px solid rgba(100,120,200,0.2);
+  color: #e4ecf5;
+}
+
+/* 🌌 animation sao nhấp nháy */
+@keyframes twinkle {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.8; }
 }
 
 /* LOVING */
