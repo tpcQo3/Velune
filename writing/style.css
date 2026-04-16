@@ -730,18 +730,127 @@ container > h1 {
   letter-spacing: 1px;
 }
 
-/* HELLO KITTY */
+/* ======================
+   HELLO KITTY THEME
+====================== */
 .theme-hellokitty {
-  background: linear-gradient(135deg, #fff0f5, #ffd6ec);
+  background: linear-gradient(135deg, #fff0f5, #ffd6ec, #ffeef8);
+  color: #ff4d88;
+
+  font-family: 'Baloo 2', 'Quicksand', sans-serif;
 }
 
+/* container */
 .theme-hellokitty .container {
-  border: 2px dashed #ff99cc;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+
+  border-radius: 24px;
+  border: 2px solid rgba(255, 182, 193, 0.4);
+
+  box-shadow:
+    0 10px 30px rgba(255, 182, 193, 0.3),
+    inset 0 0 20px rgba(255, 240, 245, 0.6);
 }
 
+/* tiêu đề */
+.theme-hellokitty h1 {
+  font-family: 'Pacifico', cursive;
+  color: #ff4d88;
+  letter-spacing: 1px;
+}
+
+/* subtitle */
+.theme-hellokitty .subtitle {
+  color: #ff85a2;
+}
+
+/* editor */
+.theme-hellokitty .editor {
+  background: #fffafd;
+  border: 2px dashed #ffc0cb;
+
+  border-radius: 16px;
+  padding: 14px;
+
+  font-family: 'Baloo 2', sans-serif;
+}
+
+/* preview */
+.theme-hellokitty .preview {
+  background: #fff5f9;
+  border-radius: 16px;
+
+  border: 1px solid #ffd6ec;
+}
+
+/* input */
+.theme-hellokitty input,
+.theme-hellokitty select {
+  background: #fffafd;
+  border: 1px solid #ffd6ec;
+  color: #ff4d88;
+}
+
+/* button */
 .theme-hellokitty .btn {
-  background: pink;
+  background: linear-gradient(135deg, #ff9ecb, #ff6fa5);
   color: white;
+
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.theme-hellokitty .btn:hover {
+  transform: scale(1.03);
+}
+
+/* link */
+.theme-hellokitty a {
+  color: #ff4d88;
+  border-bottom: 1px dashed #ff4d88;
+}
+
+/* markdown heading */
+.theme-hellokitty .letter-content h1,
+.theme-hellokitty .letter-content h2,
+.theme-hellokitty .letter-content h3 {
+  color: #ff4d88;
+}
+
+/* subtle glow */
+.theme-hellokitty .container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+
+  background: radial-gradient(circle at top left, rgba(255,182,193,0.2), transparent);
+  pointer-events: none;
+}
+
+.theme-hellokitty::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image:
+    radial-gradient(#ffc0cb 1px, transparent 1px),
+    radial-gradient(#ffd6ec 1px, transparent 1px);
+
+  background-size: 60px 60px;
+  opacity: 0.2;
+
+  animation: floatKitty 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatKitty {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50px);
+  }
 }
 
 /* BAMBOO */
