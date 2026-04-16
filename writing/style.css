@@ -32,6 +32,11 @@ body, .container, .editor, .preview, .btn, input, select {
     border 0.5s ease;
 }
 
+.editor,
+.letter-content {
+  font-size: 18px; /* bạn có thể thử 17–19 */
+}
+
 input, select, .editor {
   border: 1px solid rgba(0,0,0,0.08);
   transition: 0.3s;
@@ -49,7 +54,7 @@ select:focus,
 }
 
 /* TEXT */
-container > h1 {
+.container > h1 {
   font-family: 'Playfair Display', serif;
   text-align: center;
 }
@@ -141,18 +146,15 @@ container > h1 {
 }
 
 .letter-content h1 {
-  font-size: 28px;
-  margin: 10px 0;
+  font-size: 26px;
 }
 
 .letter-content h2 {
   font-size: 22px;
-  margin: 8px 0;
 }
 
 .letter-content h3 {
-  font-size: 18px;
-  margin: 6px 0;
+  font-size: 19px;
 }
 
 .letter-content blockquote {

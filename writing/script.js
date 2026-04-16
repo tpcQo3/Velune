@@ -9,7 +9,7 @@ const status = document.getElementById("status");
 
 const from = document.getElementById("from");
 const to = document.getElementById("to");
-let currentFont = "Quicksand";
+let currentFont = "'Quicksand', sans-serif";
 
 document.getElementById("font").addEventListener("change", e => {
   currentFont = e.target.value;
@@ -178,4 +178,13 @@ document.body.className = "theme-" + themeSelect.value;
 ====================== */
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
+};
+
+// Thêm vào script.js
+let currentColor = "#000000";
+
+window.setColor = function(color) {
+  currentColor = color;
+  document.execCommand("foreColor", false, color);
+  updatePreview();
 };
