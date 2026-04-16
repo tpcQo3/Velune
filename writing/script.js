@@ -10,20 +10,17 @@ const status = document.getElementById("status");
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 
-const sizeInput = document.getElementById("size");
-const sizeValue = document.getElementById("sizeValue");
-
 /* ======================
-   MARKDOWN
+   MARKDOWN (DISCORD STYLE)
 ====================== */
 function parseMarkdown(text) {
-  // escape trước (tránh HTML injection)
+  // escape HTML
   text = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // headings (QUAN TRỌNG – phải trước)
+  // headings
   text = text
     .replace(/^### (.*)$/gm, "<h3>$1</h3>")
     .replace(/^## (.*)$/gm, "<h2>$1</h2>")
@@ -34,6 +31,12 @@ function parseMarkdown(text) {
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
     .replace(/\*(.*?)\*/g, "<i>$1</i>")
     .replace(/__(.*?)__/g, "<u>$1</u>");
+
+  // quote
+  text = text.replace(/^> (.*)$/gm, "<blockquote>$1</blockquote>");
+
+  // divider
+  text = text.replace(/^---$/gm, "<hr>");
 
   // link
   text = text.replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
@@ -46,122 +49,6 @@ function parseMarkdown(text) {
 
   return text;
 }
-
-/* ======================
-   CORE STYLE ENGINE (FIX REAL)
-====================== */
-function applyStyle(style, value) {
-  const sel = window.getSelection();
-  if (!sel.rangeCount) return;
-
-  const range = sel.getRangeAt(0);
-  if (range.collapsed) return;
-
-  const walker = document.createTreeWalker(
-    range.commonAncestorContainer,
-    NodeFilter.SHOW_TEXT
-  );
-
-  let nodes = [];
-  let node;
-
-  while ((node = walker.nextNode())) {
-    if (!range.intersectsNode(node)) continue;
-    if (!node.nodeValue.trim()) continue;
-    nodes.push(node);
-  }
-
-  nodes.forEach(textNode => {
-    const parent = textNode.parentNode;
-
-    // nếu đã có span → update
-    if (parent.nodeName === "SPAN") {
-      parent.style[style] = value;
-      return;
-    }
-
-    // split text node nếu cần (QUAN TRỌNG)
-    const text = textNode.nodeValue;
-    const start = range.startOffset;
-    const end = range.endOffset;
-
-    if (textNode === range.startContainer && textNode === range.endContainer) {
-      const before = text.slice(0, start);
-      const middle = text.slice(start, end);
-      const after = text.slice(end);
-
-      const span = document.createElement("span");
-      span.style[style] = value;
-      span.textContent = middle;
-
-      const parent = textNode.parentNode;
-
-      if (before) parent.insertBefore(document.createTextNode(before), textNode);
-      parent.insertBefore(span, textNode);
-      if (after) parent.insertBefore(document.createTextNode(after), textNode);
-
-      textNode.remove();
-    } else {
-      // node bình thường
-      const span = document.createElement("span");
-      span.style[style] = value;
-
-      parent.replaceChild(span, textNode);
-      span.appendChild(textNode);
-    }
-  });
-
-  cleanDOM(editor);
-  updatePreview();
-}
-
-/* ======================
-   CLEAN DOM (NOTION STYLE)
-====================== */
-function cleanDOM(root) {
-  mergeSpans(root);
-  removeEmptySpans(root);
-}
-
-function mergeSpans(root) {
-  const spans = root.querySelectorAll("span");
-
-  spans.forEach(span => {
-    let next = span.nextSibling;
-
-    if (
-      next &&
-      next.nodeType === 1 &&
-      next.nodeName === "SPAN" &&
-      span.style.cssText === next.style.cssText
-    ) {
-      span.innerHTML += next.innerHTML;
-      next.remove();
-    }
-  });
-}
-
-function removeEmptySpans(root) {
-  root.querySelectorAll("span").forEach(span => {
-    if (!span.textContent.trim()) span.remove();
-  });
-}
-
-/* ======================
-   TOOLBAR
-====================== */
-sizeInput.addEventListener("input", () => {
-  sizeValue.innerText = sizeInput.value + "px";
-  applyStyle("fontSize", sizeInput.value + "px");
-});
-
-document.getElementById("font").addEventListener("change", e => {
-  applyStyle("fontFamily", e.target.value);
-});
-
-window.setColor = function (color) {
-  applyStyle("color", color);
-};
 
 /* ======================
    PREVIEW
@@ -177,11 +64,7 @@ function updatePreview() {
   `;
 }
 
-editor.addEventListener("input", () => {
-  cleanDOM(editor);
-  updatePreview();
-});
-
+editor.addEventListener("input", updatePreview);
 from.addEventListener("input", updatePreview);
 to.addEventListener("input", updatePreview);
 
@@ -242,13 +125,20 @@ window.createLetter = async function () {
     const id = await saveLetter({
       from: from.value || "Ẩn danh",
       to: to.value || "Không rõ",
-      content: editor.innerHTML,
+
+      // ❗ vẫn lưu HTML để hiển thị đẹp khi đọc
+      content: parseMarkdown(editor.innerText),
+
       expiryAt: getExpiryDate(document.getElementById("expiry").value),
+
       password: document.getElementById("password").value || null,
       theme: document.getElementById("theme").value,
+
       urlYoutube: document.getElementById("youtube").value || null,
-      youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
-      youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
+      youtubeStart:
+        parseInt(document.getElementById("ytStart").value) || 0,
+      youtubeEnd:
+        parseInt(document.getElementById("ytEnd").value) || null
     });
 
     const link =
