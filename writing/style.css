@@ -44,6 +44,10 @@ select:focus,
   box-shadow: 0 0 0 3px rgba(166,193,238,0.2);
 }
 
+.v1lt {
+  text-align: center;
+}
+
 /* TEXT */
 container > h1 {
   font-family: 'Playfair Display', serif;
