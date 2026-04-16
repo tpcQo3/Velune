@@ -962,17 +962,22 @@ select:focus,
 }
 
 /* ===== BAMBOO IMAGE BACKGROUND ===== */
+/* bamboo stalk feel */
 .theme-bamboo::before {
   content: "";
   position: fixed;
-
   inset: 0;
 
-  background-image: url("bamboo.png"); /* bạn thêm ảnh bamboo */
-  background-size: cover;
-  background-position: center;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(100, 150, 100, 0.06) 50%,
+      transparent 100%
+    );
 
-  opacity: 0.08;
+  background-size: 120px 100%;
+  opacity: 0.5;
 
   pointer-events: none;
   z-index: 0;
@@ -984,27 +989,33 @@ select:focus,
   position: fixed;
   inset: 0;
 
-  background: radial-gradient(circle at top, rgba(0,0,0,0.03), transparent);
+  background: radial-gradient(circle at top, rgba(0,0,0,0.05), transparent);
 
   pointer-events: none;
   z-index: 0;
 }
 
 /* ===== CONTAINER ===== */
-.theme-bamboo .container {
+/* ======================
+   BAMBOO THEME (NO IMAGE)
+====================== */
+.theme-bamboo {
   position: relative;
-  z-index: 1;
 
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
+  background:
+    linear-gradient(135deg, #eef5ec, #e4efe7),
+    repeating-linear-gradient(
+      90deg,
+      rgba(120, 160, 120, 0.05) 0px,
+      rgba(120, 160, 120, 0.05) 2px,
+      transparent 2px,
+      transparent 40px
+    );
 
-  border-radius: 18px;
+  color: #2f4f2f;
+  font-family: 'Quicksand', sans-serif;
 
-  border: 1px solid rgba(60, 120, 60, 0.15);
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.08),
-    inset 0 0 20px rgba(200, 220, 200, 0.2);
+  overflow-x: hidden;
 }
 
 /* ===== TITLE ===== */
@@ -1080,6 +1091,22 @@ select:focus,
 
 .theme-bamboo .letter-content h3 {
   color: #6b8f71;
+}
+
+.theme-bamboo .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(60, 120, 60, 0.15);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    inset 0 0 15px rgba(200, 220, 200, 0.2);
 }
 
 /* CUTE */
