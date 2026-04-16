@@ -947,13 +947,139 @@ select:focus,
   border: 1px solid #ffb3d4;
 }
 
-/* BAMBOO */
+/* ======================
+   BAMBOO THEME
+====================== */
 .theme-bamboo {
-  background: linear-gradient(135deg, #d4fc79, #96e6a1);
+  position: relative;
+
+  background: linear-gradient(135deg, #eef5ec, #e4efe7);
+
+  color: #2f4f2f;
+  font-family: 'Quicksand', sans-serif;
+
+  overflow-x: hidden;
 }
 
+/* ===== BAMBOO IMAGE BACKGROUND ===== */
+.theme-bamboo::before {
+  content: "";
+  position: fixed;
+
+  inset: 0;
+
+  background-image: url("bamboo.png"); /* bạn thêm ảnh bamboo */
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.08;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== LIGHT GRAIN / TEXTURE ===== */
+.theme-bamboo::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: radial-gradient(circle at top, rgba(0,0,0,0.03), transparent);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTAINER ===== */
 .theme-bamboo .container {
-  background: rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 1;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(60, 120, 60, 0.15);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    inset 0 0 20px rgba(200, 220, 200, 0.2);
+}
+
+/* ===== TITLE ===== */
+.theme-bamboo h1 {
+  font-family: 'Playfair Display', serif;
+  color: #355e3b;
+}
+
+/* ===== SUBTITLE ===== */
+.theme-bamboo .subtitle {
+  color: #6b8f71;
+}
+
+/* ===== EDITOR ===== */
+.theme-bamboo .editor {
+  background: #f8fbf8;
+
+  border: 1px solid #dce8dc;
+  border-radius: 12px;
+
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* ===== PREVIEW ===== */
+.theme-bamboo .preview {
+  background: #f4f8f4;
+
+  border-radius: 12px;
+  border: 1px solid #dce8dc;
+}
+
+/* ===== INPUT ===== */
+.theme-bamboo input,
+.theme-bamboo select {
+  background: #f8fbf8;
+
+  border: 1px solid #dce8dc;
+  color: #355e3b;
+}
+
+/* ===== BUTTON ===== */
+.theme-bamboo .btn {
+  background: linear-gradient(135deg, #7bbf7b, #4e8f4e);
+
+  color: white;
+  border-radius: 999px;
+
+  box-shadow: 0 5px 15px rgba(80, 120, 80, 0.25);
+}
+
+.theme-bamboo .btn:hover {
+  transform: scale(1.03);
+}
+
+/* ===== LINK ===== */
+.theme-bamboo a {
+  color: #4e8f4e;
+  border-bottom: 1px dashed #4e8f4e;
+}
+
+/* ===== MARKDOWN ===== */
+.theme-bamboo .letter-content {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.theme-bamboo .letter-content h1 {
+  color: #355e3b;
+}
+
+.theme-bamboo .letter-content h2 {
+  color: #4e8f4e;
+}
+
+.theme-bamboo .letter-content h3 {
+  color: #6b8f71;
 }
 
 /* CUTE */
