@@ -16,15 +16,35 @@ const sizeValue = document.getElementById("sizeValue");
 /* ======================
    MARKDOWN
 ====================== */
-function parseMarkdown(html) {
-  return html
+function parseMarkdown(text) {
+  // escape trước (tránh HTML injection)
+  text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // headings (QUAN TRỌNG – phải trước)
+  text = text
+    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+    .replace(/^# (.*)$/gm, "<h1>$1</h1>");
+
+  // bold / italic / underline
+  text = text
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
     .replace(/\*(.*?)\*/g, "<i>$1</i>")
-    .replace(/__(.*?)__/g, "<u>$1</u>")
-    .replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
-      if (!u.startsWith("http")) u = "https://" + u;
-      return `<a href="${u}" target="_blank">${t}</a>`;
-    });
+    .replace(/__(.*?)__/g, "<u>$1</u>");
+
+  // link
+  text = text.replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
+    if (!u.startsWith("http")) u = "https://" + u;
+    return `<a href="${u}" target="_blank">${t}</a>`;
+  });
+
+  // xuống dòng
+  text = text.replace(/\n/g, "<br>");
+
+  return text;
 }
 
 /* ======================
@@ -152,7 +172,7 @@ function updatePreview() {
     <div><b>Đến:</b> ${to.value || "..."}</div>
     <hr>
     <div class="letter-content">
-      ${parseMarkdown(editor.innerHTML)}
+      ${parseMarkdown(editor.innerText)}
     </div>
   `;
 }
