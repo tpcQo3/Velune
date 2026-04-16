@@ -114,10 +114,8 @@ window.closePopup = function () {
   document.body.style.overflow = "";
 };
 
-window.copyLink = function () {
-  const input = document.getElementById("popupLink");
-  input.select();
-  document.execCommand("copy");
+window.copyLink = function() {
+  navigator.clipboard.writeText(document.getElementById("popupLink").value);
 };
 
 /* ======================
