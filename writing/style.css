@@ -151,6 +151,18 @@ h1 {
   margin: 6px 0;
 }
 
+.letter-content blockquote {
+  border-left: 3px solid #ccc;
+  padding-left: 10px;
+  opacity: 0.8;
+}
+
+.letter-content hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
 /* BUTTON */
 .btn {
   width: 100%;
