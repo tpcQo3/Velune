@@ -116,6 +116,7 @@ window.closePopup = function () {
 
 window.copyLink = function() {
   navigator.clipboard.writeText(document.getElementById("popupLink").value);
+  alert("Đã sao chép link!");
 };
 
 /* ======================
