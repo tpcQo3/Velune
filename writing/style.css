@@ -45,7 +45,7 @@ select:focus,
 }
 
 /* TEXT */
-h1 {
+container > h1 {
   font-family: 'Playfair Display', serif;
   text-align: center;
 }
