@@ -9,6 +9,16 @@ const status = document.getElementById("status");
 
 const from = document.getElementById("from");
 const to = document.getElementById("to");
+let currentFont = "Quicksand";
+
+document.getElementById("font").addEventListener("change", e => {
+  currentFont = e.target.value;
+
+  // apply cho editor
+  editor.style.fontFamily = currentFont;
+
+  updatePreview();
+});
 
 /* ======================
    MARKDOWN (DISCORD STYLE)
@@ -58,7 +68,7 @@ function updatePreview() {
     <div><b>Từ:</b> ${from.value || "..."}</div>
     <div><b>Đến:</b> ${to.value || "..."}</div>
     <hr>
-    <div class="letter-content">
+    <div class="letter-content" style="font-family:${currentFont}">
       ${parseMarkdown(editor.innerText)}
     </div>
   `;
