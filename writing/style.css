@@ -948,222 +948,102 @@ select:focus,
 }
 
 /* ======================
-   ARIES THEME v2 (FIRE CORE)
+   ARIES THEME v3 (EMBER / CLEAN FIRE)
 ====================== */
+
 .theme-aries {
   position: relative;
 
   background:
-    radial-gradient(circle at 50% 30%, #ff7a00 0%, #b30000 40%, #000000 100%);
+    radial-gradient(circle at 50% 20%, #ffb36b 0%, #8a1f1f 35%, #0f0f0f 100%);
 
-  color: #fff5f0;
+  color: #fff8f5;
   font-family: 'Quicksand', sans-serif;
 
   overflow-x: hidden;
 }
 
-/* ===== FIRE CORE (ĐIỂM NHẤN CHÍNH) ===== */
+/* ===== SUBTLE FIRE GLOW (KHÔNG GẮT) ===== */
 .theme-aries::before {
   content: "";
   position: fixed;
 
-  top: 30%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 
   background: radial-gradient(
     circle,
-    rgba(255,140,0,0.9) 0%,
-    rgba(255,60,0,0.6) 40%,
-    rgba(255,0,0,0.2) 70%,
-    transparent 100%
-  );
-
-  filter: blur(60px);
-  opacity: 0.8;
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ===== HEAT WAVES ===== */
-.theme-aries::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255, 120, 0, 0.08),
+    rgba(255,140,0,0.35),
+    rgba(255,60,0,0.15),
     transparent 70%
   );
 
-  animation: heatMove 6s linear infinite;
+  filter: blur(50px);
+  opacity: 0.6;
 
   pointer-events: none;
   z-index: 0;
 }
 
-@keyframes heatMove {
-  from {
-    transform: translateX(-20%);
-  }
-  to {
-    transform: translateX(20%);
-  }
-}
-
-/* ======================
-   ARIES THEME (FINAL)
-====================== */
-
-.theme-aries {
-  position: relative;
-
-  background:
-    radial-gradient(circle at 50% 30%, #ff7a00 0%, #b30000 40%, #000000 100%);
-
-  color: #fff5f0;
-  font-family: 'Quicksand', sans-serif;
-
-  overflow-x: hidden;
-}
-
-/* ===== FIRE CORE ===== */
-.theme-aries::before {
-  content: "";
-  position: fixed;
-
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 500px;
-  height: 500px;
-
-  background: radial-gradient(
-    circle,
-    rgba(255,140,0,0.9) 0%,
-    rgba(255,60,0,0.6) 40%,
-    rgba(255,0,0,0.2) 70%,
-    transparent 100%
-  );
-
-  filter: blur(60px);
-  opacity: 0.8;
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ===== ARIES SYMBOL (SIGNATURE) ===== */
+/* ===== ARIES SYMBOL (NHẸ NHƯ WATERMARK) ===== */
 .theme-aries::after {
   content: "♈";
   position: fixed;
 
-  top: 12%;
-  right: 10%;
+  bottom: 8%;
+  right: 8%;
 
-  font-size: 120px;
-  font-weight: bold;
+  font-size: 140px;
 
-  color: rgba(255, 180, 120, 0.08);
+  color: rgba(255, 180, 120, 0.05);
 
-  text-shadow:
-    0 0 20px rgba(255,120,0,0.4),
-    0 0 40px rgba(255,60,0,0.2);
-
-  transform: rotate(-10deg);
+  letter-spacing: 5px;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* ===== HEAT WAVE ANIMATION ===== */
-.theme-aries .heat-layer {
-  position: fixed;
-  inset: 0;
-
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255, 120, 0, 0.08),
-    transparent 70%
-  );
-
-  animation: heatMove 6s linear infinite;
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes heatMove {
-  from { transform: translateX(-20%); }
-  to { transform: translateX(20%); }
-}
-
-/* ===== CONTAINER ===== */
+/* ===== CONTAINER (MAIN FOCUS) ===== */
 .theme-aries .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(20, 0, 0, 0.7);
-  backdrop-filter: blur(14px);
+  background: rgba(20, 10, 10, 0.75);
+  backdrop-filter: blur(12px);
 
   border-radius: 18px;
 
-  border: 1px solid rgba(255, 120, 0, 0.25);
+  border: 1px solid rgba(255, 120, 0, 0.15);
 
   box-shadow:
-    0 15px 40px rgba(255, 80, 0, 0.4),
-    0 0 80px rgba(255, 60, 0, 0.2);
+    0 10px 30px rgba(0,0,0,0.5),
+    0 0 40px rgba(255, 80, 0, 0.15);
 }
 
-/* ===== MINI SYMBOL DECOR ===== */
-.theme-aries .container::before {
-  content: "♈";
-  position: absolute;
-
-  top: -15px;
-  left: -10px;
-
-  font-size: 40px;
-  color: rgba(255,120,0,0.25);
-}
-
-.theme-aries .container::after {
-  content: "♈";
-  position: absolute;
-
-  bottom: -15px;
-  right: -10px;
-
-  font-size: 40px;
-  color: rgba(255,120,0,0.25);
-}
-
-/* ===== TITLE ===== */
+/* ===== TITLE (ĐIỂM NHẤN CHÍNH) ===== */
 .theme-aries h1 {
-  color: #ffd6a3;
+  color: #ffd8b0;
+
   letter-spacing: 1px;
 
-  text-shadow: 0 0 12px rgba(255, 140, 0, 0.8);
+  text-shadow:
+    0 0 10px rgba(255,140,0,0.4);
 }
 
 /* ===== SUBTITLE ===== */
 .theme-aries .subtitle {
-  color: #ffb380;
+  color: #e8a87c;
 }
 
 /* ===== EDITOR ===== */
 .theme-aries .editor {
-  background: rgba(30, 0, 0, 0.8);
+  background: rgba(30, 15, 15, 0.85);
 
-  border: 1px solid rgba(255, 120, 0, 0.3);
+  border: 1px solid rgba(255, 120, 0, 0.15);
   border-radius: 12px;
 
   color: #fff5f0;
@@ -1171,43 +1051,43 @@ select:focus,
 
 /* ===== PREVIEW ===== */
 .theme-aries .preview {
-  background: rgba(25, 0, 0, 0.7);
+  background: rgba(25, 12, 12, 0.8);
 
   border-radius: 12px;
-  border: 1px solid rgba(255, 120, 0, 0.2);
+  border: 1px solid rgba(255, 120, 0, 0.1);
 }
 
 /* ===== INPUT ===== */
 .theme-aries input,
 .theme-aries select {
-  background: rgba(30, 0, 0, 0.8);
-  border: 1px solid rgba(255, 120, 0, 0.25);
+  background: rgba(30, 15, 15, 0.9);
 
-  color: #ffccaa;
+  border: 1px solid rgba(255, 120, 0, 0.12);
+
+  color: #ffd8b0;
 }
 
-/* ===== BUTTON ===== */
+/* ===== BUTTON (CHỈ 1 ĐIỂM SÁNG DUY NHẤT) ===== */
 .theme-aries .btn {
-  background: linear-gradient(135deg, #ff7a00, #ff0000);
+  background: linear-gradient(135deg, #ff8c42, #d6452b);
 
   color: white;
   border-radius: 999px;
 
   box-shadow:
-    0 0 20px rgba(255, 100, 0, 0.7),
-    0 0 40px rgba(255, 50, 0, 0.4);
+    0 0 15px rgba(255, 100, 0, 0.4);
 
   transition: 0.2s;
 }
 
 .theme-aries .btn:hover {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 /* ===== LINK ===== */
 .theme-aries a {
-  color: #ffd6a3;
-  border-bottom: 1px dashed #ffd6a3;
+  color: #ffb380;
+  border-bottom: 1px dashed #ffb380;
 }
 
 /* ===== TEXT ===== */
@@ -1217,15 +1097,15 @@ select:focus,
 
 /* headings */
 .theme-aries .letter-content h1 {
-  color: #ffd6a3;
+  color: #ffd8b0;
 }
 
 .theme-aries .letter-content h2 {
-  color: #ff9c66;
+  color: #ffb380;
 }
 
 .theme-aries .letter-content h3 {
-  color: #ffb380;
+  color: #e8a87c;
 }
 
 /* ===== POPUP OVERLAY ===== */
