@@ -1267,14 +1267,14 @@ select:focus,
 }
 
 /* ======================
-   GEMINI THEME v2 (DUAL PERSONALITY)
+   GEMINI THEME v3 (GLITCH PERSONALITY)
 ====================== */
 
 .theme-gemini {
   position: relative;
 
   background:
-    linear-gradient(120deg, #ffffff 0%, #1a1d24 100%);
+    linear-gradient(120deg, #0f1115 0%, #f5f7fa 100%);
 
   color: #111;
   font-family: 'Quicksand', sans-serif;
@@ -1282,33 +1282,44 @@ select:focus,
   overflow-x: hidden;
 }
 
-/* ===== LIGHT PERSONA ===== */
-.theme-gemini::before {
-  content: "";
+/* ===== RGB GLITCH OVERLAY ===== */
+.theme-gemini .gemini-glitch {
   position: fixed;
   inset: 0;
 
-  background:
-    radial-gradient(circle at 25% 30%, rgba(255,255,255,0.8), transparent 40%);
-
   pointer-events: none;
-  z-index: 0;
-}
-
-/* ===== DARK PERSONA ===== */
-.theme-gemini::after {
-  content: "";
-  position: fixed;
-  inset: 0;
 
   background:
-    radial-gradient(circle at 75% 70%, rgba(0,0,0,0.7), transparent 50%);
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,0,0,0.02),
+      rgba(255,0,0,0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,255,255,0.02),
+      rgba(0,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    );
 
-  pointer-events: none;
-  z-index: 0;
+  mix-blend-mode: overlay;
+
+  animation: glitchNoise 0.8s infinite;
 }
 
-/* ===== GHOST LAYER (PERSONALITY 2) ===== */
+@keyframes glitchNoise {
+  0% { transform: translate(0,0); }
+  20% { transform: translate(-1px,1px); }
+  40% { transform: translate(1px,-1px); }
+  60% { transform: translate(-1px,0); }
+  80% { transform: translate(1px,1px); }
+  100% { transform: translate(0,0); }
+}
+
+/* ===== GHOST PERSONALITY ===== */
 .theme-gemini .gemini-ghost {
   position: fixed;
   inset: 0;
@@ -1318,31 +1329,33 @@ select:focus,
   background:
     linear-gradient(
       90deg,
-      transparent 30%,
+      transparent 20%,
       rgba(255,255,255,0.05),
-      transparent 70%
+      transparent 80%
     );
 
-  mix-blend-mode: overlay;
+  mix-blend-mode: difference;
 
-  animation: ghostShift 6s infinite alternate;
+  animation: ghostShift 4s infinite alternate;
 }
 
 @keyframes ghostShift {
-  from { transform: translateX(-10%); }
-  to { transform: translateX(10%); }
+  from { transform: translateX(-5%); }
+  to { transform: translateX(5%); }
 }
 
 /* ===== SYMBOL ===== */
-.theme-gemini .symbol {
+.theme-gemini::after {
+  content: "♊";
   position: fixed;
-  top: 12%;
+
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
 
-  font-size: 140px;
+  font-size: 150px;
 
-  color: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.05);
 
   mix-blend-mode: difference;
 
@@ -1371,24 +1384,37 @@ select:focus,
     0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* ===== DOUBLE TEXT EFFECT ===== */
+/* ===== GLITCH TEXT ===== */
 .theme-gemini h1 {
   position: relative;
 
   color: #111;
 }
 
-/* ghost text phía sau */
+/* lớp đỏ */
+.theme-gemini h1::before {
+  content: attr(data-text);
+
+  position: absolute;
+  left: -2px;
+  top: 0;
+
+  color: rgba(255,0,0,0.6);
+
+  z-index: -1;
+}
+
+/* lớp xanh */
 .theme-gemini h1::after {
   content: attr(data-text);
 
   position: absolute;
   left: 2px;
-  top: 2px;
+  top: 0;
 
-  color: rgba(255,255,255,0.3);
+  color: rgba(0,255,255,0.6);
 
-  mix-blend-mode: difference;
+  z-index: -1;
 }
 
 /* ===== EDITOR ===== */
@@ -1419,21 +1445,6 @@ select:focus,
   border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* ===== INPUT ===== */
-.theme-gemini input,
-.theme-gemini select {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.95),
-      rgba(25,25,30,0.95)
-    );
-
-  border: 1px solid rgba(0,0,0,0.1);
-
-  color: #111;
-}
-
 /* ===== BUTTON ===== */
 .theme-gemini .btn {
   background: linear-gradient(135deg, #ffffff, #1a1d24);
@@ -1450,7 +1461,7 @@ select:focus,
 }
 
 .theme-gemini .btn:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 /* ===== POPUP OVERLAY ===== */
