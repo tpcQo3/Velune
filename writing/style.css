@@ -1266,6 +1266,183 @@ select:focus,
   color: #b8ab84;
 }
 
+/* ======================
+   GEMINI THEME (DUALITY)
+====================== */
+
+.theme-gemini {
+  position: relative;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f5f7fa 0%,
+      #dbe3ea 40%,
+      #2b2f36 60%,
+      #0f1115 100%
+    );
+
+  color: #111;
+  font-family: 'Quicksand', sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* ===== SPLIT OVERLAY (BLEND MỀM) ===== */
+.theme-gemini::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.3), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(0,0,0,0.4), transparent 50%);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== GEMINI SYMBOL ===== */
+.theme-gemini::after {
+  content: "♊";
+  position: fixed;
+
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 160px;
+
+  color: rgba(255,255,255,0.06);
+
+  mix-blend-mode: overlay;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTAINER ===== */
+.theme-gemini .container {
+  position: relative;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.85),
+      rgba(20,20,25,0.85)
+    );
+
+  backdrop-filter: blur(12px);
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* ===== TITLE ===== */
+.theme-gemini h1 {
+  background: linear-gradient(90deg, #111, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 1px;
+}
+
+/* ===== SUBTITLE ===== */
+.theme-gemini .subtitle {
+  color: rgba(0,0,0,0.6);
+}
+
+/* ===== EDITOR ===== */
+.theme-gemini .editor {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.95),
+      rgba(30,30,35,0.95)
+    );
+
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+
+  color: #111;
+}
+
+/* ===== PREVIEW ===== */
+.theme-gemini .preview {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(250,250,250,0.95),
+      rgba(25,25,30,0.95)
+    );
+
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ===== INPUT ===== */
+.theme-gemini input,
+.theme-gemini select {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.95),
+      rgba(30,30,35,0.95)
+    );
+
+  border: 1px solid rgba(0,0,0,0.1);
+
+  color: #111;
+}
+
+/* ===== BUTTON ===== */
+.theme-gemini .btn {
+  background: linear-gradient(135deg, #ffffff, #1c1f26);
+
+  color: #111;
+
+  border-radius: 999px;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.3),
+    0 4px 12px rgba(0,0,0,0.4);
+
+  transition: 0.2s;
+}
+
+.theme-gemini .btn:hover {
+  transform: scale(1.04);
+}
+
+/* ===== LINK ===== */
+.theme-gemini a {
+  color: #444;
+  border-bottom: 1px dashed #666;
+}
+
+/* ===== TEXT ===== */
+.theme-gemini .letter-content {
+  line-height: 1.8;
+}
+
+/* headings */
+.theme-gemini .letter-content h1 {
+  color: #111;
+}
+
+.theme-gemini .letter-content h2 {
+  color: #333;
+}
+
+.theme-gemini .letter-content h3 {
+  color: #555;
+}
+
 /* ===== POPUP OVERLAY ===== */
 .popup {
   position: fixed;
