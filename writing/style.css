@@ -948,164 +948,261 @@ select:focus,
 }
 
 /* ======================
-   ARIES THEME v3 (EMBER / CLEAN FIRE)
+   ARIES THEME
 ====================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
 
 .theme-aries {
   position: relative;
+  overflow-x: hidden;
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  color: #f5d0a0;
 
   background:
-    radial-gradient(circle at 50% 20%, #ffb36b 0%, #8a1f1f 35%, #0f0f0f 100%);
-
-  color: #fff8f5;
-  font-family: 'Quicksand', sans-serif;
-
-  overflow-x: hidden;
+    radial-gradient(circle at 70% 10%, #3a0a00 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, #1a0500 0%, transparent 45%),
+    linear-gradient(160deg, #0d0000 0%, #1c0600 40%, #2a0a00 70%, #0d0000 100%);
 }
 
-/* ===== SUBTLE FIRE GLOW (KHÔNG GẮT) ===== */
-.theme-aries::before {
-  content: "";
+/* ember particles — dùng lại .stars-2 và .shooting-star đã có trong HTML */
+.theme-aries .stars-2 {
   position: fixed;
-
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 400px;
-  height: 400px;
-
-  background: radial-gradient(
-    circle,
-    rgba(255,140,0,0.35),
-    rgba(255,60,0,0.15),
-    transparent 70%
-  );
-
-  filter: blur(50px);
-  opacity: 0.6;
-
+  inset: 0;
+  background:
+    radial-gradient(2px 2px at 15% 70%, #ff4500, transparent),
+    radial-gradient(2px 2px at 40% 85%, #ff6020, transparent),
+    radial-gradient(3px 3px at 65% 75%, #ff4500, transparent),
+    radial-gradient(2px 2px at 80% 90%, #ffaa40, transparent),
+    radial-gradient(2px 2px at 25% 95%, #ff8c00, transparent);
+  opacity: 0.5;
   pointer-events: none;
   z-index: 0;
+  animation: emberFloat 6s ease-in-out infinite alternate;
 }
 
-/* ===== ARIES SYMBOL (NHẸ NHƯ WATERMARK) ===== */
-.theme-aries::after {
-  content: "♈";
-  position: fixed;
-
-  bottom: 8%;
-  right: 8%;
-
-  font-size: 140px;
-
-  color: rgba(255, 180, 120, 0.05);
-
-  letter-spacing: 5px;
-
-  pointer-events: none;
-  z-index: 0;
+@keyframes emberFloat {
+  0%   { transform: translateY(0); opacity: 0.4; }
+  100% { transform: translateY(-20px); opacity: 0.8; }
 }
 
-/* ===== CONTAINER (MAIN FOCUS) ===== */
+/* container */
 .theme-aries .container {
   position: relative;
   z-index: 1;
-
-  background: rgba(20, 10, 10, 0.75);
-  backdrop-filter: blur(12px);
-
-  border-radius: 18px;
-
-  border: 1px solid rgba(255, 120, 0, 0.15);
-
+  background: linear-gradient(160deg, rgba(30,5,0,0.92), rgba(15,3,0,0.96));
+  border-radius: 4px;
+  border: 1px solid #8b2500;
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.5),
-    0 0 40px rgba(255, 80, 0, 0.15);
+    0 0 0 1px rgba(200,60,0,0.15),
+    0 0 50px rgba(180,40,0,0.25),
+    inset 0 1px 0 rgba(255,120,40,0.08);
+  padding-top: 32px;
 }
 
-/* ===== TITLE (ĐIỂM NHẤN CHÍNH) ===== */
+/* fire bar trên đỉnh */
+.theme-aries .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(90deg, transparent, #ff4500, #ff8c00, #ff4500, transparent);
+  animation: firePulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes firePulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; box-shadow: 0 0 12px #ff4500, 0 0 20px rgba(255,69,0,0.3); }
+}
+
+/* ký hiệu Aries glow phía sau title */
+.theme-aries .container::after {
+  content: "♈";
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+  color: rgba(180,40,0,0.08);
+  pointer-events: none;
+  font-family: serif;
+  line-height: 1;
+}
+
+/* title */
 .theme-aries h1 {
-  color: #ffd8b0;
-
-  letter-spacing: 1px;
-
-  text-shadow:
-    0 0 10px rgba(255,140,0,0.4);
+  font-family: 'Cinzel', serif;
+  color: #ff8c40;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 22px;
 }
 
-/* ===== SUBTITLE ===== */
 .theme-aries .subtitle {
-  color: #e8a87c;
+  color: #6b2010;
+  letter-spacing: 2.5px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
 }
 
-/* ===== EDITOR ===== */
-.theme-aries .editor {
-  background: rgba(30, 15, 15, 0.85);
-
-  border: 1px solid rgba(255, 120, 0, 0.15);
-  border-radius: 12px;
-
-  color: #fff5f0;
-}
-
-/* ===== PREVIEW ===== */
-.theme-aries .preview {
-  background: rgba(25, 12, 12, 0.8);
-
-  border-radius: 12px;
-  border: 1px solid rgba(255, 120, 0, 0.1);
-}
-
-/* ===== INPUT ===== */
+/* inputs & selects */
 .theme-aries input,
 .theme-aries select {
-  background: rgba(30, 15, 15, 0.9);
-
-  border: 1px solid rgba(255, 120, 0, 0.12);
-
-  color: #ffd8b0;
-}
-
-/* ===== BUTTON (CHỈ 1 ĐIỂM SÁNG DUY NHẤT) ===== */
-.theme-aries .btn {
-  background: linear-gradient(135deg, #ff8c42, #d6452b);
-
-  color: white;
-  border-radius: 999px;
-
-  box-shadow:
-    0 0 15px rgba(255, 100, 0, 0.4);
-
+  background: rgba(10,2,0,0.85);
+  border: 1px solid #6b1a00;
+  border-radius: 3px;
+  color: #f5d0a0;
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.3px;
   transition: 0.2s;
 }
 
-.theme-aries .btn:hover {
-  transform: scale(1.04);
+.theme-aries input::placeholder {
+  color: #4a1a08;
 }
 
-/* ===== LINK ===== */
-.theme-aries a {
-  color: #ffb380;
-  border-bottom: 1px dashed #ffb380;
+.theme-aries input:focus,
+.theme-aries select:focus {
+  outline: none;
+  border-color: #ff4500;
+  box-shadow: 0 0 0 2px rgba(255,69,0,0.2);
 }
 
-/* ===== TEXT ===== */
-.theme-aries .letter-content {
-  line-height: 1.8;
+/* editor */
+.theme-aries .editor {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,69,0,0.04) 0px,
+      rgba(255,69,0,0.04) 1px,
+      transparent 1px,
+      transparent 27px
+    ),
+    rgba(8,1,0,0.92);
+  border: 1px solid #6b1a00;
+  border-radius: 3px;
+  color: #f5d0a0;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 14px;
+  line-height: 1.9;
+  letter-spacing: 0.3px;
 }
 
-/* headings */
-.theme-aries .letter-content h1 {
-  color: #ffd8b0;
+.theme-aries .editor:focus {
+  border-color: #ff4500;
+  box-shadow: 0 0 0 2px rgba(255,69,0,0.15),
+              inset 0 0 15px rgba(255,50,0,0.04);
 }
 
-.theme-aries .letter-content h2 {
-  color: #ffb380;
+.theme-aries .editor:empty::before {
+  content: "Rót lửa vào từng chữ... ♈";
+  color: #4a1a08;
+  font-style: italic;
+  pointer-events: none;
 }
 
+/* preview */
+.theme-aries .preview {
+  background: rgba(8,1,0,0.7);
+  border: 1px dashed #6b1a00;
+  border-radius: 3px;
+  color: #f5d0a0;
+}
+
+.theme-aries .preview h3 {
+  color: #6b2010;
+  letter-spacing: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+}
+
+/* markdown */
+.theme-aries .letter-content h1,
+.theme-aries .letter-content h2,
 .theme-aries .letter-content h3 {
-  color: #e8a87c;
+  color: #ff6020;
+  letter-spacing: 1px;
+}
+
+.theme-aries .letter-content blockquote {
+  border-left: 2px solid #8b2500;
+  color: #c8a060;
+  padding-left: 12px;
+}
+
+.theme-aries .letter-content a {
+  color: #ff6020;
+  text-decoration: underline;
+}
+
+/* button */
+.theme-aries .btn {
+  background: linear-gradient(135deg, #8b1a00, #c03000, #8b1a00);
+  color: #ffd0a0;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid #ff4500;
+  box-shadow:
+    0 4px 20px rgba(180,40,0,0.4),
+    inset 0 1px 0 rgba(255,120,40,0.15);
+}
+
+.theme-aries .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 28px rgba(220,60,0,0.5),
+    inset 0 1px 0 rgba(255,160,60,0.2);
+}
+
+/* help button */
+.theme-aries .help-btn {
+  background: rgba(10,2,0,0.8);
+  border: 1px solid #6b1a00;
+  color: #ff6020;
+}
+
+/* toolbar */
+.theme-aries .toolbar,
+.theme-aries .color-toolbar {
+  background: rgba(15,3,0,0.6);
+  border: 1px solid rgba(139,37,0,0.3);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+/* popup */
+.theme-aries .popup-box {
+  background: rgba(20,4,0,0.97);
+  border: 1px solid #8b2500;
+  border-radius: 4px;
+  color: #f5d0a0;
+}
+
+.theme-aries .popup-box h3 {
+  color: #ff6020;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+}
+
+.theme-aries .popup-box input {
+  background: rgba(8,1,0,0.9);
+  border: 1px solid #6b1a00;
+  color: #f5d0a0;
+}
+
+.theme-aries .popup-actions button {
+  background: linear-gradient(135deg, #5a1000, #8b2000);
+  color: #ffd0a0;
+  border: 1px solid #8b2500;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
 }
 
 /* ======================
