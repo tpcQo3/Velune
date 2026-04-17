@@ -947,6 +947,149 @@ select:focus,
   border: 1px solid #ffb3d4;
 }
 
+/* ======================
+   ARIES THEME (FIRE / POWER)
+====================== */
+.theme-aries {
+  position: relative;
+
+  background:
+    radial-gradient(circle at top, #ff6a00, #b30000 60%),
+    linear-gradient(135deg, #2b0000, #000000);
+
+  color: #fff5f0;
+  font-family: 'Quicksand', sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* ===== FIRE GLOW ===== */
+.theme-aries::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,120,0,0.25), transparent 60%),
+    radial-gradient(circle at 70% 80%, rgba(255,0,0,0.2), transparent 60%);
+
+  filter: blur(40px);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== HEAT OVERLAY ===== */
+.theme-aries::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 80, 0, 0.08)
+  );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTAINER ===== */
+.theme-aries .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(20, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 120, 0, 0.2);
+
+  box-shadow:
+    0 10px 30px rgba(255, 80, 0, 0.25),
+    inset 0 0 25px rgba(255, 60, 0, 0.15);
+}
+
+/* ===== TITLE ===== */
+.theme-aries h1 {
+  color: #ffb347;
+  letter-spacing: 1px;
+}
+
+/* ===== SUBTITLE ===== */
+.theme-aries .subtitle {
+  color: #ff9966;
+}
+
+/* ===== EDITOR ===== */
+.theme-aries .editor {
+  background: rgba(30, 0, 0, 0.7);
+
+  border: 1px solid rgba(255, 120, 0, 0.2);
+  border-radius: 12px;
+
+  color: #fff5f0;
+}
+
+/* ===== PREVIEW ===== */
+.theme-aries .preview {
+  background: rgba(25, 0, 0, 0.6);
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 120, 0, 0.15);
+}
+
+/* ===== INPUT ===== */
+.theme-aries input,
+.theme-aries select {
+  background: rgba(30, 0, 0, 0.7);
+  border: 1px solid rgba(255, 120, 0, 0.2);
+
+  color: #ffccaa;
+}
+
+/* ===== BUTTON ===== */
+.theme-aries .btn {
+  background: linear-gradient(135deg, #ff6a00, #ff0000);
+
+  color: white;
+  border-radius: 999px;
+
+  box-shadow: 0 5px 20px rgba(255, 80, 0, 0.4);
+
+  transition: 0.2s;
+}
+
+.theme-aries .btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== LINK ===== */
+.theme-aries a {
+  color: #ffb347;
+  border-bottom: 1px dashed #ffb347;
+}
+
+/* ===== TEXT ===== */
+.theme-aries .letter-content {
+  line-height: 1.8;
+}
+
+/* headings */
+.theme-aries .letter-content h1 {
+  color: #ffb347;
+}
+
+.theme-aries .letter-content h2 {
+  color: #ff884d;
+}
+
+.theme-aries .letter-content h3 {
+  color: #ff9966;
+}
+
 /* ===== POPUP OVERLAY ===== */
 .popup {
   position: fixed;
