@@ -1109,133 +1109,137 @@ select:focus,
 }
 
 /* ======================
-   TAURUS THEME (EARTH / LUXURY)
+   TAURUS THEME v2 (EARTH MATERIAL)
 ====================== */
 
 .theme-taurus {
   position: relative;
 
   background:
-    radial-gradient(circle at 50% 20%, #d6c7a1 0%, #5c6b3c 40%, #1c1f1a 100%);
+    radial-gradient(circle at 50% 10%, #cbbf9d 0%, #3b422e 40%, #12140f 100%);
 
-  color: #f5f3eb;
+  color: #f3f1e8;
   font-family: 'Quicksand', sans-serif;
 
   overflow-x: hidden;
 }
 
-/* ===== EARTH DEPTH ===== */
+/* ===== EARTH TEXTURE (KEY FIX) ===== */
 .theme-taurus::before {
   content: "";
   position: fixed;
-
   inset: 0;
 
   background:
     repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.02),
-      rgba(255,255,255,0.02) 2px,
-      transparent 2px,
-      transparent 6px
+      45deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 4px
     );
 
-  opacity: 0.4;
+  opacity: 0.5;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* ===== TAURUS SYMBOL (SUBTLE) ===== */
+/* ===== TAURUS SYMBOL ===== */
 .theme-taurus::after {
   content: "♉";
   position: fixed;
 
-  bottom: 10%;
+  top: 12%;
   left: 8%;
 
-  font-size: 140px;
+  font-size: 150px;
 
-  color: rgba(220, 200, 140, 0.06);
+  color: rgba(220, 200, 140, 0.05);
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* ===== CONTAINER ===== */
+/* ===== CONTAINER (STONE BLOCK FEEL) ===== */
 .theme-taurus .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(30, 35, 25, 0.85);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(
+    180deg,
+    rgba(40, 45, 30, 0.95),
+    rgba(30, 35, 25, 0.95)
+  );
 
-  border-radius: 18px;
+  border-radius: 16px;
 
-  border: 1px solid rgba(180, 160, 100, 0.15);
+  border: 1px solid rgba(180, 160, 100, 0.12);
 
   box-shadow:
-    0 10px 25px rgba(0,0,0,0.5),
-    inset 0 0 20px rgba(200, 180, 120, 0.08);
+    0 12px 30px rgba(0,0,0,0.6),
+    inset 0 2px 6px rgba(255,255,255,0.05),
+    inset 0 -4px 10px rgba(0,0,0,0.5);
 }
 
-/* ===== TITLE ===== */
+/* ===== TITLE (GOLD ACCENT NHẸ) ===== */
 .theme-taurus h1 {
-  color: #e6d3a3;
+  color: #e0d0a5;
 
   letter-spacing: 0.5px;
 
-  text-shadow: 0 0 6px rgba(200,180,120,0.2);
+  text-shadow:
+    0 0 4px rgba(200,180,120,0.2);
 }
 
 /* ===== SUBTITLE ===== */
 .theme-taurus .subtitle {
-  color: #c4b38a;
+  color: #b8ab84;
 }
 
 /* ===== EDITOR ===== */
 .theme-taurus .editor {
-  background: rgba(40, 45, 30, 0.9);
+  background: rgba(45, 50, 35, 0.95);
 
-  border: 1px solid rgba(180, 160, 100, 0.12);
-  border-radius: 12px;
+  border: 1px solid rgba(180, 160, 100, 0.1);
+  border-radius: 10px;
 
-  color: #f5f3eb;
+  color: #f3f1e8;
 }
 
 /* ===== PREVIEW ===== */
 .theme-taurus .preview {
-  background: rgba(35, 40, 28, 0.9);
+  background: rgba(35, 40, 28, 0.95);
 
-  border-radius: 12px;
-  border: 1px solid rgba(180, 160, 100, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(180, 160, 100, 0.08);
 }
 
 /* ===== INPUT ===== */
 .theme-taurus input,
 .theme-taurus select {
-  background: rgba(40, 45, 30, 0.95);
+  background: rgba(45, 50, 35, 0.95);
 
-  border: 1px solid rgba(180, 160, 100, 0.12);
+  border: 1px solid rgba(180, 160, 100, 0.1);
 
-  color: #e6d3a3;
+  color: #e0d0a5;
 }
 
-/* ===== BUTTON (LUXURY ACCENT) ===== */
+/* ===== BUTTON (SOLID / WEIGHT) ===== */
 .theme-taurus .btn {
-  background: linear-gradient(135deg, #a38f5c, #6b7a42);
+  background: linear-gradient(135deg, #8c7a4f, #5a6738);
 
   color: white;
   border-radius: 999px;
 
   box-shadow:
-    0 0 10px rgba(180, 160, 100, 0.25);
+    0 4px 12px rgba(0,0,0,0.4);
 
   transition: 0.2s;
 }
 
 .theme-taurus .btn:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* ===== LINK ===== */
@@ -1251,7 +1255,7 @@ select:focus,
 
 /* headings */
 .theme-taurus .letter-content h1 {
-  color: #e6d3a3;
+  color: #e0d0a5;
 }
 
 .theme-taurus .letter-content h2 {
@@ -1259,7 +1263,7 @@ select:focus,
 }
 
 .theme-taurus .letter-content h3 {
-  color: #c4b38a;
+  color: #b8ab84;
 }
 
 /* ===== POPUP OVERLAY ===== */
