@@ -1108,6 +1108,160 @@ select:focus,
   color: #e8a87c;
 }
 
+/* ======================
+   TAURUS THEME (EARTH / LUXURY)
+====================== */
+
+.theme-taurus {
+  position: relative;
+
+  background:
+    radial-gradient(circle at 50% 20%, #d6c7a1 0%, #5c6b3c 40%, #1c1f1a 100%);
+
+  color: #f5f3eb;
+  font-family: 'Quicksand', sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* ===== EARTH DEPTH ===== */
+.theme-taurus::before {
+  content: "";
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.02) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+
+  opacity: 0.4;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== TAURUS SYMBOL (SUBTLE) ===== */
+.theme-taurus::after {
+  content: "♉";
+  position: fixed;
+
+  bottom: 10%;
+  left: 8%;
+
+  font-size: 140px;
+
+  color: rgba(220, 200, 140, 0.06);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTAINER ===== */
+.theme-taurus .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(30, 35, 25, 0.85);
+  backdrop-filter: blur(10px);
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(180, 160, 100, 0.15);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(200, 180, 120, 0.08);
+}
+
+/* ===== TITLE ===== */
+.theme-taurus h1 {
+  color: #e6d3a3;
+
+  letter-spacing: 0.5px;
+
+  text-shadow: 0 0 6px rgba(200,180,120,0.2);
+}
+
+/* ===== SUBTITLE ===== */
+.theme-taurus .subtitle {
+  color: #c4b38a;
+}
+
+/* ===== EDITOR ===== */
+.theme-taurus .editor {
+  background: rgba(40, 45, 30, 0.9);
+
+  border: 1px solid rgba(180, 160, 100, 0.12);
+  border-radius: 12px;
+
+  color: #f5f3eb;
+}
+
+/* ===== PREVIEW ===== */
+.theme-taurus .preview {
+  background: rgba(35, 40, 28, 0.9);
+
+  border-radius: 12px;
+  border: 1px solid rgba(180, 160, 100, 0.1);
+}
+
+/* ===== INPUT ===== */
+.theme-taurus input,
+.theme-taurus select {
+  background: rgba(40, 45, 30, 0.95);
+
+  border: 1px solid rgba(180, 160, 100, 0.12);
+
+  color: #e6d3a3;
+}
+
+/* ===== BUTTON (LUXURY ACCENT) ===== */
+.theme-taurus .btn {
+  background: linear-gradient(135deg, #a38f5c, #6b7a42);
+
+  color: white;
+  border-radius: 999px;
+
+  box-shadow:
+    0 0 10px rgba(180, 160, 100, 0.25);
+
+  transition: 0.2s;
+}
+
+.theme-taurus .btn:hover {
+  transform: scale(1.03);
+}
+
+/* ===== LINK ===== */
+.theme-taurus a {
+  color: #d6c7a1;
+  border-bottom: 1px dashed #d6c7a1;
+}
+
+/* ===== TEXT ===== */
+.theme-taurus .letter-content {
+  line-height: 1.8;
+}
+
+/* headings */
+.theme-taurus .letter-content h1 {
+  color: #e6d3a3;
+}
+
+.theme-taurus .letter-content h2 {
+  color: #d6c7a1;
+}
+
+.theme-taurus .letter-content h3 {
+  color: #c4b38a;
+}
+
 /* ===== POPUP OVERLAY ===== */
 .popup {
   position: fixed;
