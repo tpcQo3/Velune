@@ -1017,7 +1017,96 @@ select:focus,
   }
 }
 
-/* ===== CONTAINER (FLOATING ABOVE FIRE) ===== */
+/* ======================
+   ARIES THEME (FINAL)
+====================== */
+
+.theme-aries {
+  position: relative;
+
+  background:
+    radial-gradient(circle at 50% 30%, #ff7a00 0%, #b30000 40%, #000000 100%);
+
+  color: #fff5f0;
+  font-family: 'Quicksand', sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* ===== FIRE CORE ===== */
+.theme-aries::before {
+  content: "";
+  position: fixed;
+
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 500px;
+  height: 500px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255,140,0,0.9) 0%,
+    rgba(255,60,0,0.6) 40%,
+    rgba(255,0,0,0.2) 70%,
+    transparent 100%
+  );
+
+  filter: blur(60px);
+  opacity: 0.8;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== ARIES SYMBOL (SIGNATURE) ===== */
+.theme-aries::after {
+  content: "♈";
+  position: fixed;
+
+  top: 12%;
+  right: 10%;
+
+  font-size: 120px;
+  font-weight: bold;
+
+  color: rgba(255, 180, 120, 0.08);
+
+  text-shadow:
+    0 0 20px rgba(255,120,0,0.4),
+    0 0 40px rgba(255,60,0,0.2);
+
+  transform: rotate(-10deg);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== HEAT WAVE ANIMATION ===== */
+.theme-aries .heat-layer {
+  position: fixed;
+  inset: 0;
+
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 120, 0, 0.08),
+    transparent 70%
+  );
+
+  animation: heatMove 6s linear infinite;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes heatMove {
+  from { transform: translateX(-20%); }
+  to { transform: translateX(20%); }
+}
+
+/* ===== CONTAINER ===== */
 .theme-aries .container {
   position: relative;
   z-index: 1;
@@ -1034,9 +1123,34 @@ select:focus,
     0 0 80px rgba(255, 60, 0, 0.2);
 }
 
+/* ===== MINI SYMBOL DECOR ===== */
+.theme-aries .container::before {
+  content: "♈";
+  position: absolute;
+
+  top: -15px;
+  left: -10px;
+
+  font-size: 40px;
+  color: rgba(255,120,0,0.25);
+}
+
+.theme-aries .container::after {
+  content: "♈";
+  position: absolute;
+
+  bottom: -15px;
+  right: -10px;
+
+  font-size: 40px;
+  color: rgba(255,120,0,0.25);
+}
+
 /* ===== TITLE ===== */
 .theme-aries h1 {
   color: #ffd6a3;
+  letter-spacing: 1px;
+
   text-shadow: 0 0 12px rgba(255, 140, 0, 0.8);
 }
 
@@ -1072,7 +1186,7 @@ select:focus,
   color: #ffccaa;
 }
 
-/* ===== BUTTON (REAL HIGHLIGHT) ===== */
+/* ===== BUTTON ===== */
 .theme-aries .btn {
   background: linear-gradient(135deg, #ff7a00, #ff0000);
 
