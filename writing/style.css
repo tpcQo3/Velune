@@ -948,14 +948,13 @@ select:focus,
 }
 
 /* ======================
-   ARIES THEME (FIRE / POWER)
+   ARIES THEME v2 (FIRE CORE)
 ====================== */
 .theme-aries {
   position: relative;
 
   background:
-    radial-gradient(circle at top, #ff6a00, #b30000 60%),
-    linear-gradient(135deg, #2b0000, #000000);
+    radial-gradient(circle at 50% 30%, #ff7a00 0%, #b30000 40%, #000000 100%);
 
   color: #fff5f0;
   font-family: 'Quicksand', sans-serif;
@@ -963,72 +962,94 @@ select:focus,
   overflow-x: hidden;
 }
 
-/* ===== FIRE GLOW ===== */
+/* ===== FIRE CORE (ĐIỂM NHẤN CHÍNH) ===== */
 .theme-aries::before {
   content: "";
   position: fixed;
-  inset: 0;
 
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,120,0,0.25), transparent 60%),
-    radial-gradient(circle at 70% 80%, rgba(255,0,0,0.2), transparent 60%);
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  filter: blur(40px);
+  width: 500px;
+  height: 500px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255,140,0,0.9) 0%,
+    rgba(255,60,0,0.6) 40%,
+    rgba(255,0,0,0.2) 70%,
+    transparent 100%
+  );
+
+  filter: blur(60px);
+  opacity: 0.8;
 
   pointer-events: none;
   z-index: 0;
-  opacity: 0.7;
 }
 
-/* ===== HEAT OVERLAY ===== */
+/* ===== HEAT WAVES ===== */
 .theme-aries::after {
   content: "";
   position: fixed;
   inset: 0;
 
   background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 80, 0, 0.08)
+    120deg,
+    transparent 30%,
+    rgba(255, 120, 0, 0.08),
+    transparent 70%
   );
+
+  animation: heatMove 6s linear infinite;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* ===== CONTAINER ===== */
+@keyframes heatMove {
+  from {
+    transform: translateX(-20%);
+  }
+  to {
+    transform: translateX(20%);
+  }
+}
+
+/* ===== CONTAINER (FLOATING ABOVE FIRE) ===== */
 .theme-aries .container {
   position: relative;
   z-index: 1;
 
-  background: rgba(20, 0, 0, 0.65);
-  backdrop-filter: blur(12px);
+  background: rgba(20, 0, 0, 0.7);
+  backdrop-filter: blur(14px);
 
   border-radius: 18px;
 
-  border: 1px solid rgba(255, 120, 0, 0.2);
+  border: 1px solid rgba(255, 120, 0, 0.25);
 
   box-shadow:
-    0 10px 30px rgba(255, 80, 0, 0.25),
-    inset 0 0 25px rgba(255, 60, 0, 0.15);
+    0 15px 40px rgba(255, 80, 0, 0.4),
+    0 0 80px rgba(255, 60, 0, 0.2);
 }
 
 /* ===== TITLE ===== */
 .theme-aries h1 {
-  color: #ffb347;
-  letter-spacing: 1px;
+  color: #ffd6a3;
+  text-shadow: 0 0 12px rgba(255, 140, 0, 0.8);
 }
 
 /* ===== SUBTITLE ===== */
 .theme-aries .subtitle {
-  color: #ff9966;
+  color: #ffb380;
 }
 
 /* ===== EDITOR ===== */
 .theme-aries .editor {
-  background: rgba(30, 0, 0, 0.7);
+  background: rgba(30, 0, 0, 0.8);
 
-  border: 1px solid rgba(255, 120, 0, 0.2);
+  border: 1px solid rgba(255, 120, 0, 0.3);
   border-radius: 12px;
 
   color: #fff5f0;
@@ -1036,41 +1057,43 @@ select:focus,
 
 /* ===== PREVIEW ===== */
 .theme-aries .preview {
-  background: rgba(25, 0, 0, 0.6);
+  background: rgba(25, 0, 0, 0.7);
 
   border-radius: 12px;
-  border: 1px solid rgba(255, 120, 0, 0.15);
+  border: 1px solid rgba(255, 120, 0, 0.2);
 }
 
 /* ===== INPUT ===== */
 .theme-aries input,
 .theme-aries select {
-  background: rgba(30, 0, 0, 0.7);
-  border: 1px solid rgba(255, 120, 0, 0.2);
+  background: rgba(30, 0, 0, 0.8);
+  border: 1px solid rgba(255, 120, 0, 0.25);
 
   color: #ffccaa;
 }
 
-/* ===== BUTTON ===== */
+/* ===== BUTTON (REAL HIGHLIGHT) ===== */
 .theme-aries .btn {
-  background: linear-gradient(135deg, #ff6a00, #ff0000);
+  background: linear-gradient(135deg, #ff7a00, #ff0000);
 
   color: white;
   border-radius: 999px;
 
-  box-shadow: 0 5px 20px rgba(255, 80, 0, 0.4);
+  box-shadow:
+    0 0 20px rgba(255, 100, 0, 0.7),
+    0 0 40px rgba(255, 50, 0, 0.4);
 
   transition: 0.2s;
 }
 
 .theme-aries .btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 /* ===== LINK ===== */
 .theme-aries a {
-  color: #ffb347;
-  border-bottom: 1px dashed #ffb347;
+  color: #ffd6a3;
+  border-bottom: 1px dashed #ffd6a3;
 }
 
 /* ===== TEXT ===== */
@@ -1080,15 +1103,15 @@ select:focus,
 
 /* headings */
 .theme-aries .letter-content h1 {
-  color: #ffb347;
+  color: #ffd6a3;
 }
 
 .theme-aries .letter-content h2 {
-  color: #ff884d;
+  color: #ff9c66;
 }
 
 .theme-aries .letter-content h3 {
-  color: #ff9966;
+  color: #ffb380;
 }
 
 /* ===== POPUP OVERLAY ===== */
