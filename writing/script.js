@@ -1,15 +1,40 @@
 import { initEditor } from "./modules/editor.js";
 import { initPreview } from "./modules/preview.js";
 import { initToolbar } from "./modules/toolbar.js";
-import { initPopup } from "./modules/popup.js";
+import { initPopup, showPopup } from "./modules/popup.js";
 import { initTheme } from "./modules/theme.js";
 
-initEditor();
-initPreview();
-initToolbar();
-initPopup();
-initTheme();
+import { saveLetter } from "../firebase.js";
 
+/* ===== ELEMENTS ===== */
+const editor = document.getElementById("editor");
+const status = document.getElementById("status");
+
+const from = document.getElementById("from");
+const to = document.getElementById("to");
+
+/* ===== UTILS ===== */
+function getExpiryDate(days) {
+  if (!days || days === "0") return null;
+
+  const d = new Date();
+  d.setDate(d.getDate() + parseInt(days));
+  return d;
+}
+
+/* ===== INIT ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  initEditor();
+  initPreview();
+  initToolbar();
+  initPopup();
+  initTheme();
+
+  document.getElementById("createBtn")
+    .addEventListener("click", createLetter);
+});
+
+/* ===== CREATE LETTER ===== */
 async function createLetter() {
   if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
@@ -41,6 +66,3 @@ async function createLetter() {
     status.innerText = "Lỗi: " + e.message;
   }
 }
-
-document.getElementById("createBtn")
-  .addEventListener("click", createLetter);
