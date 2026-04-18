@@ -20,6 +20,15 @@ body, .container, .editor, .preview, .btn, input, select {
     border 0.5s ease;
 }
 
+.letter-content {
+  line-height: 1.8;
+  white-space: pre-wrap;
+
+  /* 🔥 thêm 2 dòng này */
+  color: inherit;
+  font-family: inherit;
+}
+
 /* text align helper */
 .v1lt {
   text-align: center;
