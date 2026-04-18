@@ -22,6 +22,10 @@ function getExpiryDate(days) {
   return d;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+});
+
 /* ===== INIT ===== */
 document.addEventListener("DOMContentLoaded", () => {
   initEditor();
