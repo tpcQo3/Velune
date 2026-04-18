@@ -1364,305 +1364,301 @@ select:focus,
 }
 
 /* ======================
-   GEMINI THEME v3 (GLITCH PERSONALITY)
-====================== */
+   GEMINI THEME (AIR SIGN - THE TWINS)
+   ====================== */
 
 .theme-gemini {
   position: relative;
-
-  background:
-    linear-gradient(120deg, #0f1115 0%, #f5f7fa 100%);
-
-  color: #111;
   font-family: 'Quicksand', sans-serif;
-
+  color: #2c3e50;
   overflow-x: hidden;
+
+  /* ===== DUAL-TONE GRADIENT (LIGHT + DARK DUALS) ===== */
+  background:
+    /* layer 1: light airy blue */
+    linear-gradient(135deg, #e3f2fd 0%, #bbdefb 30%, #90caf9 60%, #64b5f6 100%),
+    /* layer 2: deep navy (the other twin) */
+    radial-gradient(circle at 80% 20%, #1a237e 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, #283593 0%, transparent 50%);
+  background-blend-mode: normal, screen, screen;
+  min-height: 100vh;
 }
 
-/* ===== RGB GLITCH OVERLAY ===== */
-.theme-gemini .gemini-glitch {
+/* ===== FLOATING TWIN SYMBOLS (♊♊) ===== */
+.theme-gemini::before {
+  content: "♊♊";
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 180px;
+  color: rgba(255,255,255,0.08);
+  letter-spacing: 20px;
+  pointer-events: none;
+  z-index: 0;
+  animation: twinFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinFloat {
+  0% { transform: translateX(-50%) translateY(0) rotate(-2deg); }
+  100% { transform: translateX(-50%) translateY(-15px) rotate(2deg); }
+}
+
+/* ===== SUBTLE AERIAL PARTICLES (Mercury dust) ===== */
+.theme-gemini .stars-2 {
   position: fixed;
   inset: 0;
-
-  pointer-events: none;
-
   background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,0,0,0.02),
-      rgba(255,0,0,0.02) 1px,
-      transparent 1px,
-      transparent 3px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,255,255,0.02),
-      rgba(0,255,255,0.02) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-
-  mix-blend-mode: overlay;
-
-  animation: glitchNoise 0.8s infinite;
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 30% 80%, rgba(255,255,255,0.4), transparent);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  animation: particleDrift 20s linear infinite;
 }
 
-@keyframes glitchNoise {
-  0% { transform: translate(0,0); }
-  20% { transform: translate(-1px,1px); }
-  40% { transform: translate(1px,-1px); }
-  60% { transform: translate(-1px,0); }
-  80% { transform: translate(1px,1px); }
-  100% { transform: translate(0,0); }
+@keyframes particleDrift {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(-20px) rotate(3deg); }
 }
 
-/* ===== GHOST PERSONALITY ===== */
+/* ===== DUAL SHADOW LAYER (two souls) ===== */
 .theme-gemini .gemini-ghost {
   position: fixed;
   inset: 0;
-
   pointer-events: none;
-
   background:
-    linear-gradient(
-      90deg,
-      transparent 20%,
-      rgba(255,255,255,0.05),
-      transparent 80%
-    );
-
-  mix-blend-mode: difference;
-
-  animation: ghostShift 4s infinite alternate;
+    linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.05) 50%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, rgba(100,150,255,0.05) 50%, transparent 55%);
+  mix-blend-mode: overlay;
+  animation: dualGlow 8s infinite alternate;
 }
 
-@keyframes ghostShift {
-  from { transform: translateX(-5%); }
-  to { transform: translateX(5%); }
+@keyframes dualGlow {
+  0% { opacity: 0.3; transform: translateX(-3%); }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; transform: translateX(3%); }
 }
 
-/* ===== SYMBOL ===== */
-.theme-gemini::after {
-  content: "♊";
-  position: fixed;
-
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-size: 150px;
-
-  color: rgba(255,255,255,0.05);
-
-  mix-blend-mode: difference;
-
-  pointer-events: none;
-}
-
-/* ===== CONTAINER ===== */
+/* ===== CONTAINER (DUAL GLASS) ===== */
 .theme-gemini .container {
   position: relative;
   z-index: 1;
 
+  /* split-gradient: left light, right dark */
   background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.9),
-      rgba(20,20,30,0.9)
-    );
+    linear-gradient(135deg,
+      rgba(255,255,255,0.92) 0%,
+      rgba(255,255,255,0.85) 45%,
+      rgba(200,220,255,0.9) 50%,
+      rgba(180,210,255,0.85) 100%);
 
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
 
-  border-radius: 16px;
+  border-radius: 24px;
 
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(100,150,200,0.2);
 
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.5);
+    0 0 0 1px rgba(255,255,255,0.4),
+    0 10px 40px rgba(0,0,0,0.15),
+    0 0 60px rgba(100,150,255,0.15);
 }
 
-/* ===== GLITCH TEXT ===== */
+/* ===== TITLE (DUAL GLITCH - SUBTLE) ===== */
 .theme-gemini h1 {
   position: relative;
-
-  color: #111;
+  color: #2c3e50;
+  font-size: 28px;
+  letter-spacing: 1px;
 }
 
-/* lớp đỏ */
-.theme-gemini h1::before {
-  content: attr(data-text);
-
-  position: absolute;
-  left: -2px;
-  top: 0;
-
-  color: rgba(255,0,0,0.6);
-
-  z-index: -1;
-}
-
-/* lớp xanh */
+/* Twin shadow effect - left blue, right pink (yin yang) */
+.theme-gemini h1::before,
 .theme-gemini h1::after {
   content: attr(data-text);
-
   position: absolute;
-  left: 2px;
   top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0.15;
+}
 
-  color: rgba(0,255,255,0.6);
+/* left twin - cool blue */
+.theme-gemini h1::before {
+  color: #2196f3;
+  transform: translate(-2px, -1px);
+  z-index: -2;
+}
 
-  z-index: -1;
+/* right twin - warm coral */
+.theme-gemini h1::after {
+  color: #ff7043;
+  transform: translate(2px, 1px);
+  z-index: -2;
 }
 
 /* ===== EDITOR ===== */
 .theme-gemini .editor {
   background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.95),
-      rgba(25,25,30,0.95)
-    );
+    linear-gradient(90deg,
+      rgba(255,255,255,0.95) 0%,
+      rgba(240,248,255,0.95) 50%,
+      rgba(220,235,255,0.95) 100%);
 
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 10px;
+  border: 1.5px solid rgba(100,150,200,0.25);
+  border-radius: 14px;
 
-  color: #111;
+  color: #2c3e50;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.04),
+    0 4px 12px rgba(100,150,200,0.1);
+}
+
+.theme-gemini .editor:focus {
+  outline: none;
+  border-color: #64b5f6;
+  box-shadow:
+    0 0 0 3px rgba(100,181,246,0.15),
+    inset 0 2px 6px rgba(0,0,0,0.04);
 }
 
 /* ===== PREVIEW ===== */
 .theme-gemini .preview {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(250,250,250,0.95),
-      rgba(25,25,30,0.95)
-    );
-
-  border-radius: 10px;
-  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(240,248,255,0.7);
+  border: 1px solid rgba(100,150,200,0.2);
+  border-radius: 14px;
 }
 
 /* ===== BUTTON ===== */
 .theme-gemini .btn {
-  background: linear-gradient(135deg, #ffffff, #1a1d24);
-
-  color: #111;
-
+  background: linear-gradient(135deg, #64b5f6, #42a5f5, #1e88e5);
+  color: white;
   border-radius: 999px;
-
+  font-weight: 600;
+  letter-spacing: 0.5px;
   box-shadow:
-    inset 0 1px 2px rgba(255,255,255,0.3),
-    0 4px 12px rgba(0,0,0,0.4);
-
-  transition: 0.2s;
+    0 4px 15px rgba(100,181,246,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  transition: all 0.25s ease;
 }
 
 .theme-gemini .btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 8px 25px rgba(100,181,246,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
-/* ===== POPUP OVERLAY ===== */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(6px);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 9999;
-
-  animation: fadeOverlay 0.3s ease;
+.theme-gemini .btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
-/* Ẩn */
-.hidden {
-  display: none;
+/* ===== INPUTS & SELECTS ===== */
+.theme-gemini input,
+.theme-gemini select {
+  background: rgba(255,255,255,0.9);
+  border: 1.5px solid rgba(100,150,200,0.3);
+  border-radius: 12px;
+  color: #2c3e50;
+  transition: all 0.2s ease;
 }
 
-/* ===== POPUP BOX ===== */
-.popup-box {
-  width: 90%;
-  max-width: 340px;
-
-  padding: 20px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-
-  text-align: center;
-
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-
-  animation: popupIn 0.35s ease;
+.theme-gemini input::placeholder {
+  color: #90a4ae;
 }
 
-/* INPUT */
-.popup-box input {
-  width: 100%;
-  margin-top: 10px;
-  padding: 8px;
-
-  border-radius: 10px;
-  border: 1px solid #ddd;
+.theme-gemini input:focus,
+.theme-gemini select:focus {
+  outline: none;
+  border-color: #64b5f6;
+  box-shadow: 0 0 0 3px rgba(100,181,246,0.15);
 }
 
-/* BUTTON GROUP */
-.popup-actions {
-  margin-top: 12px;
-  display: flex;
-  gap: 8px;
+/* ===== SUBTITLE ===== */
+.theme-gemini .subtitle {
+  color: #5d6d7e;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
-.popup-actions button {
-  flex: 1;
-  padding: 10px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #ffd6ec, #cceeff);
-  cursor: pointer;
-
-  transition: 0.2s;
+/* ===== HELP BUTTON ===== */
+.theme-gemini .help-btn {
+  background: rgba(100,181,246,0.1);
+  border: 1.5px solid rgba(100,181,246,0.3);
+  color: #64b5f6;
+  border-radius: 999px;
+  transition: all 0.2s;
 }
 
-.popup-actions button:hover {
-  transform: scale(1.05);
+.theme-gemini .help-btn:hover {
+  background: rgba(100,181,246,0.2);
+  transform: scale(1.1);
 }
 
-/* ===== ANIMATION ===== */
+/* ===== TOOLBAR / COLOR PALETTE ===== */
+.theme-gemini .toolbar,
+.theme-gemini .color-toolbar {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(100,150,200,0.2);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
 
-/* overlay fade */
+/* ===== POPUP OVERRIDE ===== */
+.theme-gemini .popup-box {
+  background: rgba(255,255,255,0.95);
+  border: 2px solid rgba(100,181,246,0.3);
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(100,181,246,0.25);
+}
+
+.theme-gemini .popup-box h3 {
+  color: #1976d2;
+}
+
+.theme-gemini .popup-actions button {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1976d2;
+  border: 1px solid rgba(100,181,246,0.3);
+}
+
+.theme-gemini .popup-actions button:hover {
+  background: linear-gradient(135deg, #bbdefb, #90caf9);
+}
+
+/* ===== LETTER CONTENT ===== */
+.theme-gemini .letter-content h1,
+.theme-gemini .letter-content h2,
+.theme-gemini .letter-content h3 {
+  color: #1565c0;
+}
+
+.theme-gemini .letter-content blockquote {
+  border-left: 3px solid #64b5f6;
+  color: #5d6d7e;
+  padding-left: 12px;
+}
+
+/* ===== fade animation ===== */
 @keyframes fadeOverlay {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* popup bay lên */
 @keyframes popupIn {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.9);
-  }
-  60% {
-    transform: translateY(-5px) scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+  60% { transform: translateY(-5px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .editor span {
