@@ -1,19 +1,66 @@
-import { initEditor } from "./modules/editor.js";
-import { initPreview } from "./modules/preview.js";
-import { initToolbar } from "./modules/toolbar.js";
-import { initPopup, showPopup } from "./modules/popup.js";
-import { initTheme } from "./modules/theme.js";
-
 import { saveLetter } from "../firebase.js";
 
-/* ===== ELEMENTS ===== */
+/* ======================
+   ELEMENTS
+====================== */
 const editor = document.getElementById("editor");
+const preview = document.getElementById("preview");
 const status = document.getElementById("status");
 
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 
-/* ===== UTILS ===== */
+/* ======================
+   MARKDOWN
+====================== */
+function parseMarkdown(text) {
+  text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  text = text
+    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+    .replace(/^# (.*)$/gm, "<h1>$1</h1>");
+
+  text = text
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+    .replace(/\*(.*?)\*/g, "<i>$1</i>")
+    .replace(/__(.*?)__/g, "<u>$1</u>");
+
+  text = text.replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
+    if (!u.startsWith("http")) u = "https://" + u;
+    return `<a href="${u}" target="_blank">${t}</a>`;
+  });
+
+  text = text.replace(/\n/g, "<br>");
+  return text;
+}
+
+/* ======================
+   PREVIEW
+====================== */
+function updatePreview() {
+  preview.innerHTML = `
+    <div><b>Từ:</b> ${from.value || "..."}</div>
+    <div><b>Đến:</b> ${to.value || "..."}</div>
+    <hr>
+    <div class="letter-content">
+      ${parseMarkdown(editor.innerText)}
+    </div>
+  `;
+}
+
+editor.addEventListener("input", updatePreview);
+from.addEventListener("input", updatePreview);
+to.addEventListener("input", updatePreview);
+
+updatePreview();
+
+/* ======================
+   EXPIRY
+====================== */
 function getExpiryDate(days) {
   if (!days || days === "0") return null;
 
@@ -22,23 +69,39 @@ function getExpiryDate(days) {
   return d;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
-});
+/* ======================
+   POPUP
+====================== */
+function showPopup(link) {
+  const popup = document.getElementById("popup");
+  const input = document.getElementById("popupLink");
+  const canvas = document.getElementById("qrcode");
 
-/* ===== INIT ===== */
-document.addEventListener("DOMContentLoaded", () => {
-  initEditor();
-  initPreview();
-  initToolbar();
-  initPopup();
-  initTheme();
+  input.value = link;
 
-  document.getElementById("createBtn")
-    .addEventListener("click", createLetter);
-});
+  QRCode.toCanvas(canvas, link, {
+    width: 200,
+    color: { dark: "#333", light: "#fff" }
+  });
 
-/* ===== CREATE LETTER ===== */
+  popup.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+window.closePopup = function () {
+  document.getElementById("popup").classList.add("hidden");
+  document.body.style.overflow = "";
+};
+
+window.copyLink = function () {
+  const input = document.getElementById("popupLink");
+  input.select();
+  document.execCommand("copy");
+};
+
+/* ======================
+   CREATE LETTER
+====================== */
 async function createLetter() {
   if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
@@ -70,3 +133,31 @@ async function createLetter() {
     status.innerText = "Lỗi: " + e.message;
   }
 }
+
+/* ======================
+   THEME
+====================== */
+const themeSelect = document.getElementById("theme");
+
+function applyTheme(theme) {
+  document.body.className = "theme-" + theme;
+}
+
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
+});
+
+applyTheme(themeSelect.value);
+
+/* ======================
+   NAV
+====================== */
+window.goHelp = function () {
+  window.location.href = "../helping/helping.html";
+};
+
+/* ======================
+   BIND BUTTON
+====================== */
+document.getElementById("createBtn")
+  .addEventListener("click", createLetter);
