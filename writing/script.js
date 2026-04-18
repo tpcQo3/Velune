@@ -97,6 +97,7 @@ window.copyLink = function () {
   const input = document.getElementById("popupLink");
   input.select();
   document.execCommand("copy");
+  alert("Đã sao chép link!");
 };
 
 /* ======================
