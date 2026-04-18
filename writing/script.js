@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     popup.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "";
   }
 
   window.closePopup = function () {
