@@ -9,4 +9,5 @@ initPreview();
 initToolbar();
 initPopup();
 initTheme();
-window.createLetter = createLetter;
+document.getElementById("createBtn")
+  .addEventListener("click", createLetter);
