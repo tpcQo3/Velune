@@ -1665,3 +1665,120 @@ select:focus,
   line-height: inherit;
   white-space: pre-wrap;
 }
+
+/* ======================
+   POPUP OVERLAY
+====================== */
+.popup {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+/* Ẩn */
+.popup.hidden {
+  display: none;
+}
+
+/* ======================
+   POPUP BOX
+====================== */
+.popup-content {
+  width: 90%;
+  max-width: 420px;
+
+  background: #ffffff;
+  color: #111;
+
+  border-radius: 16px;
+  padding: 20px;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.4);
+
+  text-align: center;
+
+  animation: popupFade 0.25s ease;
+}
+
+/* ======================
+   INPUT LINK
+====================== */
+.popup-content input {
+  width: 100%;
+  margin-top: 10px;
+
+  padding: 10px;
+  border-radius: 8px;
+
+  border: 1px solid #ddd;
+
+  font-size: 14px;
+}
+
+/* ======================
+   BUTTONS
+====================== */
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.popup-actions button {
+  flex: 1;
+
+  padding: 10px;
+  border-radius: 999px;
+
+  border: none;
+  cursor: pointer;
+
+  font-weight: 500;
+
+  transition: 0.2s;
+}
+
+/* copy */
+.popup-actions .copy {
+  background: #4f7cff;
+  color: white;
+}
+
+/* close */
+.popup-actions .close {
+  background: #eee;
+}
+
+/* hover */
+.popup-actions button:hover {
+  transform: scale(1.03);
+}
+
+/* ======================
+   QR
+====================== */
+#qrcode {
+  margin-top: 15px;
+}
+
+/* ======================
+   ANIMATION
+====================== */
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
