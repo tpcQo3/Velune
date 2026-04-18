@@ -63,8 +63,3 @@ select:focus,
   line-height: inherit;
   white-space: pre-wrap;
 }
-
-.editor span,
-.letter-content span {
-  all: unset;
-}
