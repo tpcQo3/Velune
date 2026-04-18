@@ -42,7 +42,6 @@
     radial-gradient(2px 2px at 70% 20%, #d400ff, transparent);
   opacity: 0.4;
   animation: geminiNoise 4s infinite alternate;
-  pointer-events: none;
 }
 
 @keyframes geminiNoise {
