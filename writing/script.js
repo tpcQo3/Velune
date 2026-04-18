@@ -9,3 +9,4 @@ initPreview();
 initToolbar();
 initPopup();
 initTheme();
+window.createLetter = createLetter;
