@@ -1,0 +1,50 @@
+.editor {
+  min-height: 150px;
+  padding: 12px;
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.85);
+
+  border: 1.5px solid rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+  font-family: 'Quicksand', sans-serif;
+  line-height: 1.8;
+
+  outline: none;
+}
+
+.editor:focus {
+  border: 1.5px solid #a6c1ee;
+  box-shadow: 0 0 0 3px rgba(166,193,238,0.2);
+}
+
+/* markdown */
+.letter-content {
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.letter-content h1 {
+  font-size: 26px;
+}
+
+.letter-content h2 {
+  font-size: 22px;
+}
+
+.letter-content h3 {
+  font-size: 19px;
+}
+
+.letter-content blockquote {
+  border-left: 3px solid #ccc;
+  padding-left: 10px;
+  opacity: 0.8;
+}
+
+.letter-content hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}

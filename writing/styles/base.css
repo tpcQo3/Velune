@@ -1,0 +1,51 @@
+/* ===== RESET ===== */
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+  transition: all 0.4s ease;
+}
+
+/* global transition */
+body, .container, .editor, .preview, .btn, input, select {
+  transition: 
+    background 0.5s ease,
+    color 0.5s ease,
+    box-shadow 0.5s ease,
+    border 0.5s ease;
+}
+
+/* text align helper */
+.v1lt {
+  text-align: center;
+}
+
+/* font size base */
+.editor,
+.letter-content {
+  font-size: 18px;
+}
+
+/* input focus base */
+input, select, .editor {
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+input:focus,
+select:focus,
+.editor:focus {
+  border-color: #a6c1ee;
+  box-shadow: 0 0 0 3px rgba(166,193,238,0.2);
+}
+
+/* editor span fix */
+.editor span {
+  line-height: inherit;
+  white-space: pre-wrap;
+}
