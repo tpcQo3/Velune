@@ -1,0 +1,157 @@
+/* ======================
+   TAURUS THEME v3 (DARK LUXURY)
+====================== */
+
+.theme-taurus {
+  position: relative;
+
+  background:
+    radial-gradient(circle at 50% 0%, #2a2f23 0%, #12140f 60%);
+
+  color: #f5f3eb;
+  font-family: 'Quicksand', sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* ===== SUBTLE GOLD LIGHT ===== */
+.theme-taurus::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 50% 10%, rgba(200,180,120,0.15), transparent 60%);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== SYMBOL ===== */
+.theme-taurus::after {
+  content: "♉";
+  position: fixed;
+
+  top: 10%;
+  right: 10%;
+
+  font-size: 160px;
+
+  color: rgba(220, 200, 140, 0.04);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTAINER (KEY UPGRADE) ===== */
+.theme-taurus .container {
+  position: relative;
+  z-index: 1;
+
+  background: linear-gradient(
+    180deg,
+    #1a1d16,
+    #141710
+  );
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(200,180,120,0.2);
+
+  /* 🔥 GOLD EDGE LIGHT */
+  box-shadow:
+    0 0 0 1px rgba(200,180,120,0.08),
+    0 10px 40px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    inset 0 -6px 20px rgba(0,0,0,0.7);
+}
+
+/* ===== TITLE (LUXURY FOCUS) ===== */
+.theme-taurus h1 {
+  color: #e6d3a3;
+
+  letter-spacing: 0.6px;
+
+  text-shadow:
+    0 0 6px rgba(200,180,120,0.3);
+}
+
+/* ===== SUBTITLE ===== */
+.theme-taurus .subtitle {
+  color: #b8ab84;
+}
+
+/* ===== EDITOR ===== */
+.theme-taurus .editor {
+  background: #1f231b;
+
+  border: 1px solid rgba(200,180,120,0.15);
+  border-radius: 10px;
+
+  color: #f3f1e8;
+}
+
+/* ===== PREVIEW ===== */
+.theme-taurus .preview {
+  background: #1a1d16;
+
+  border-radius: 10px;
+  border: 1px solid rgba(200,180,120,0.12);
+}
+
+/* ===== INPUT ===== */
+.theme-taurus input,
+.theme-taurus select {
+  background: #1f231b;
+
+  border: 1px solid rgba(200,180,120,0.15);
+
+  color: #e6d3a3;
+}
+
+/* ===== BUTTON (PREMIUM METAL FEEL) ===== */
+.theme-taurus .btn {
+  background: linear-gradient(
+    135deg,
+    #b8a46a,
+    #6b7a42
+  );
+
+  color: #fff;
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.5),
+    inset 0 1px 2px rgba(255,255,255,0.15);
+
+  transition: 0.2s;
+}
+
+.theme-taurus .btn:hover {
+  transform: scale(1.03);
+}
+
+/* ===== LINK ===== */
+.theme-taurus a {
+  color: #d6c7a1;
+  border-bottom: 1px solid rgba(200,180,120,0.5);
+}
+
+/* ===== TEXT ===== */
+.theme-taurus .letter-content {
+  line-height: 1.8;
+}
+
+/* headings */
+.theme-taurus .letter-content h1 {
+  color: #e6d3a3;
+}
+
+.theme-taurus .letter-content h2 {
+  color: #d6c7a1;
+}
+
+.theme-taurus .letter-content h3 {
+  color: #b8ab84;
+}

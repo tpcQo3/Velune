@@ -1,0 +1,195 @@
+/* ===== MOON CINEMATIC ===== */
+.theme-moon {
+  position: relative;
+  overflow-x: hidden;
+
+  background: radial-gradient(circle at top, #1a2330, #05070d 80%);
+  color: #e6edf5;
+}
+
+.theme-moon .stars-2 {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(1px 1px at 15% 25%, white, transparent),
+    radial-gradient(1px 1px at 60% 10%, white, transparent),
+    radial-gradient(1px 1px at 75% 65%, white, transparent),
+    radial-gradient(1px 1px at 35% 85%, white, transparent);
+
+  opacity: 0.4;
+
+  animation: twinkleSlow 6s infinite alternate;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== STAR FIELD (layer 1) ===== */
+.theme-moon::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(1.5px 1.5px at 10% 20%, white, transparent),
+    radial-gradient(1px 1px at 25% 60%, white, transparent),
+    radial-gradient(2px 2px at 70% 15%, white, transparent),
+    radial-gradient(1px 1px at 80% 40%, white, transparent),
+    radial-gradient(1.5px 1.5px at 60% 80%, white, transparent),
+    radial-gradient(2px 2px at 30% 30%, white, transparent),
+    radial-gradient(1px 1px at 90% 70%, white, transparent),
+    radial-gradient(1.5px 1.5px at 50% 50%, white, transparent);
+
+  animation: twinkle 3s infinite alternate;
+
+  opacity: 0.7;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== MOON (layer 2) ===== */
+.theme-moon::after {
+  content: "";
+  position: fixed;
+  top: 60px;
+  right: 80px;
+
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  background:
+    /* base */
+    radial-gradient(circle at 30% 30%, #fff, #eaeaea 35%, #d6d6d6 55%, #bfbfbf 75%, transparent 100%),
+
+    /* craters (nhiều hơn, tự nhiên hơn) */
+    radial-gradient(circle at 65% 40%, rgba(0,0,0,0.18) 10px, transparent 12px),
+    radial-gradient(circle at 40% 65%, rgba(0,0,0,0.15) 12px, transparent 14px),
+    radial-gradient(circle at 75% 75%, rgba(0,0,0,0.12) 8px, transparent 10px),
+    radial-gradient(circle at 55% 20%, rgba(0,0,0,0.14) 9px, transparent 11px),
+    radial-gradient(circle at 30% 50%, rgba(0,0,0,0.1) 7px, transparent 9px);
+
+  box-shadow:
+    /* phase shadow */
+    inset -30px -30px 60px rgba(0,0,0,0.5),
+    inset 15px 15px 25px rgba(255,255,255,0.25),
+
+    /* glow */
+    0 0 60px rgba(255,255,255,0.25),
+    0 0 160px rgba(180,200,255,0.15);
+
+  filter: blur(0.2px);
+
+  animation: moonFloat 8s ease-in-out infinite alternate;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== SHOOTING STAR ===== */
+.theme-moon .shooting-star {
+  position: fixed;
+  top: 20%;
+  left: -150px;
+
+  width: 150px;
+  height: 2px;
+
+  background: linear-gradient(90deg, white, transparent);
+
+  opacity: 0;
+
+  transform: rotate(25deg);
+
+  animation: shooting 10s infinite;
+}
+
+/* ===== CONTAINER ===== */
+.theme-moon .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(15,20,30,0.75);
+  backdrop-filter: blur(18px);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.7),
+    0 0 40px rgba(120,150,255,0.1);
+}
+
+/* ===== EDITOR ===== */
+.theme-moon .editor {
+  background: linear-gradient(to bottom, #0b0f17, #111827);
+
+  border: 1px solid rgba(120,150,255,0.2);
+
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+
+  color: #e6edf5;
+}
+
+/* ===== PREVIEW ===== */
+.theme-moon .preview {
+  background: rgba(10,15,25,0.7);
+
+  border: 1px solid rgba(120,150,255,0.2);
+}
+
+/* ===== TEXT GLOW ===== */
+.theme-moon .letter-content {
+  text-shadow: 0 0 4px rgba(200,220,255,0.25);
+}
+
+/* ===== BUTTON ===== */
+.theme-moon .btn {
+  background: linear-gradient(135deg, #1f2a44, #3b5998);
+
+  color: white;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+}
+
+.theme-moon .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(100,120,255,0.3);
+}
+
+/* ===== INPUT ===== */
+.theme-moon input,
+.theme-moon select {
+  background: rgba(20,25,35,0.9);
+  border: 1px solid rgba(120,150,255,0.2);
+  color: #e6edf5;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.9; transform: scale(1.2); }
+}
+
+@keyframes twinkleSlow {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(0) translateY(0) rotate(25deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  40% {
+    transform: translateX(120vw) translateY(60vh) rotate(25deg);
+    opacity: 0;
+  }
+  100% { opacity: 0; }
+}
+
+@keyframes moonFloat {
+  from { transform: translateY(0px); }
+  to { transform: translateY(12px); }
+}
