@@ -1,9 +1,12 @@
-/* ===== POPUP OVERLAY ===== */
+/* ======================
+   POPUP OVERLAY
+====================== */
 .popup {
   position: fixed;
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px);
 
   display: flex;
   align-items: center;
@@ -16,70 +19,111 @@
   display: none;
 }
 
-/* ===== BOX ===== */
-.popup-content {
+/* ======================
+   POPUP BOX
+====================== */
+.popup-box {
   width: 90%;
-  max-width: 420px;
+  max-width: 460px;
 
-  background: #ffffff;
-  color: #111;
+  background: linear-gradient(160deg, #0f241c, #132b22);
+  color: #e8e2c8;
 
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 20px;
 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  border: 1px solid rgba(200,180,120,0.25);
 
-  text-align: center;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,230,160,0.08);
 
-  animation: popupFade 0.25s ease;
+  animation: popupIn 0.3s ease;
 }
 
-/* input */
-.popup-content input {
-  width: 100%;
-  margin-top: 10px;
-
-  padding: 10px;
-  border-radius: 8px;
-
-  border: 1px solid #ddd;
+/* ======================
+   HEADER
+====================== */
+.popup-box h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #e8d090;
 }
 
-/* buttons */
-.popup-actions {
+.popup-box p {
+  margin: 8px 0 16px;
+  opacity: 0.85;
+}
+
+/* ======================
+   QR + LINK BLOCK
+====================== */
+.popup-body {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.popup-actions button {
-  flex: 1;
-  padding: 10px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-}
-
-.popup-actions .copy {
-  background: #4f7cff;
-  color: white;
-}
-
-.popup-actions .close {
-  background: #eee;
-}
-
-.popup-actions button:hover {
-  transform: scale(1.03);
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 /* QR */
 #qrcode {
-  margin-top: 15px;
+  width: 180px !important;
+  height: 180px !important;
+
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
 }
 
-/* animation */
-@keyframes popupFade {
+/* link input */
+.popup-box input {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(200,180,120,0.25);
+
+  background: rgba(8,20,15,0.9);
+  color: #e8e2c8;
+
+  font-size: 13px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ======================
+   BUTTONS
+====================== */
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.popup-actions button {
+  flex: 1;
+  padding: 12px;
+
+  border-radius: 999px;
+  border: 1px solid #c8b060;
+
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #2f5a45, #4a7a60);
+  color: #f0e8c8;
+
+  transition: 0.2s;
+}
+
+.popup-actions button:hover {
+  transform: translateY(-2px);
+}
+
+/* ======================
+   ANIMATION
+====================== */
+@keyframes popupIn {
   from {
     opacity: 0;
     transform: scale(0.95) translateY(10px);
@@ -88,4 +132,9 @@
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+}
+
+.theme-aries input:hover,
+.theme-aries select:hover {
+  border-color: rgba(255,100,40,0.4);
 }

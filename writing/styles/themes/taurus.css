@@ -1,157 +1,288 @@
 /* ======================
-   TAURUS THEME v3 (DARK LUXURY)
+   TAURUS THEME — FULL (LUXURY + TEXTURE)
 ====================== */
 
 .theme-taurus {
   position: relative;
-
-  background:
-    radial-gradient(circle at 50% 0%, #2a2f23 0%, #12140f 60%);
-
-  color: #f5f3eb;
-  font-family: 'Quicksand', sans-serif;
-
   overflow-x: hidden;
+
+  font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
+  color: #e8e2c8;
+
+  /* ===== BACKGROUND LAYERS ===== */
+  background:
+    /* grain noise */
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+
+    /* gold dust */
+    radial-gradient(circle at 30% 40%, rgba(200,180,120,0.06), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(160,140,90,0.05), transparent 60%),
+
+    /* lighting */
+    radial-gradient(circle at 70% 20%, #1f3a2d 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, #0f241c 0%, transparent 50%),
+
+    /* base */
+    linear-gradient(160deg, #0b1a14 0%, #132b22 40%, #0f241c 70%, #0b1a14 100%);
 }
 
-/* ===== SUBTLE GOLD LIGHT ===== */
-.theme-taurus::before {
+/* ===== FILM GRAIN OVERLAY ===== */
+.theme-taurus::after {
   content: "";
   position: fixed;
   inset: 0;
 
-  background:
-    radial-gradient(circle at 50% 10%, rgba(200,180,120,0.15), transparent 60%);
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* ===== SYMBOL ===== */
-.theme-taurus::after {
-  content: "♉";
+/* ===== EARTH PARTICLES ===== */
+.theme-taurus .stars-2 {
   position: fixed;
+  inset: 0;
 
-  top: 10%;
-  right: 10%;
+  background:
+    radial-gradient(2px 2px at 20% 70%, rgba(200,180,120,0.3), transparent),
+    radial-gradient(2px 2px at 50% 85%, rgba(160,140,90,0.25), transparent),
+    radial-gradient(3px 3px at 70% 75%, rgba(200,180,120,0.35), transparent);
 
-  font-size: 160px;
-
-  color: rgba(220, 200, 140, 0.04);
-
+  opacity: 0.4;
   pointer-events: none;
   z-index: 0;
+
+  animation: taurusFloat 10s ease-in-out infinite alternate;
 }
 
-/* ===== CONTAINER (KEY UPGRADE) ===== */
+@keyframes taurusFloat {
+  0%   { transform: translateY(0); opacity: 0.3; }
+  100% { transform: translateY(-10px); opacity: 0.5; }
+}
+
+/* ===== CONTAINER ===== */
 .theme-taurus .container {
   position: relative;
   z-index: 1;
 
-  background: linear-gradient(
-    180deg,
-    #1a1d16,
-    #141710
-  );
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(160deg, rgba(20,40,30,0.92), rgba(10,25,20,0.96));
 
-  border-radius: 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(180,160,100,0.3);
 
-  border: 1px solid rgba(200,180,120,0.2);
-
-  /* 🔥 GOLD EDGE LIGHT */
   box-shadow:
     0 0 0 1px rgba(200,180,120,0.08),
-    0 10px 40px rgba(0,0,0,0.8),
-    inset 0 1px 0 rgba(255,255,255,0.04),
-    inset 0 -6px 20px rgba(0,0,0,0.7);
+    0 20px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,230,160,0.08),
+    inset 0 -10px 30px rgba(0,0,0,0.3);
+
+  padding-top: 32px;
 }
 
-/* ===== TITLE (LUXURY FOCUS) ===== */
+/* ===== GOLD BAR ===== */
+.theme-taurus .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+
+  height: 2px;
+  border-radius: 6px 6px 0 0;
+
+  background:
+    linear-gradient(90deg, transparent, #c8b060, #e8d090, #c8b060, transparent),
+    linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+
+  animation: goldPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes goldPulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; box-shadow: 0 0 12px rgba(200,180,120,0.4); }
+}
+
+/* ===== SYMBOL ===== */
+.theme-taurus .container::after {
+  content: "♉";
+  position: absolute;
+
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 56px;
+  color: rgba(200,180,120,0.08);
+
+  pointer-events: none;
+}
+
+/* ===== TITLE ===== */
 .theme-taurus h1 {
-  color: #e6d3a3;
-
-  letter-spacing: 0.6px;
-
-  text-shadow:
-    0 0 6px rgba(200,180,120,0.3);
+  color: #e8d090;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* ===== SUBTITLE ===== */
 .theme-taurus .subtitle {
-  color: #b8ab84;
-}
-
-/* ===== EDITOR ===== */
-.theme-taurus .editor {
-  background: #1f231b;
-
-  border: 1px solid rgba(200,180,120,0.15);
-  border-radius: 10px;
-
-  color: #f3f1e8;
-}
-
-/* ===== PREVIEW ===== */
-.theme-taurus .preview {
-  background: #1a1d16;
-
-  border-radius: 10px;
-  border: 1px solid rgba(200,180,120,0.12);
+  color: #7a7050;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
 }
 
 /* ===== INPUT ===== */
 .theme-taurus input,
 .theme-taurus select {
-  background: #1f231b;
+  background: rgba(10,25,20,0.85);
+  border: 1px solid rgba(180,160,100,0.3);
+  border-radius: 4px;
 
-  border: 1px solid rgba(200,180,120,0.15);
-
-  color: #e6d3a3;
+  color: #e8e2c8;
+  font-family: 'Playfair Display', serif;
 }
 
-/* ===== BUTTON (PREMIUM METAL FEEL) ===== */
+.theme-taurus input::placeholder {
+  color: #6a6040;
+}
+
+.theme-taurus input:focus,
+.theme-taurus select:focus {
+  border-color: #c8b060;
+  box-shadow: 0 0 0 2px rgba(200,180,120,0.2);
+}
+
+/* ===== EDITOR ===== */
+.theme-taurus .editor {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 28px
+    ),
+    radial-gradient(circle at 20% 30%, rgba(200,180,120,0.05), transparent 60%),
+    rgba(8,20,15,0.92);
+
+  border: 1px solid rgba(180,160,100,0.3);
+  border-radius: 4px;
+
+  color: #e8e2c8;
+  line-height: 1.9;
+}
+
+.theme-taurus .editor:focus {
+  border-color: #c8b060;
+  box-shadow:
+    0 0 0 2px rgba(200,180,120,0.15),
+    inset 0 0 12px rgba(200,180,120,0.05);
+}
+
+.theme-taurus .editor:empty::before {
+  content: "Viết điều gì đó thật chậm rãi... ♉";
+  color: #6a6040;
+  font-style: italic;
+}
+
+/* ===== PREVIEW ===== */
+.theme-taurus .preview {
+  background: rgba(8,20,15,0.7);
+  border: 1px dashed rgba(180,160,100,0.3);
+  border-radius: 4px;
+}
+
+.theme-taurus .preview h3 {
+  color: #7a7050;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+
+/* ===== MARKDOWN ===== */
+.theme-taurus .letter-content h1,
+.theme-taurus .letter-content h2,
+.theme-taurus .letter-content h3 {
+  color: #d8c080;
+}
+
+.theme-taurus .letter-content blockquote {
+  border-left: 2px solid #c8b060;
+  color: #c8c090;
+}
+
+.theme-taurus .letter-content a {
+  color: #d8c080;
+}
+
+/* ===== BUTTON ===== */
 .theme-taurus .btn {
-  background: linear-gradient(
-    135deg,
-    #b8a46a,
-    #6b7a42
-  );
+  background: linear-gradient(135deg, #2f5a45, #4a7a60, #2f5a45);
+  color: #f0e8c8;
 
-  color: #fff;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
 
-  border-radius: 999px;
+  border-radius: 4px;
+  border: 1px solid #c8b060;
 
   box-shadow:
-    0 2px 6px rgba(0,0,0,0.5),
-    inset 0 1px 2px rgba(255,255,255,0.15);
-
-  transition: 0.2s;
+    0 6px 20px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,230,160,0.15);
 }
 
 .theme-taurus .btn:hover {
-  transform: scale(1.03);
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,230,160,0.2);
 }
 
-/* ===== LINK ===== */
-.theme-taurus a {
-  color: #d6c7a1;
-  border-bottom: 1px solid rgba(200,180,120,0.5);
+/* ===== HELP BUTTON ===== */
+.theme-taurus .help-btn {
+  background: rgba(10,25,20,0.8);
+  border: 1px solid rgba(180,160,100,0.3);
+  color: #c8b060;
 }
 
-/* ===== TEXT ===== */
-.theme-taurus .letter-content {
-  line-height: 1.8;
+/* ===== TOOLBAR ===== */
+.theme-taurus .toolbar,
+.theme-taurus .color-toolbar {
+  background: rgba(15,35,25,0.6);
+  border: 1px solid rgba(180,160,100,0.2);
+  border-radius: 4px;
 }
 
-/* headings */
-.theme-taurus .letter-content h1 {
-  color: #e6d3a3;
+/* ===== POPUP ===== */
+.theme-taurus .popup-box {
+  background: rgba(15,35,25,0.95);
+  border: 1px solid rgba(180,160,100,0.3);
+  color: #e8e2c8;
 }
 
-.theme-taurus .letter-content h2 {
-  color: #d6c7a1;
+.theme-taurus .popup-box h3 {
+  color: #d8c080;
 }
 
-.theme-taurus .letter-content h3 {
-  color: #b8ab84;
+.theme-taurus .popup-box input {
+  background: rgba(8,20,15,0.9);
+  border: 1px solid rgba(180,160,100,0.3);
+}
+
+.theme-taurus .popup-actions button {
+  background: linear-gradient(135deg, #2f5a45, #4a7a60);
+  border: 1px solid #c8b060;
+  color: #f0e8c8;
 }
