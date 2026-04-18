@@ -32,6 +32,9 @@ body, .container, .editor, .preview, .btn, input, select {
   /* 🔥 thêm 2 dòng này */
   color: inherit;
   font-family: inherit;
+    /* 🔥 thêm 2 dòng này */
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* text align helper */
