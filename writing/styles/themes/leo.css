@@ -1,0 +1,255 @@
+/* ======================
+   LEO THEME
+====================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Be+Vietnam+Pro:wght@300;400;600&display=swap');
+
+.theme-leo {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Cinzel', 'Be Vietnam Pro', serif;
+  color: #fff4cc;
+
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255,200,80,0.25), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(255,140,0,0.15), transparent 60%),
+    linear-gradient(160deg, #120700 0%, #2a1200 40%, #3a1900 70%, #120700 100%);
+}
+
+/* gold particles */
+.theme-leo .stars-2 {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(2px 2px at 15% 70%, #ffd700, transparent),
+    radial-gradient(2px 2px at 40% 85%, #ffcc33, transparent),
+    radial-gradient(3px 3px at 65% 75%, #ffb300, transparent),
+    radial-gradient(2px 2px at 80% 90%, #fff0a0, transparent),
+    radial-gradient(2px 2px at 25% 95%, #ffd966, transparent);
+
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+
+  animation: leoGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes leoGlow {
+  0%   { transform: translateY(0); opacity: 0.5; }
+  100% { transform: translateY(-18px); opacity: 0.9; }
+}
+
+/* container */
+.theme-leo .container {
+  position: relative;
+  z-index: 1;
+
+  background: linear-gradient(
+    160deg,
+    rgba(40,15,0,0.92),
+    rgba(20,8,0,0.96)
+  );
+
+  border-radius: 6px;
+  border: 1px solid #d4a017;
+
+  box-shadow:
+    0 0 0 1px rgba(255,200,80,0.15),
+    0 0 70px rgba(255,160,0,0.25),
+    inset 0 1px 0 rgba(255,220,120,0.1);
+
+  padding-top: 34px;
+}
+
+/* royal bar */
+.theme-leo .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffd700,
+    #fff2a8,
+    #ffd700,
+    transparent
+  );
+
+  animation: royalPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes royalPulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; box-shadow: 0 0 18px #ffd700; }
+}
+
+/* symbol */
+.theme-leo .container::after {
+  content: "♌";
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 62px;
+  color: rgba(255,215,0,0.08);
+
+  pointer-events: none;
+}
+
+/* title */
+.theme-leo h1 {
+  font-family: 'Cinzel', serif;
+  color: #ffd700;
+
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.theme-leo .subtitle {
+  color: #c9a646;
+  letter-spacing: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* inputs */
+.theme-leo input,
+.theme-leo select {
+  background: rgba(20,8,0,0.85);
+  border: 1px solid #a67c00;
+
+  color: #fff4cc;
+  border-radius: 4px;
+
+  font-family: 'Cinzel', serif;
+}
+
+.theme-leo input::placeholder {
+  color: #7a5a00;
+}
+
+.theme-leo input:focus,
+.theme-leo select:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 2px rgba(255,215,0,0.25);
+}
+
+/* editor */
+.theme-leo .editor {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,215,0,0.05) 0px,
+      rgba(255,215,0,0.05) 1px,
+      transparent 1px,
+      transparent 27px
+    ),
+    rgba(15,6,0,0.92);
+
+  border: 1px solid #a67c00;
+  border-radius: 4px;
+
+  color: #fff4cc;
+  font-family: 'Cinzel', serif;
+
+  line-height: 1.9;
+}
+
+.theme-leo .editor:focus {
+  border-color: #ffd700;
+  box-shadow:
+    0 0 0 2px rgba(255,215,0,0.2),
+    inset 0 0 20px rgba(255,200,0,0.05);
+}
+
+.theme-leo .editor:empty::before {
+  content: "Viết như thể cả thế giới đang nhìn bạn... ♌";
+  color: #7a5a00;
+  font-style: italic;
+}
+
+/* preview */
+.theme-leo .preview {
+  background: rgba(15,6,0,0.7);
+  border: 1px dashed #a67c00;
+
+  color: #fff4cc;
+}
+
+.theme-leo .preview h3 {
+  color: #ffd700;
+}
+
+/* markdown */
+.theme-leo .letter-content h1,
+.theme-leo .letter-content h2,
+.theme-leo .letter-content h3 {
+  color: #ffd700;
+}
+
+.theme-leo .letter-content blockquote {
+  border-left: 2px solid #d4a017;
+  color: #ffe699;
+}
+
+/* button */
+.theme-leo .btn {
+  background: linear-gradient(
+    135deg,
+    #b8860b,
+    #ffd700,
+    #b8860b
+  );
+
+  color: #2a1200;
+
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  border-radius: 4px;
+  border: 1px solid #ffd700;
+
+  box-shadow:
+    0 4px 25px rgba(255,200,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.theme-leo .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 35px rgba(255,200,0,0.6);
+}
+
+/* toolbar */
+.theme-leo .toolbar,
+.theme-leo .color-toolbar {
+  background: rgba(25,10,0,0.6);
+  border: 1px solid rgba(212,160,23,0.3);
+}
+
+/* popup */
+.theme-leo .popup-box {
+  background: rgba(25,10,0,0.95);
+  border: 1px solid #d4a017;
+
+  color: #fff4cc;
+}
+
+.theme-leo .popup-box h3 {
+  color: #ffd700;
+}
+
+.theme-leo .popup-actions button {
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  border: 1px solid #ffd700;
+}
