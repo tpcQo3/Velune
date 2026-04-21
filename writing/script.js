@@ -34,11 +34,25 @@ function parseMarkdown(html) {
   return html;
 }
 
+function parseMarkdownSafe(html) {
+  // chỉ xử lý markdown nếu KHÔNG nằm trong tag
+  return html
+    .replace(/(^|>)([^<]*?)### (.*?)(?=<|$)/g, '$1<h3>$3</h3>')
+    .replace(/(^|>)([^<]*?)## (.*?)(?=<|$)/g, '$1<h2>$3</h2>')
+    .replace(/(^|>)([^<]*?)# (.*?)(?=<|$)/g, '$1<h1>$3</h1>')
+
+    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    .replace(/\*(.*?)\*/g, '<i>$1</i>')
+    .replace(/__(.*?)__/g, '<u>$1</u>');
+}
+
 /* ======================
    PREVIEW
 ====================== */
 function updatePreview() {
   let content = editor.innerHTML;
+
+  content = parseMarkdownSafe(content);
 
   preview.innerHTML = `
     <div><b>Từ:</b> ${from.value || "..."}</div>
