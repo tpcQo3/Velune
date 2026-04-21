@@ -53,3 +53,8 @@
 .letter-content span {
   all: revert;
 }
+
+.editor,
+.letter-content {
+  font-family: inherit;
+}
