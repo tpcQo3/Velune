@@ -51,5 +51,5 @@
 
 .editor span,
 .letter-content span {
-  font-family: inherit !important;
+  all: revert;
 }
