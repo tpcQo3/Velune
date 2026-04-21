@@ -40,8 +40,6 @@ function parseMarkdown(html) {
 function updatePreview() {
   let content = editor.innerHTML;
 
-  content = parseMarkdown(content);
-
   preview.innerHTML = `
     <div><b>Từ:</b> ${from.value || "..."}</div>
     <div><b>Đến:</b> ${to.value || "..."}</div>
@@ -162,4 +160,66 @@ applyTheme(themeSelect.value);
 ====================== */
 window.goHelp = function () {
   window.location.href = "../helping/helping.html";
+};
+
+/* ======================
+   RICH TEXT (FIX DỨT ĐIỂM)
+====================== */
+
+function applyStyle(styleObj) {
+  const selection = window.getSelection();
+  if (!selection.rangeCount) return;
+
+  const range = selection.getRangeAt(0);
+
+  if (range.collapsed) return; // chưa bôi đen
+
+  const span = document.createElement("span");
+
+  Object.assign(span.style, styleObj);
+
+  span.appendChild(range.extractContents());
+  range.insertNode(span);
+
+  // giữ selection
+  selection.removeAllRanges();
+  const newRange = document.createRange();
+  newRange.selectNodeContents(span);
+  selection.addRange(newRange);
+
+  updatePreview(); // 🔥 sync ngay
+}
+
+/* ===== COLOR ===== */
+window.setColor = function (color) {
+  editor.focus();
+  applyStyle({ color });
+};
+
+/* ===== FONT ===== */
+window.setFont = function (font) {
+  editor.focus();
+  applyStyle({ fontFamily: font });
+};
+
+/* ===== SIZE ===== */
+window.setSize = function (size) {
+  editor.focus();
+  applyStyle({ fontSize: size + "px" });
+};
+
+/* ===== BOLD / ITALIC / UNDERLINE ===== */
+window.bold = function () {
+  editor.focus();
+  applyStyle({ fontWeight: "bold" });
+};
+
+window.italic = function () {
+  editor.focus();
+  applyStyle({ fontStyle: "italic" });
+};
+
+window.underline = function () {
+  editor.focus();
+  applyStyle({ textDecoration: "underline" });
 };
