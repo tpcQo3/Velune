@@ -1,0 +1,247 @@
+/* ======================
+   CANCER THEME
+====================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap');
+
+.theme-cancer {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Be Vietnam Pro', 'Playfair Display', serif;
+  color: #dbeafe;
+
+  background:
+    radial-gradient(circle at 80% 20%, rgba(120,160,255,0.15), transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(80,120,220,0.15), transparent 50%),
+    linear-gradient(160deg, #050814 0%, #0b1024 40%, #101a3a 70%, #050814 100%);
+}
+
+/* water particles */
+.theme-cancer .stars-2 {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(2px 2px at 15% 70%, #a5c9ff, transparent),
+    radial-gradient(2px 2px at 40% 85%, #7fb3ff, transparent),
+    radial-gradient(3px 3px at 65% 75%, #bcdcff, transparent),
+    radial-gradient(2px 2px at 80% 90%, #9fc5ff, transparent),
+    radial-gradient(2px 2px at 25% 95%, #cfe4ff, transparent);
+
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+
+  animation: waterFloat 8s ease-in-out infinite alternate;
+}
+
+@keyframes waterFloat {
+  0%   { transform: translateY(0); opacity: 0.3; }
+  100% { transform: translateY(-15px); opacity: 0.6; }
+}
+
+/* container */
+.theme-cancer .container {
+  position: relative;
+  z-index: 1;
+
+  background: linear-gradient(
+    160deg,
+    rgba(10,15,40,0.9),
+    rgba(5,8,25,0.95)
+  );
+
+  border-radius: 8px;
+  border: 1px solid rgba(120,160,255,0.25);
+
+  box-shadow:
+    0 0 0 1px rgba(150,190,255,0.08),
+    0 0 60px rgba(80,120,255,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  padding-top: 34px;
+}
+
+/* moon bar */
+.theme-cancer .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #9fc5ff,
+    #dbeafe,
+    #9fc5ff,
+    transparent
+  );
+
+  animation: moonPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes moonPulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; box-shadow: 0 0 15px #9fc5ff; }
+}
+
+/* symbol */
+.theme-cancer .container::after {
+  content: "♋";
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 58px;
+  color: rgba(200,220,255,0.08);
+
+  pointer-events: none;
+}
+
+/* title */
+.theme-cancer h1 {
+  font-family: 'Playfair Display', serif;
+  color: #c7ddff;
+
+  letter-spacing: 2px;
+  font-size: 22px;
+}
+
+.theme-cancer .subtitle {
+  color: #7fa6ff;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* inputs */
+.theme-cancer input,
+.theme-cancer select {
+  background: rgba(10,15,40,0.8);
+  border: 1px solid rgba(120,160,255,0.25);
+
+  color: #dbeafe;
+  border-radius: 6px;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.theme-cancer input::placeholder {
+  color: #6c8edc;
+}
+
+.theme-cancer input:focus,
+.theme-cancer select:focus {
+  border-color: #9fc5ff;
+  box-shadow: 0 0 0 2px rgba(120,160,255,0.2);
+}
+
+/* editor */
+.theme-cancer .editor {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(160,190,255,0.05) 0px,
+      rgba(160,190,255,0.05) 1px,
+      transparent 1px,
+      transparent 28px
+    ),
+    rgba(8,12,30,0.9);
+
+  border: 1px solid rgba(120,160,255,0.25);
+  border-radius: 6px;
+
+  color: #e6f0ff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+
+  line-height: 1.9;
+}
+
+.theme-cancer .editor:focus {
+  border-color: #9fc5ff;
+  box-shadow:
+    0 0 0 2px rgba(120,160,255,0.2),
+    inset 0 0 20px rgba(120,160,255,0.05);
+}
+
+.theme-cancer .editor:empty::before {
+  content: "Viết điều bạn chưa từng nói... ♋";
+  color: #6c8edc;
+  font-style: italic;
+}
+
+/* preview */
+.theme-cancer .preview {
+  background: rgba(8,12,30,0.7);
+  border: 1px dashed rgba(120,160,255,0.25);
+
+  color: #dbeafe;
+}
+
+.theme-cancer .preview h3 {
+  color: #9fc5ff;
+}
+
+/* markdown */
+.theme-cancer .letter-content h1,
+.theme-cancer .letter-content h2,
+.theme-cancer .letter-content h3 {
+  color: #c7ddff;
+}
+
+.theme-cancer .letter-content blockquote {
+  border-left: 2px solid #7fa6ff;
+  color: #bcdcff;
+}
+
+/* button */
+.theme-cancer .btn {
+  background: linear-gradient(
+    135deg,
+    #1a2f6b,
+    #3b5dbf,
+    #1a2f6b
+  );
+
+  color: #e6f0ff;
+
+  border: 1px solid #7fa6ff;
+
+  box-shadow:
+    0 4px 20px rgba(80,120,255,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.theme-cancer .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 28px rgba(120,160,255,0.4);
+}
+
+/* toolbar */
+.theme-cancer .toolbar,
+.theme-cancer .color-toolbar {
+  background: rgba(10,15,40,0.6);
+  border: 1px solid rgba(120,160,255,0.2);
+}
+
+/* popup */
+.theme-cancer .popup-box {
+  background: rgba(10,15,40,0.95);
+  border: 1px solid rgba(120,160,255,0.3);
+
+  color: #dbeafe;
+}
+
+.theme-cancer .popup-box h3 {
+  color: #9fc5ff;
+}
+
+.theme-cancer .popup-actions button {
+  background: linear-gradient(135deg, #1a2f6b, #3b5dbf);
+  border: 1px solid #7fa6ff;
+}
