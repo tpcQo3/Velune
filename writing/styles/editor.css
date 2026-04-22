@@ -51,7 +51,7 @@
 
 .editor span,
 .letter-content span {
-  all: revert;
+  white-space: pre-wrap;
 }
 
 .editor,
