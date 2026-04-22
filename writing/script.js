@@ -201,6 +201,10 @@ function applyTheme(theme) {
   document.body.classList.add("theme-" + theme);
 }
 
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
+});
+
 applyTheme(themeSelect.value);
 
 /* ======================
