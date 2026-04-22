@@ -3,7 +3,7 @@
 /* ===== RESET ===== */
 body {
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: inherit;
 
   display: flex;
   justify-content: center;
