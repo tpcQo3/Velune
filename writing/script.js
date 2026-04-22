@@ -1,4 +1,6 @@
-import { saveLetter } from "../firebase.js";
+import { db } from "../firebase.js";
+import { collection, doc, runTransaction } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 /* ======================
    ELEMENTS
@@ -12,35 +14,26 @@ const to = document.getElementById("to");
 const themeSelect = document.getElementById("theme");
 
 /* ======================
-   MARKDOWN (SAFE VERSION)
+   DAY KEY (RESET 6H)
 ====================== */
-function parseMarkdown(html) {
-  // chỉ xử lý markdown nhẹ để không phá HTML
-  html = html
-    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
-    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-    .replace(/^# (.*)$/gm, "<h1>$1</h1>");
+function getDayKey() {
+  const now = new Date();
 
-  html = html
-    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
-    .replace(/\*(.*?)\*/g, "<i>$1</i>")
-    .replace(/__(.*?)__/g, "<u>$1</u>");
+  if (now.getHours() < 6) {
+    now.setDate(now.getDate() - 1);
+  }
 
-  html = html.replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
-    if (!u.startsWith("http")) u = "https://" + u;
-    return `<a href="${u}" target="_blank">${t}</a>`;
-  });
-
-  return html;
+  return now.toISOString().slice(0, 10);
 }
 
+/* ======================
+   MARKDOWN
+====================== */
 function parseMarkdownSafe(html) {
-  // chỉ xử lý markdown nếu KHÔNG nằm trong tag
   return html
     .replace(/(^|>)([^<]*?)### (.*?)(?=<|$)/g, '$1<h3>$3</h3>')
     .replace(/(^|>)([^<]*?)## (.*?)(?=<|$)/g, '$1<h2>$3</h2>')
     .replace(/(^|>)([^<]*?)# (.*?)(?=<|$)/g, '$1<h1>$3</h1>')
-
     .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
     .replace(/\*(.*?)\*/g, '<i>$1</i>')
     .replace(/__(.*?)__/g, '<u>$1</u>');
@@ -51,7 +44,6 @@ function parseMarkdownSafe(html) {
 ====================== */
 function updatePreview() {
   let content = editor.innerHTML;
-
   content = parseMarkdownSafe(content);
 
   preview.innerHTML = `
@@ -97,12 +89,10 @@ function showPopup(link) {
   });
 
   popup.classList.remove("hidden");
-  document.body.style.overflow = "";
 }
 
 window.closePopup = function () {
   document.getElementById("popup").classList.add("hidden");
-  document.body.style.overflow = "";
 };
 
 window.copyLink = function () {
@@ -113,7 +103,7 @@ window.copyLink = function () {
 };
 
 /* ======================
-   CREATE LETTER
+   CREATE LETTER (LIMIT 1000/DAY)
 ====================== */
 async function createLetter() {
   if (!editor.innerText.trim()) {
@@ -124,26 +114,57 @@ async function createLetter() {
   status.innerText = "Đang tạo thư...";
 
   try {
-    const id = await saveLetter({
-      from: from.value || "Ẩn danh",
-      to: to.value || "Không rõ",
-      content: editor.innerHTML, // 🔥 giữ full style
-      expiryAt: getExpiryDate(document.getElementById("expiry").value),
-      password: document.getElementById("password").value || null,
-      theme: themeSelect.value,
-      urlYoutube: document.getElementById("youtube").value || null,
-      youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
-      youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
+    const statsRef = doc(db, "stats", "daily");
+    const newLetterRef = doc(collection(db, "letters"));
+
+    const dayKey = getDayKey();
+
+    await runTransaction(db, async (tx) => {
+      const statsDoc = await tx.get(statsRef);
+
+      let count = 0;
+
+      if (statsDoc.exists()) {
+        const data = statsDoc.data();
+
+        if (data.dayKey === dayKey) {
+          count = data.count || 0;
+        }
+      }
+
+      if (count >= 1000) {
+        throw new Error("Hôm nay đã đạt giới hạn 1000 thư. Quay lại sau 6h sáng nhé!");
+      }
+
+      tx.set(statsRef, {
+        count: count + 1,
+        dayKey: dayKey
+      });
+
+      tx.set(newLetterRef, {
+        from: from.value || "Ẩn danh",
+        to: to.value || "Không rõ",
+        content: editor.innerHTML,
+        createdAt: new Date(),
+
+        expiryAt: getExpiryDate(document.getElementById("expiry").value),
+        password: document.getElementById("password").value || null,
+        theme: themeSelect.value,
+        urlYoutube: document.getElementById("youtube").value || null,
+        youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
+        youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
+      });
     });
 
     const link =
-      window.location.origin + "/reading/reading.html?id=" + id;
+      window.location.origin + "/reading/reading.html?id=" + newLetterRef.id;
 
     showPopup(link);
 
     status.innerText = "Đã tạo thư ✨";
+
   } catch (e) {
-    status.innerText = "Lỗi: " + e.message;
+    status.innerText = e.message;
   }
 }
 
@@ -177,31 +198,27 @@ window.goHelp = function () {
 };
 
 /* ======================
-   RICH TEXT (FIX DỨT ĐIỂM)
+   RICH TEXT
 ====================== */
-
 function applyStyle(styleObj) {
   const selection = window.getSelection();
   if (!selection.rangeCount) return;
 
   const range = selection.getRangeAt(0);
-
-  if (range.collapsed) return; // chưa bôi đen
+  if (range.collapsed) return;
 
   const span = document.createElement("span");
-
   Object.assign(span.style, styleObj);
 
   span.appendChild(range.extractContents());
   range.insertNode(span);
 
-  // giữ selection
   selection.removeAllRanges();
   const newRange = document.createRange();
   newRange.selectNodeContents(span);
   selection.addRange(newRange);
 
-  updatePreview(); // 🔥 sync ngay
+  updatePreview();
 }
 
 /* ===== COLOR ===== */
@@ -222,7 +239,7 @@ window.setSize = function (size) {
   applyStyle({ fontSize: size + "px" });
 };
 
-/* ===== BOLD / ITALIC / UNDERLINE ===== */
+/* ===== STYLE ===== */
 window.bold = function () {
   editor.focus();
   applyStyle({ fontWeight: "bold" });
