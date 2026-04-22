@@ -108,9 +108,14 @@ window.closePopup = function () {
 
 window.copyLink = function () {
   const input = document.getElementById("popupLink");
-  input.select();
-  document.execCommand("copy");
-  alert("Đã sao chép link!");
+
+  navigator.clipboard.writeText(input.value);
+
+  input.value = "Đã copy ✨";
+
+  setTimeout(() => {
+    input.value = window.location.href;
+  }, 1500);
 };
 
 /* ======================

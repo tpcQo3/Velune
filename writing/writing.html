@@ -158,19 +158,27 @@
 
   <div id="popup" class="popup hidden">
   <div class="popup-box">
-    <h3>🎉 Thành công!</h3>
 
-    <p>Bạn đã tạo một lá thư ✨</p>
+    <div class="popup-header">
+      <h3>✨ Thư đã sẵn sàng</h3>
+      <button onclick="closePopup()">✕</button>
+    </div>
 
-    <input id="popupLink" readonly>
+    <div class="popup-content">
+      <input id="popupLink" readonly />
 
-    <!-- QR -->
-    <canvas id="qrcode"></canvas>
+      <div class="qr-wrapper">
+        <canvas id="qrcode"></canvas>
+      </div>
+    </div>
 
     <div class="popup-actions">
-      <button onclick="copyLink()">Copy link</button>
+      <button onclick="copyLink()">Sao chép</button>
       <button onclick="closePopup()">Đóng</button>
     </div>
+
+  </div>
+</div>
   </div>
 </div>
 <div class="stars-2"></div>
