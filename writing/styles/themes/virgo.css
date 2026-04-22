@@ -1,0 +1,236 @@
+/* ======================
+   VIRGO THEME (CLEAN)
+====================== */
+
+.theme-virgo {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #2f3a2f;
+
+  background:
+    radial-gradient(circle at 20% 10%, rgba(200,220,190,0.2), transparent 55%),
+    linear-gradient(160deg, #f5f6f2 0%, #eceee6 60%, #e4e7dc 100%);
+}
+
+/* subtle texture */
+.theme-virgo .stars-2 {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(1px 1px at 30% 40%, rgba(120,140,120,0.2), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(120,140,120,0.15), transparent);
+
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ======================
+   CONTAINER
+====================== */
+.theme-virgo .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(255,255,255,0.85);
+
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.06);
+
+  padding-top: 30px;
+}
+
+/* top line minimal */
+.theme-virgo .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #9bb38a,
+    transparent
+  );
+}
+
+/* symbol */
+.theme-virgo .container::after {
+  content: "♍";
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 40px;
+  color: rgba(120,140,120,0.15);
+
+  pointer-events: none;
+}
+
+/* ======================
+   TITLE
+====================== */
+.theme-virgo h1 {
+  font-family: 'Lora', serif;
+  color: #2f3a2f;
+
+  letter-spacing: 1px;
+  font-size: 22px;
+}
+
+.theme-virgo .subtitle {
+  color: #7a8572;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* ======================
+   INPUT
+====================== */
+.theme-virgo input,
+.theme-virgo select {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+
+  color: #2f3a2f;
+  border-radius: 8px;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.theme-virgo input::placeholder {
+  color: #a0a8a0;
+}
+
+.theme-virgo input:focus,
+.theme-virgo select:focus {
+  border-color: #9bb38a;
+  box-shadow: 0 0 0 2px rgba(155,179,138,0.2);
+}
+
+/* ======================
+   EDITOR
+====================== */
+.theme-virgo .editor {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.03) 0px,
+      rgba(0,0,0,0.03) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    #ffffff;
+
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+
+  color: #2f3a2f;
+
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.theme-virgo .editor:focus {
+  border-color: #9bb38a;
+  box-shadow:
+    0 0 0 2px rgba(155,179,138,0.15);
+}
+
+.theme-virgo .editor:empty::before {
+  content: "Viết một cách rõ ràng, tinh tế, và có trật tự... ♍";
+  color: #a0a8a0;
+  font-style: italic;
+}
+
+/* ======================
+   PREVIEW
+====================== */
+.theme-virgo .preview {
+  background: #ffffff;
+  border: 1px dashed rgba(0,0,0,0.08);
+
+  color: #2f3a2f;
+}
+
+.theme-virgo .preview h3 {
+  color: #7a8572;
+}
+
+/* markdown */
+.theme-virgo .letter-content {
+  font-family: 'Lora', serif;
+}
+
+.theme-virgo .letter-content h1,
+.theme-virgo .letter-content h2,
+.theme-virgo .letter-content h3 {
+  color: #2f3a2f;
+}
+
+.theme-virgo .letter-content blockquote {
+  border-left: 3px solid #9bb38a;
+  color: #6d7767;
+}
+
+/* ======================
+   BUTTON
+====================== */
+.theme-virgo .btn {
+  background: #9bb38a;
+  color: white;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 500;
+
+  border-radius: 999px;
+  border: none;
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+}
+
+.theme-virgo .btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* ======================
+   TOOLBAR
+====================== */
+.theme-virgo .toolbar,
+.theme-virgo .color-toolbar {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ======================
+   POPUP
+====================== */
+.theme-virgo .popup-box {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+
+  color: #2f3a2f;
+}
+
+.theme-virgo .popup-box h3 {
+  color: #2f3a2f;
+}
+
+.theme-virgo .popup-actions button {
+  background: #9bb38a;
+  color: white;
+}
