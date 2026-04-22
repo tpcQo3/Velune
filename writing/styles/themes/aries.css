@@ -1,11 +1,7 @@
-/* ======================
-   ARIES THEME
-====================== */
-
 .theme-aries {
   position: relative;
   overflow-x: hidden;
-  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', 'Merriweather', Georgia, serif;
   color: #f5d0a0;
 
   background:
@@ -81,7 +77,7 @@
 
 /* title */
 .theme-aries h1 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Playfair Display', serif;
   color: #ff8c40;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -93,7 +89,7 @@
   letter-spacing: 2.5px;
   font-size: 11px;
   text-transform: uppercase;
-  font-family: 'Cinzel', serif;
+  font-family: 'Playfair Display', serif;
 }
 
 /* inputs & selects */
@@ -103,7 +99,7 @@
   border: 1px solid #6b1a00;
   border-radius: 3px;
   color: #f5d0a0;
-  font-family: 'Cinzel', Georgia, serif;
+  font-family: 'Lora';
   letter-spacing: 0.3px;
   transition: 0.2s;
 }
@@ -133,7 +129,7 @@
   border: 1px solid #6b1a00;
   border-radius: 3px;
   color: #f5d0a0;
-  font-family: 'Cinzel', Georgia, serif;
+  font-family: 'Lora', serif;
   font-size: 14px;
   line-height: 1.9;
   letter-spacing: 0.3px;
@@ -165,7 +161,7 @@
   letter-spacing: 2px;
   font-size: 10px;
   text-transform: uppercase;
-  font-family: 'Cinzel', serif;
+  font-family: 'Playfair Display', serif;
 }
 
 /* markdown */
@@ -174,6 +170,7 @@
 .theme-aries .letter-content h3 {
   color: #ff6020;
   letter-spacing: 1px;
+  font-family: 'Playfair Display';
 }
 
 .theme-aries .letter-content blockquote {
@@ -191,7 +188,7 @@
 .theme-aries .btn {
   background: linear-gradient(135deg, #8b1a00, #c03000, #8b1a00);
   color: #ffd0a0;
-  font-family: 'Cinzel', Georgia, serif;
+  font-family: 'Playfair Display', serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -236,7 +233,7 @@
 
 .theme-aries .popup-box h3 {
   color: #ff6020;
-  font-family: 'Cinzel', serif;
+  font-family: 'Playfair Display', serif;
   letter-spacing: 2px;
 }
 
@@ -250,7 +247,7 @@
   background: linear-gradient(135deg, #5a1000, #8b2000);
   color: #ffd0a0;
   border: 1px solid #8b2500;
-  font-family: 'Cinzel', serif;
+  font-family: 'Lora', serif;
   letter-spacing: 1px;
 }
 
