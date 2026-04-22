@@ -1,0 +1,189 @@
+/* ======================
+   CAPRICORN THEME
+====================== */
+
+.theme-capricorn {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Inter', sans-serif;
+  color: #e5e7eb;
+
+  background:
+    radial-gradient(circle at 80% 10%, #1a1f2b 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, #0a0d14 0%, transparent 45%),
+    linear-gradient(160deg, #05070c 0%, #0a0d14 40%, #0f1420 70%, #05070c 100%);
+}
+
+/* ===== subtle grain (premium feel) ===== */
+.theme-capricorn::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.015);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== container ===== */
+.theme-capricorn .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(15, 20, 30, 0.85);
+  border-radius: 10px;
+
+  border: 1px solid rgba(200, 200, 220, 0.08);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* ===== symbol ===== */
+.theme-capricorn .container::after {
+  content: "♑";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+
+  color: rgba(200, 200, 220, 0.04);
+  pointer-events: none;
+}
+
+/* ===== title ===== */
+.theme-capricorn h1 {
+  font-family: 'Playfair Display', serif;
+  color: #d1d5db;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+.theme-capricorn .subtitle {
+  font-family: 'Playfair Display', serif;
+  color: #6b7280;
+  letter-spacing: 1.5px;
+  font-size: 11px;
+}
+
+/* ===== inputs ===== */
+.theme-capricorn input,
+.theme-capricorn select {
+  background: rgba(20, 25, 35, 0.9);
+
+  border: 1px solid rgba(200, 200, 220, 0.08);
+  border-radius: 6px;
+
+  color: #e5e7eb;
+
+  font-family: 'Inter', sans-serif;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.theme-capricorn input::placeholder {
+  color: rgba(200,200,220,0.3);
+}
+
+.theme-capricorn input:focus,
+.theme-capricorn select:focus {
+  border-color: #9ca3af;
+
+  box-shadow:
+    0 0 0 2px rgba(156,163,175,0.2);
+}
+
+/* ===== editor ===== */
+.theme-capricorn .editor {
+  background: rgba(15, 20, 30, 0.95);
+
+  border: 1px solid rgba(200, 200, 220, 0.08);
+  border-radius: 6px;
+
+  color: #e5e7eb;
+
+  font-family: 'Inter', sans-serif;
+  line-height: 1.8;
+}
+
+.theme-capricorn .editor:focus {
+  border-color: #9ca3af;
+
+  box-shadow:
+    0 0 0 2px rgba(156,163,175,0.15);
+}
+
+.theme-capricorn .editor:empty::before {
+  content: "Viết điều cần nói... ♑";
+  color: rgba(200,200,220,0.25);
+  font-style: italic;
+}
+
+/* ===== preview ===== */
+.theme-capricorn .preview {
+  background: rgba(15, 20, 30, 0.7);
+  border: 1px dashed rgba(200, 200, 220, 0.1);
+}
+
+.theme-capricorn .preview h3 {
+  font-family: 'Playfair Display', serif;
+  color: #9ca3af;
+}
+
+/* ===== markdown ===== */
+.theme-capricorn .letter-content h1,
+.theme-capricorn .letter-content h2,
+.theme-capricorn .letter-content h3 {
+  font-family: 'Playfair Display', serif;
+  color: #d1d5db;
+}
+
+.theme-capricorn .letter-content blockquote {
+  border-left: 2px solid #6b7280;
+  color: #9ca3af;
+  padding-left: 12px;
+}
+
+.theme-capricorn .letter-content a {
+  color: #9ca3af;
+}
+
+/* ===== button ===== */
+.theme-capricorn .btn {
+  font-family: 'Playfair Display', serif;
+
+  background: linear-gradient(135deg, #1f2937, #374151);
+  color: #e5e7eb;
+
+  border: 1px solid #6b7280;
+
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.5);
+}
+
+.theme-capricorn .btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 25px rgba(0,0,0,0.7);
+}
+
+/* ===== popup ===== */
+.theme-capricorn .popup-box {
+  background: rgba(20, 25, 35, 0.95);
+  border: 1px solid rgba(200, 200, 220, 0.1);
+  color: #e5e7eb;
+}
+
+.theme-capricorn .popup-box h3 {
+  font-family: 'Playfair Display', serif;
+  color: #d1d5db;
+}
+
+.theme-capricorn .popup-actions button {
+  font-family: 'Playfair Display', serif;
+}
