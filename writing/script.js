@@ -13,6 +13,17 @@ const from = document.getElementById("from");
 const to = document.getElementById("to");
 const themeSelect = document.getElementById("theme");
 
+function generateId(length = 6) {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "";
+
+  for (let i = 0; i < length; i++) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  return result;
+}
+
 /* ======================
    DAY KEY (RESET 6H)
 ====================== */
@@ -115,7 +126,8 @@ async function createLetter() {
 
   try {
     const statsRef = doc(db, "stats", "daily");
-    const newLetterRef = doc(collection(db, "letters"));
+    const id = generateId();
+    const newLetterRef = doc(db, "letters", id);
 
     const dayKey = getDayKey();
 
@@ -157,7 +169,7 @@ async function createLetter() {
     });
 
     const link =
-      window.location.origin + "/reading/reading.html?id=" + newLetterRef.id;
+      window.location.origin + "/reading/reading.html?id=" + id;
 
     showPopup(link);
 
