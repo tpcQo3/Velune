@@ -1,0 +1,254 @@
+/* ======================
+   LIBRA THEME (AESTHETIC)
+====================== */
+
+.theme-libra {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #4b3a4d;
+
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,200,220,0.35), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(200,180,255,0.25), transparent 60%),
+    linear-gradient(160deg, #fff5f9 0%, #f8f3ff 50%, #fff0f5 100%);
+}
+
+/* soft sparkles */
+.theme-libra .stars-2 {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,180,210,0.6), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(200,170,255,0.6), transparent),
+    radial-gradient(2px 2px at 80% 40%, rgba(255,200,230,0.5), transparent);
+
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+
+  animation: libraFloat 8s ease-in-out infinite alternate;
+}
+
+@keyframes libraFloat {
+  0%   { transform: translateY(0); opacity: 0.4; }
+  100% { transform: translateY(-12px); opacity: 0.8; }
+}
+
+/* ======================
+   CONTAINER
+====================== */
+.theme-libra .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(20px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(255,200,230,0.4);
+
+  box-shadow:
+    0 10px 40px rgba(200,150,200,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+
+  padding-top: 34px;
+}
+
+/* gradient top line */
+.theme-libra .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffb6d5,
+    #caa8ff,
+    #ffb6d5,
+    transparent
+  );
+}
+
+/* symbol */
+.theme-libra .container::after {
+  content: "♎";
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 48px;
+  color: rgba(180,150,200,0.15);
+
+  pointer-events: none;
+}
+
+/* ======================
+   TITLE
+====================== */
+.theme-libra h1 {
+  font-family: 'Playfair Display', serif;
+  color: #b57ab4;
+
+  letter-spacing: 1.5px;
+  font-size: 22px;
+}
+
+.theme-libra .subtitle {
+  color: #9a7aa3;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+/* ======================
+   INPUT
+====================== */
+.theme-libra input,
+.theme-libra select {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(200,170,255,0.4);
+
+  color: #4b3a4d;
+  border-radius: 12px;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.theme-libra input::placeholder {
+  color: #c0a5c7;
+}
+
+.theme-libra input:focus,
+.theme-libra select:focus {
+  border-color: #caa8ff;
+  box-shadow: 0 0 0 2px rgba(200,170,255,0.25);
+}
+
+/* ======================
+   EDITOR
+====================== */
+.theme-libra .editor {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(200,170,255,0.08) 0px,
+      rgba(200,170,255,0.08) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    rgba(255,255,255,0.95);
+
+  border: 1px solid rgba(200,170,255,0.4);
+  border-radius: 16px;
+
+  color: #4b3a4d;
+
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.theme-libra .editor:focus {
+  border-color: #caa8ff;
+  box-shadow:
+    0 0 0 2px rgba(200,170,255,0.2);
+}
+
+.theme-libra .editor:empty::before {
+  content: "Viết nhẹ nhàng, như một lời thì thầm... ♎";
+  color: #c0a5c7;
+  font-style: italic;
+}
+
+/* ======================
+   PREVIEW
+====================== */
+.theme-libra .preview {
+  background: rgba(255,255,255,0.85);
+  border: 1px dashed rgba(200,170,255,0.4);
+
+  color: #4b3a4d;
+}
+
+.theme-libra .preview h3 {
+  color: #b57ab4;
+}
+
+/* markdown */
+.theme-libra .letter-content {
+  font-family: 'Playfair Display', serif;
+}
+
+.theme-libra .letter-content h1,
+.theme-libra .letter-content h2,
+.theme-libra .letter-content h3 {
+  color: #b57ab4;
+}
+
+.theme-libra .letter-content blockquote {
+  border-left: 3px solid #caa8ff;
+  color: #8a6f90;
+}
+
+/* ======================
+   BUTTON
+====================== */
+.theme-libra .btn {
+  background: linear-gradient(
+    135deg,
+    #ffb6d5,
+    #caa8ff
+  );
+
+  color: white;
+
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 500;
+
+  border-radius: 999px;
+  border: none;
+
+  box-shadow:
+    0 5px 20px rgba(200,170,255,0.3);
+}
+
+.theme-libra .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(200,170,255,0.4);
+}
+
+/* ======================
+   TOOLBAR
+====================== */
+.theme-libra .toolbar,
+.theme-libra .color-toolbar {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(200,170,255,0.3);
+}
+
+/* ======================
+   POPUP
+====================== */
+.theme-libra .popup-box {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(200,170,255,0.4);
+
+  color: #4b3a4d;
+}
+
+.theme-libra .popup-box h3 {
+  color: #b57ab4;
+}
+
+.theme-libra .popup-actions button {
+  background: linear-gradient(135deg, #ffb6d5, #caa8ff);
+  color: white;
+}
