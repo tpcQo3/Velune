@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đọc thư 💌</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 🔥 DÙNG CHUNG CSS -->
+  <link rel="stylesheet" href="../writing/styles/base.css">
+  <link rel="stylesheet" href="../writing/styles/layout.css">
+  <link rel="stylesheet" href="../writing/styles/components.css">
+  <link rel="stylesheet" href="../writing/styles/editor.css">
+  <link rel="stylesheet" href="../writing/styles/effects.css">
+
+  <!-- 🔥 THEMES -->
+  <link rel="stylesheet" href="../writing/styles/themes/aries.css">
+  <link rel="stylesheet" href="../writing/styles/themes/leo.css">
+  <link rel="stylesheet" href="../writing/styles/themes/pisces.css">
+  <link rel="stylesheet" href="../writing/styles/themes/aquarius.css">
+  <link rel="stylesheet" href="../writing/styles/themes/capricorn.css">
+  <link rel="stylesheet" href="../writing/styles/themes/sagittarius.css">
+  <link rel="stylesheet" href="../writing/styles/themes/scorpio.css">
+  <link rel="stylesheet" href="../writing/styles/themes/libra.css">
+  <link rel="stylesheet" href="../writing/styles/themes/virgo.css">
+  <link rel="stylesheet" href="../writing/styles/themes/cancer.css">
+  <link rel="stylesheet" href="../writing/styles/themes/gemini.css">
+  <link rel="stylesheet" href="../writing/styles/themes/taurus.css">
+
+  <!-- 🔥 CSS RIÊNG -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<div class="container reading-container">
+
+  <div id="loading">Đang mở thư...</div>
+
+  <div id="letterBox" class="hidden">
+
+    <div class="letter-header">
+      <h2 id="to"></h2>
+      <p id="from"></p>
+    </div>
+
+    <hr>
+
+    <div id="content" class="letter-content"></div>
+
+    <div class="actions">
+      <button onclick="copyLink()">Copy link</button>
+    </div>
+
+  </div>
+
+  <div id="error" class="hidden"></div>
+
+</div>
+
+<script type="module" src="./script.js"></script>
+
+</body>
+</html>
