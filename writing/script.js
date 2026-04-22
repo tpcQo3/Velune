@@ -192,6 +192,7 @@ document.getElementById("createBtn")
    THEME
 ====================== */
 function applyTheme(theme) {
+  console.log("changing theme to:", theme);
   const overlay = document.getElementById("themeTransition");
 
   // bật overlay
