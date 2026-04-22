@@ -1,0 +1,193 @@
+/* ======================
+   SCORPIO THEME
+====================== */
+
+.theme-scorpio {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Lora', serif;
+  color: #e6d6ff;
+
+  background:
+    radial-gradient(circle at 80% 20%, #2a003f 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, #12001f 0%, transparent 45%),
+    linear-gradient(160deg, #050008 0%, #0a0014 40%, #12001f 70%, #050008 100%);
+}
+
+/* ===== subtle mist effect ===== */
+.theme-scorpio::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(150,0,255,0.08), transparent),
+    radial-gradient(circle at 70% 70%, rgba(100,0,200,0.06), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== container ===== */
+.theme-scorpio .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(10, 0, 20, 0.85);
+  border-radius: 6px;
+
+  border: 1px solid rgba(120, 0, 255, 0.25);
+
+  box-shadow:
+    0 0 40px rgba(80, 0, 150, 0.25),
+    inset 0 0 10px rgba(120, 0, 255, 0.08);
+}
+
+/* ===== symbol ===== */
+.theme-scorpio .container::after {
+  content: "♏";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+
+  color: rgba(180, 120, 255, 0.05);
+  pointer-events: none;
+}
+
+/* ===== title ===== */
+.theme-scorpio h1 {
+  font-family: 'Playfair Display', serif;
+  color: #c77dff;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+.theme-scorpio .subtitle {
+  font-family: 'Playfair Display', serif;
+  color: #5a2a80;
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+
+/* ===== inputs ===== */
+.theme-scorpio input,
+.theme-scorpio select {
+  background: rgba(20, 0, 40, 0.8);
+
+  border: 1px solid rgba(120, 0, 255, 0.2);
+  border-radius: 4px;
+
+  color: #e6d6ff;
+
+  font-family: 'Lora', serif;
+
+  box-shadow:
+    inset 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.theme-scorpio input::placeholder {
+  color: rgba(200,150,255,0.4);
+}
+
+.theme-scorpio input:focus,
+.theme-scorpio select:focus {
+  border-color: #a855f7;
+
+  box-shadow:
+    0 0 0 2px rgba(168,85,247,0.25),
+    0 0 10px rgba(120,0,255,0.2);
+}
+
+/* ===== editor ===== */
+.theme-scorpio .editor {
+  background: rgba(10, 0, 20, 0.9);
+
+  border: 1px solid rgba(120, 0, 255, 0.2);
+  border-radius: 4px;
+
+  color: #e6d6ff;
+
+  font-family: 'Lora', serif;
+  line-height: 1.9;
+}
+
+.theme-scorpio .editor:focus {
+  border-color: #a855f7;
+
+  box-shadow:
+    0 0 0 2px rgba(168,85,247,0.2),
+    inset 0 0 15px rgba(120,0,255,0.05);
+}
+
+.theme-scorpio .editor:empty::before {
+  content: "Những điều chưa thể nói... ♏";
+  color: rgba(200,150,255,0.3);
+  font-style: italic;
+}
+
+/* ===== preview ===== */
+.theme-scorpio .preview {
+  background: rgba(10, 0, 20, 0.6);
+  border: 1px dashed rgba(120, 0, 255, 0.25);
+}
+
+.theme-scorpio .preview h3 {
+  font-family: 'Playfair Display', serif;
+  color: #7b2cbf;
+}
+
+/* ===== markdown ===== */
+.theme-scorpio .letter-content h1,
+.theme-scorpio .letter-content h2,
+.theme-scorpio .letter-content h3 {
+  font-family: 'Playfair Display', serif;
+  color: #c77dff;
+}
+
+.theme-scorpio .letter-content blockquote {
+  border-left: 2px solid #7b2cbf;
+  color: #cdb4ff;
+  padding-left: 12px;
+}
+
+.theme-scorpio .letter-content a {
+  color: #a855f7;
+}
+
+/* ===== button ===== */
+.theme-scorpio .btn {
+  font-family: 'Playfair Display', serif;
+
+  background: linear-gradient(135deg, #3a0066, #6a00f4);
+  color: #f0e6ff;
+
+  border: 1px solid #a855f7;
+
+  box-shadow:
+    0 4px 20px rgba(120,0,255,0.3);
+}
+
+.theme-scorpio .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 30px rgba(150,0,255,0.5);
+}
+
+/* ===== popup ===== */
+.theme-scorpio .popup-box {
+  background: rgba(15, 0, 30, 0.95);
+  border: 1px solid rgba(120, 0, 255, 0.3);
+  color: #e6d6ff;
+}
+
+.theme-scorpio .popup-box h3 {
+  font-family: 'Playfair Display', serif;
+  color: #c77dff;
+}
+
+.theme-scorpio .popup-actions button {
+  font-family: 'Playfair Display', serif;
+}
