@@ -8,7 +8,7 @@
   border: 1.5px solid rgba(0,0,0,0.08);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 
-  font-family: 'Quicksand', sans-serif;
+  font-family: inherit;
   line-height: 1.8;
 
   outline: none;
