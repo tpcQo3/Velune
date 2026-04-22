@@ -192,18 +192,27 @@ document.getElementById("createBtn")
    THEME
 ====================== */
 function applyTheme(theme) {
-  document.body.classList.forEach(c => {
-    if (c.startsWith("theme-")) {
-      document.body.classList.remove(c);
-    }
-  });
+  const overlay = document.getElementById("themeTransition");
 
-  document.body.classList.add("theme-" + theme);
+  // bật overlay
+  overlay.classList.add("active", "animate");
+
+  setTimeout(() => {
+    // đổi theme ở giữa animation
+    document.body.classList.forEach(c => {
+      if (c.startsWith("theme-")) {
+        document.body.classList.remove(c);
+      }
+    });
+
+    document.body.classList.add("theme-" + theme);
+  }, 200);
+
+  // tắt overlay
+  setTimeout(() => {
+    overlay.classList.remove("active", "animate");
+  }, 600);
 }
-
-themeSelect.addEventListener("change", () => {
-  applyTheme(themeSelect.value);
-});
 
 applyTheme(themeSelect.value);
 
