@@ -54,17 +54,17 @@ function parseMarkdownSafe(html) {
    PREVIEW
 ====================== */
 function updatePreview() {
-  let content = editor.innerHTML;
-  content = parseMarkdownSafe(content);
+  const raw = editor.innerHTML; // giữ nguyên
+  const parsed = parseMarkdownSafe(raw); // chỉ dùng cho preview
 
   preview.innerHTML = `
-    <div><b>Từ:</b> ${from.value || "..."}</div>
-    <div><b>Đến:</b> ${to.value || "..."}</div>
-    <hr>
-    <div class="letter-content">
-      ${content}
-    </div>
-  `;
+  <div><b>Từ:</b> ${from.value || "..."}</div>
+  <div><b>Đến:</b> ${to.value || "..."}</div>
+  <hr>
+  <div class="letter-content">
+    ${parsed}
+  </div>
+`;
 }
 
 editor.addEventListener("input", updatePreview);
