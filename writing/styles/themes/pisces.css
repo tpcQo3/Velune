@@ -1,0 +1,251 @@
+/* ======================
+   PISCES THEME
+====================== */
+
+.theme-pisces {
+  position: relative;
+  overflow-x: hidden;
+
+  font-family: 'Lora', serif;
+  color: #e6f7ff;
+
+  background:
+    radial-gradient(circle at 70% 10%, rgba(150,200,255,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(180,150,255,0.12) 0%, transparent 45%),
+    linear-gradient(160deg, #020611 0%, #07142a 40%, #0a1c33 70%, #020611 100%);
+}
+
+/* ===== water blur layer ===== */
+.theme-pisces::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 30% 40%, rgba(150,200,255,0.1), transparent),
+    radial-gradient(circle at 70% 60%, rgba(200,180,255,0.08), transparent);
+
+  filter: blur(40px);
+  opacity: 0.7;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== soft glow ===== */
+.theme-pisces::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 50% 0%, rgba(180,220,255,0.15), transparent 60%);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== container ===== */
+.theme-pisces .container {
+  position: relative;
+  z-index: 1;
+
+  background: rgba(20, 30, 50, 0.6);
+  backdrop-filter: blur(18px);
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(200,220,255,0.2);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(180,220,255,0.1);
+
+  overflow: hidden;
+}
+
+/* ===== watery shimmer ===== */
+.theme-pisces .container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(120deg,
+      transparent 30%,
+      rgba(255,255,255,0.12),
+      transparent 70%
+    );
+
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ===== symbol ===== */
+.theme-pisces .container::after {
+  content: "♓";
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 64px;
+
+  color: rgba(200,220,255,0.08);
+  pointer-events: none;
+}
+
+/* ===== title ===== */
+.theme-pisces h1 {
+  font-family: 'Playfair Display', serif;
+
+  background: linear-gradient(90deg, #a5f3fc, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+.theme-pisces .subtitle {
+  font-family: 'Playfair Display', serif;
+  color: #9cc8ff;
+  letter-spacing: 1.5px;
+}
+
+/* ===== inputs ===== */
+.theme-pisces input,
+.theme-pisces select {
+  background: rgba(30, 45, 70, 0.7);
+
+  border: 1px solid rgba(200,220,255,0.25);
+  border-radius: 10px;
+
+  color: #e6f7ff;
+
+  font-family: 'Lora', serif;
+
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.4),
+    0 0 10px rgba(180,220,255,0.1);
+}
+
+.theme-pisces input::placeholder {
+  color: rgba(200,220,255,0.4);
+}
+
+.theme-pisces input:focus,
+.theme-pisces select:focus {
+  border-color: #a5f3fc;
+
+  box-shadow:
+    0 0 0 2px rgba(165,243,252,0.3),
+    0 0 20px rgba(165,243,252,0.2);
+}
+
+/* ===== editor ===== */
+.theme-pisces .editor {
+  background: rgba(20, 30, 50, 0.85);
+
+  border: 1px solid rgba(200,220,255,0.2);
+  border-radius: 10px;
+
+  color: #e6f7ff;
+
+  font-family: 'Lora', serif;
+  line-height: 1.9;
+
+  box-shadow:
+    inset 0 0 20px rgba(180,220,255,0.1);
+}
+
+.theme-pisces .editor:focus {
+  border-color: #a5f3fc;
+
+  box-shadow:
+    0 0 0 2px rgba(165,243,252,0.2),
+    inset 0 0 25px rgba(180,220,255,0.15);
+}
+
+.theme-pisces .editor:empty::before {
+  content: "Viết điều bạn đang cảm nhận... ♓";
+  color: rgba(200,220,255,0.4);
+  font-style: italic;
+}
+
+/* ===== preview ===== */
+.theme-pisces .preview {
+  background: rgba(20, 30, 50, 0.6);
+
+  border: 1px dashed rgba(200,220,255,0.2);
+  border-radius: 10px;
+}
+
+.theme-pisces .preview h3 {
+  font-family: 'Playfair Display', serif;
+  color: #a5f3fc;
+}
+
+/* ===== markdown ===== */
+.theme-pisces .letter-content h1,
+.theme-pisces .letter-content h2,
+.theme-pisces .letter-content h3 {
+  font-family: 'Playfair Display', serif;
+  color: #c4b5fd;
+}
+
+.theme-pisces .letter-content blockquote {
+  border-left: 3px solid #a5f3fc;
+  color: #dbeafe;
+  padding-left: 12px;
+}
+
+.theme-pisces .letter-content a {
+  color: #7dd3fc;
+}
+
+/* ===== button ===== */
+.theme-pisces .btn {
+  font-family: 'Playfair Display', serif;
+
+  background:
+    linear-gradient(135deg, #7dd3fc, #c4b5fd);
+
+  color: #0f172a;
+
+  border: 1px solid rgba(200,220,255,0.4);
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 6px 25px rgba(180,220,255,0.3);
+}
+
+.theme-pisces .btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 40px rgba(180,220,255,0.5);
+}
+
+/* ===== popup ===== */
+.theme-pisces .popup-box {
+  background: rgba(20, 30, 50, 0.85);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(200,220,255,0.25);
+  border-radius: 14px;
+
+  color: #e6f7ff;
+}
+
+.theme-pisces .popup-box h3 {
+  font-family: 'Playfair Display', serif;
+  color: #a5f3fc;
+}
+
+.theme-pisces .popup-actions button {
+  font-family: 'Playfair Display', serif;
+}
