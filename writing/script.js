@@ -137,6 +137,7 @@ async function createLetter() {
     const newLetterRef = doc(db, "letters", id);
 
     const dayKey = getDayKey();
+    const passwordValue = document.getElementById("password")?.value.trim();
 
     await runTransaction(db, async (tx) => {
       const statsDoc = await tx.get(statsRef);
@@ -167,7 +168,8 @@ async function createLetter() {
         createdAt: new Date(),
 
         expiryAt: getExpiryDate(document.getElementById("expiry").value),
-        password: document.getElementById("password").value || null,
+
+        password: passwordValue ? passwordValue : null,
         theme: themeSelect.value
       });
     });
