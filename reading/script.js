@@ -28,6 +28,9 @@ const passwordBox = document.getElementById("passwordBox");
 
 let currentLetter = null;
 
+/* ======================
+   MARKDOWN SAFE
+====================== */
 function parseMarkdownSafe(html) {
   return html
     .replace(/(^|>)([^<]*?)### (.*?)(?=<|$)/g, '$1<h3>$3</h3>')
@@ -101,11 +104,76 @@ function renderLetter(letter) {
     if (hasPassword) {
       passwordBox.classList.remove("hidden");
     } else {
-      passwordBox.classList.add("hidden"); // 🔥 FIX QUAN TRỌNG
+      passwordBox.classList.add("hidden");
       showLetter(letter);
     }
 
   }, 1500);
+}
+
+/* ======================
+   TYPE HTML (SAFE)
+====================== */
+function typeHTML(el, html, speed = 12) {
+  el.innerHTML = "";
+
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+
+  const nodes = Array.from(temp.childNodes);
+  let i = 0;
+
+  function processNode(node, parent, done) {
+    if (node.nodeType === 3) {
+      // TEXT
+      let text = node.textContent;
+      let j = 0;
+
+      const textNode = document.createTextNode("");
+      parent.appendChild(textNode);
+
+      const interval = setInterval(() => {
+        textNode.textContent += text[j];
+        j++;
+        if (j >= text.length) {
+          clearInterval(interval);
+          done();
+        }
+      }, speed);
+
+    } else {
+      // ELEMENT
+      const clone = node.cloneNode(false);
+      parent.appendChild(clone);
+
+      const children = Array.from(node.childNodes);
+      let k = 0;
+
+      function nextChild() {
+        if (k < children.length) {
+          processNode(children[k], clone, () => {
+            k++;
+            nextChild();
+          });
+        } else {
+          done();
+        }
+      }
+
+      nextChild();
+    }
+  }
+
+  function next() {
+    if (i < nodes.length) {
+      processNode(nodes[i], el, () => {
+        i++;
+        next();
+      });
+    }
+  }
+
+  next();
 }
 
 /* ======================
@@ -122,15 +190,23 @@ function showLetter(letter) {
   toEl.innerText = "Gửi đến: " + (letter.to || "...");
   fromEl.innerText = "Từ: " + (letter.from || "Ẩn danh");
 
-  // content (🔥 giữ full style)
+  // content
   let content = letter.content || "";
   content = parseMarkdownSafe(content);
-
-  contentEl.innerHTML = content;
 
   // show UI
   loading.classList.add("hidden");
   letterBox.classList.remove("hidden");
+
+  // animation mở thư
+  setTimeout(() => {
+    letterBox.classList.add("show");
+  }, 50);
+
+  // typing effect
+  setTimeout(() => {
+    typeHTML(contentEl, content, 12);
+  }, 300);
 }
 
 /* ======================

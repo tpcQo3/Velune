@@ -168,3 +168,23 @@
 .hidden {
   display: none !important;
 }
+
+@media (max-width: 600px) {
+  .container::after {
+    top: -20px;
+    font-size: 40px;
+    opacity: 0.05;
+  }
+}
+
+/* ===== LETTER OPEN ANIMATION ===== */
+#letterBox {
+  opacity: 0;
+  transform: scale(0.92) translateY(20px);
+  transition: all 0.6s ease;
+}
+
+#letterBox.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
