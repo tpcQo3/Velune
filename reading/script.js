@@ -22,6 +22,7 @@ const errorBox = document.getElementById("error");
 const toEl = document.getElementById("to");
 const fromEl = document.getElementById("from");
 const contentEl = document.getElementById("content");
+let currentLetter = null;
 
 /* ======================
    LOAD LETTER
@@ -67,20 +68,35 @@ async function loadLetter() {
    RENDER
 ====================== */
 function renderLetter(letter) {
+  currentLetter = letter;
 
-  // theme
+  // intro xong mới xử lý
+  setTimeout(() => {
+
+    document.getElementById("intro").style.display = "none";
+
+    // nếu có password
+    if (letter.password) {
+      document.getElementById("passwordBox").classList.remove("hidden");
+      return;
+    }
+
+    showLetter(letter);
+
+  }, 1500);
+}
+
+function showLetter(letter) {
+
   if (letter.theme) {
     document.body.classList.add("theme-" + letter.theme);
   }
 
-  // info
   toEl.innerText = "Gửi đến: " + (letter.to || "...");
   fromEl.innerText = "Từ: " + (letter.from || "Ẩn danh");
 
-  // content (🔥 giữ style)
   contentEl.innerHTML = letter.content || "";
 
-  // show
   loading.classList.add("hidden");
   letterBox.classList.remove("hidden");
 }
@@ -93,6 +109,17 @@ function showError(msg) {
   errorBox.innerText = msg;
   errorBox.classList.remove("hidden");
 }
+
+window.checkPassword = function () {
+  const input = document.getElementById("passwordInput").value;
+
+  if (input === currentLetter.password) {
+    document.getElementById("passwordBox").classList.add("hidden");
+    showLetter(currentLetter);
+  } else {
+    document.getElementById("passwordError").innerText = "Sai mật mã 😢";
+  }
+};
 
 /* ======================
    COPY LINK

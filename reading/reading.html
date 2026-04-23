@@ -33,6 +33,25 @@
 
 <body>
 
+  <div id="intro">
+  <div class="intro-text">VeluneInk❤</div>
+</div>
+
+<div id="passwordBox" class="hidden">
+  <div class="password-card">
+    <h3>🔒</h3>
+    <p>
+      Có vẻ như lá thư này cần sự thân thiết để truy cập,<br>
+      hãy liên hệ với người viết để có được mật mã nhé 👀
+    </p>
+
+    <input type="password" id="passwordInput" placeholder="Nhập mật mã...">
+    <button onclick="checkPassword()">Mở thư</button>
+
+    <div id="passwordError"></div>
+  </div>
+</div>
+
 <div class="container reading-container">
 
   <div id="loading">Đang mở thư...</div>

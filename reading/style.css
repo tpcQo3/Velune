@@ -86,3 +86,81 @@
     transform: translateY(0);
   }
 }
+
+/* ===== INTRO ===== */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.intro-text {
+  font-size: 36px;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 2px;
+
+  animation: introFade 1.5s ease forwards;
+}
+
+@keyframes introFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* ===== PASSWORD ===== */
+#passwordBox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 998;
+}
+
+.password-card {
+  background: #111;
+  color: white;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 320px;
+}
+
+.password-card input {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+.password-card button {
+  margin-top: 12px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#passwordError {
+  color: #ff4d4f;
+  margin-top: 8px;
+}
