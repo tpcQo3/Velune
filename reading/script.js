@@ -75,10 +75,8 @@ function renderLetter(letter) {
   currentLetter = letter;
 
   setTimeout(() => {
-    // ẩn intro
     if (intro) intro.style.display = "none";
 
-    // check password chuẩn (🔥 FIX CHÍNH)
     const hasPassword =
       letter.password &&
       typeof letter.password === "string" &&
@@ -86,10 +84,10 @@ function renderLetter(letter) {
 
     if (hasPassword) {
       passwordBox.classList.remove("hidden");
-      return;
+    } else {
+      passwordBox.classList.add("hidden"); // 🔥 FIX QUAN TRỌNG
+      showLetter(letter);
     }
-
-    showLetter(letter);
 
   }, 1500);
 }
