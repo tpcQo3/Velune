@@ -28,6 +28,22 @@ const passwordBox = document.getElementById("passwordBox");
 
 let currentLetter = null;
 
+function parseMarkdownSafe(html) {
+  return html
+    .replace(/(^|>)([^<]*?)### (.*?)(?=<|$)/g, '$1<h3>$3</h3>')
+    .replace(/(^|>)([^<]*?)## (.*?)(?=<|$)/g, '$1<h2>$3</h2>')
+    .replace(/(^|>)([^<]*?)# (.*?)(?=<|$)/g, '$1<h1>$3</h1>')
+
+    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    .replace(/\*(.*?)\*/g, '<i>$1</i>')
+    .replace(/__(.*?)__/g, '<u>$1</u>')
+
+    .replace(/\[(.*?)\]\((.*?)\)/g, (m, t, u) => {
+      if (!u.startsWith("http")) u = "https://" + u;
+      return `<a href="${u}" target="_blank">${t}</a>`;
+    });
+}
+
 /* ======================
    LOAD LETTER
 ====================== */
@@ -107,7 +123,10 @@ function showLetter(letter) {
   fromEl.innerText = "Từ: " + (letter.from || "Ẩn danh");
 
   // content (🔥 giữ full style)
-  contentEl.innerHTML = letter.content || "";
+  let content = letter.content || "";
+  content = parseMarkdownSafe(content);
+
+  contentEl.innerHTML = content;
 
   // show UI
   loading.classList.add("hidden");
