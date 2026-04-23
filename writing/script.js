@@ -122,6 +122,15 @@ window.copyLink = function () {
    CREATE LETTER (LIMIT 1000/DAY)
 ====================== */
 async function createLetter() {
+  console.log(
+  document.getElementById("expiry"),
+  document.getElementById("password"),
+  document.getElementById("youtube"),
+  document.getElementById("ytStart"),
+  document.getElementById("ytEnd")
+);
+
+
   if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
     return;
