@@ -122,9 +122,6 @@ window.copyLink = function () {
    CREATE LETTER (LIMIT 1000/DAY)
 ====================== */
 async function createLetter() {
-  console.log(
-  document.getElementById("expiry"),
-  document.getElementById("password"),
 
 
   if (!editor.innerText.trim()) {
@@ -171,7 +168,7 @@ async function createLetter() {
 
         expiryAt: getExpiryDate(document.getElementById("expiry").value),
         password: document.getElementById("password").value || null,
-        theme: themeSelect.value,
+        theme: themeSelect.value
       });
     });
 
