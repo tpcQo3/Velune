@@ -125,10 +125,6 @@ async function createLetter() {
   console.log(
   document.getElementById("expiry"),
   document.getElementById("password"),
-  document.getElementById("youtube"),
-  document.getElementById("ytStart"),
-  document.getElementById("ytEnd")
-);
 
 
   if (!editor.innerText.trim()) {
@@ -176,9 +172,6 @@ async function createLetter() {
         expiryAt: getExpiryDate(document.getElementById("expiry").value),
         password: document.getElementById("password").value || null,
         theme: themeSelect.value,
-        urlYoutube: document.getElementById("youtube").value || null,
-        youtubeStart: parseInt(document.getElementById("ytStart").value) || 0,
-        youtubeEnd: parseInt(document.getElementById("ytEnd").value) || null
       });
     });
 
