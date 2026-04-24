@@ -3,95 +3,17 @@
     <title>Patching</title>
 </head>
 <body>
-    VeluneInk Patch Notes
+<pre id="patch"></pre>
 
-========================================
-Version 0.3 – Reading & UX Update
-========================================
-
-[NEW]
-- Trang reading hoàn chỉnh (đọc thư)
-- Hiệu ứng intro "VeluneInk ❤" khi mở thư
-- Hỗ trợ nhập mật khẩu để mở thư
-- Typing effect cho nội dung thư
-- Render markdown khi đọc thư
-- Hỗ trợ nhạc YouTube (lấy audio, không dùng video)
-
-[IMPROVED]
-- UI popup tạo thư đẹp hơn
-- Trải nghiệm đọc thư mượt hơn
-- Tối ưu hiển thị mobile
-- Cải thiện hệ thống theme (Aries, Pisces, …)
-
-[FIXED]
-- Fix lỗi password vẫn yêu cầu dù không set
-- Fix lỗi mất span/style khi lưu content
-- Fix lỗi markdown không render ở reading
-- Fix lỗi icon cung hoàng đạo đè text trên mobile
-- Fix lỗi copy link trả về sai URL (writing thay vì reading)
-
-
-========================================
-Version 0.2 – Editor & Theme Expansion
-========================================
-
-[NEW]
-- Rich text editor (bold, italic, underline)
-- Tùy chỉnh màu chữ, font, kích thước
-- Hệ thống theme cung hoàng đạo:
-  Aries, Taurus, Gemini, Cancer, Leo, Virgo,
-  Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces
-- Preview realtime nội dung thư
-- QR code cho link thư
-
-[IMPROVED]
-- Giao diện editor trực quan hơn
-- Toolbar dễ dùng hơn
-- Preview hiển thị sát với thực tế hơn
-
-[FIXED]
-- Fix lỗi selection bị mất khi apply style
-- Fix lỗi preview không sync ngay lập tức
-- Fix lỗi font không load đúng ở một số theme
-
-
-========================================
-Version 0.1 – Core Features (Initial)
-========================================
-
-[NEW]
-- Tạo thư và chia sẻ bằng link
-- Lưu thư lên Firebase
-- Hỗ trợ:
-  + Người gửi / người nhận
-  + Nội dung HTML
-  + Thời hạn thư (expiry)
-  + Mật khẩu bảo vệ thư
-- Generate ID ngẫu nhiên cho link
-- Giới hạn 1000 thư / ngày (anti spam)
-
-[IMPROVED]
-- Logic lưu dữ liệu tối ưu hơn bằng transaction
-- Cấu trúc project rõ ràng (writing / reading / tos / patch)
-
-[FIXED]
-- Fix lỗi crash khi thiếu input (expiry, password)
-- Fix lỗi async không catch (Uncaught promise)
-
-
-========================================
-System & Policy Updates
-========================================
-
-[NEW]
-- Trang Terms of Service (TOS)
-- Popup yêu cầu đồng ý điều khoản
-- Lưu trạng thái đồng ý bằng localStorage
-
-[IMPROVED]
-- TOS thiết kế đơn giản (dark + Consolas)
-- Patch page dạng dev log
-
-========================================
+<script>
+    fetch("patching.txt")
+  .then(res => res.text())
+  .then(text => {
+    document.getElementById("patch").textContent = text;
+  })
+  .catch(err => {
+    console.error(err);
+  });
+</script>
 </body>
 </html>
