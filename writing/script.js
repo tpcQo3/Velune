@@ -123,6 +123,13 @@ window.copyLink = function () {
 ====================== */
 async function createLetter() {
 
+  if (!localStorage.getItem("acceptedTOS")) {
+  if (!confirm("Bạn cần đồng ý với Điều khoản sử dụng trước khi tạo thư.")) {
+    return;
+  }
+  localStorage.setItem("acceptedTOS", "true");
+}
+
 
   if (!editor.innerText.trim()) {
     status.innerText = "Bạn chưa viết nội dung...";
