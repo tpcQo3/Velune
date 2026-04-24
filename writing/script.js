@@ -119,16 +119,35 @@ window.copyLink = function () {
 };
 
 /* ======================
+   TOS POPUP
+====================== */
+
+function requireTOS() {
+  if (!localStorage.getItem("acceptedTOS")) {
+    document.getElementById("tosPopup").classList.remove("hidden");
+    return false;
+  }
+  return true;
+}
+
+window.acceptTOS = function () {
+  localStorage.setItem("acceptedTOS", "true");
+  document.getElementById("tosPopup").classList.add("hidden");
+
+  // gọi lại tạo thư sau khi accept
+  createLetter();
+};
+
+window.declineTOS = function () {
+  document.getElementById("tosPopup").classList.add("hidden");
+};
+
+/* ======================
    CREATE LETTER (LIMIT 1000/DAY)
 ====================== */
 async function createLetter() {
 
-  if (!localStorage.getItem("acceptedTOS")) {
-  if (!confirm("Bạn cần đồng ý với Điều khoản sử dụng trước khi tạo thư.")) {
-    return;
-  }
-  localStorage.setItem("acceptedTOS", "true");
-}
+  if (!requireTOS()) return;
 
 
   if (!editor.innerText.trim()) {
