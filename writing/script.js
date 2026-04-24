@@ -12,6 +12,7 @@ const status = document.getElementById("status");
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 const themeSelect = document.getElementById("theme");
+let currentLink = "";
 
 function generateId(length = 6) {
   const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -201,7 +202,9 @@ async function createLetter() {
     });
 
     const link =
-      window.location.origin + "/reading/reading.html?id=" + id;
+    window.location.origin + "/reading/reading.html?id=" + id;
+
+    currentLink = link; // 🔥 LƯU LẠI
 
     showPopup(link);
 
