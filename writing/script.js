@@ -110,12 +110,16 @@ window.closePopup = function () {
 window.copyLink = function () {
   const input = document.getElementById("popupLink");
 
-  navigator.clipboard.writeText(input.value);
+  const original = input.value; // 🔥 lưu link thật
+
+  navigator.clipboard.writeText(original);
 
   input.value = "Đã copy ✨";
+  input.style.opacity = "0.7";
 
   setTimeout(() => {
-    input.value = window.location.href;
+    input.value = original; // 🔥 trả lại link đúng
+    input.style.opacity = "1";
   }, 1500);
 };
 
